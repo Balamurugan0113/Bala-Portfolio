@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surprise Birthday Wish Panel</title>
+    <style>
+        body {
+            background-color: #0b0c10;
+            color: #c5c6c7;
+            font-family: 'Courier New', Courier, monospace;
+            text-align: center;
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            position: absolute;
+            z-index: 10;
+            max-width: 500px;
+            background: rgba(22, 25, 34, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+        h1 {
+            color: #66fcf1;
+            font-size: 28px;
+            animation: bounce 2s infinite;
+        }
+        p {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            pointer-events: auto;
+        }
+        .instruction {
+            color: #45f3ff;
+            font-weight: bold;
+            font-size: 13px;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="balloonCanvas"></canvas>
+    <div class="container">
+        <h1>🎉 Happy Birthday! 🎉</h1>
+        <p>This is a custom surprise wish page built specifically for my close friends and family. Click anywhere in the background to pop floating balloons and trigger surprise effects!</p>
+        <p class="instruction">🎈 CLICK ON THE FLOATING BALLOONS TO POP THEM!</p>
+    </div>
+    <script src="balloon_pop.js"></script>
+</body>
+</html>

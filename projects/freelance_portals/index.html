@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Business Landing Portal</title>
+    <style>
+        :root {
+            --bg-color: #0d0e12;
+            --card-color: #161922;
+            --text-color: #f1f2f6;
+            --primary-color: #6c5ce7;
+        }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 600px;
+            width: 90%;
+            background-color: var(--card-color);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            border: 1px border #2a2f3e;
+        }
+        h1 {
+            color: #ffffff;
+            margin-bottom: 15px;
+        }
+        p {
+            color: #a4b0be;
+            line-height: 1.6;
+        }
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: #fff;
+            padding: 12px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-top: 25px;
+            transition: all 0.2s ease;
+        }
+        .btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+        #alert-box {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 6px;
+            display: none;
+            font-size: 14px;
+        }
+        .success { background-color: rgba(46, 204, 113, 0.2); color: #2ecc71; border: 1px solid #2ecc71; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Your Business Landing Page</h1>
+        <p>A high-performance, fully optimized, and responsive web portal built for modern devices. Designed with cross-browser compatibility and fluid animations to convert visitors into clients.</p>
+        <button id="cta-btn" class="btn">Trigger Lifetime Action</button>
+        <div id="alert-box"></div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
