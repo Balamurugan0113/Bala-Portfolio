@@ -9,7 +9,7 @@ const SOCIALS = [
 
 export default function Footer() {
   return (
-    <footer className="relative border-t border-[rgba(79,140,255,0.06)] py-6" role="contentinfo">
+    <footer className="relative z-20 border-t border-[rgba(79,140,255,0.06)] py-6" role="contentinfo">
       <div className="max-w-7xl mx-auto px-[clamp(1.25rem,4vw,3rem)] flex flex-col items-center gap-4">
         <div className="flex items-center gap-4">
           {SOCIALS.map(({ icon: Icon, href, label }) => (
@@ -18,8 +18,9 @@ export default function Footer() {
               href={href}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-9 h-9 flex items-center justify-center rounded-lg bg-[rgba(79,140,255,0.08)] text-[#94A3B8] hover:text-white hover:bg-[#4F8CFF]/20 transition-all duration-200"
+              className="w-9 h-9 flex items-center justify-center rounded-lg bg-[rgba(79,140,255,0.08)] text-[#94A3B8] hover:text-white hover:bg-[#4F8CFF]/20 transition-all duration-200 cursor-pointer"
               aria-label={label}
+              style={{ pointerEvents: 'auto', position: 'relative', zIndex: 1 }}
             >
               <Icon size={16} />
             </a>
