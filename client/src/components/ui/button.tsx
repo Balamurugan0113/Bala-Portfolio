@@ -1,39 +1,30 @@
-import * as React from "react";
-import { cn } from "@/lib/utils";
+import { forwardRef, type ButtonHTMLAttributes } from 'react';
+import { cn } from '@/lib/utils';
 
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "default" | "secondary" | "accent" | "outline" | "destructive" | "ghost" | "outline-magenta";
-  size?: "default" | "sm" | "lg" | "icon";
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: 'primary' | 'ghost' | 'outline' | 'glass';
+  size?: 'sm' | 'md' | 'lg';
 }
 
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant = "default", size = "default", ...props }, ref) => {
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ className, variant = 'primary', size = 'md', ...props }, ref) => {
     return (
       <button
+        ref={ref}
         className={cn(
-          "inline-flex items-center justify-center rounded-lg font-sans font-semibold tracking-wide transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary disabled:pointer-events-none disabled:opacity-50 active:scale-[0.98] cursor-pointer",
-          // Variants
-          variant === "default" && "bg-primary text-primary-foreground hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20",
-          variant === "secondary" && "bg-secondary text-secondary-foreground hover:bg-secondary/90 hover:shadow-lg hover:shadow-secondary/20",
-          variant === "accent" && "bg-accent text-accent-foreground hover:bg-accent/90 hover:shadow-lg hover:shadow-accent/20",
-          variant === "outline" && "border border-primary bg-transparent text-primary hover:bg-primary/10",
-          variant === "outline-magenta" && "border border-secondary bg-transparent text-secondary hover:bg-secondary/10",
-          variant === "destructive" && "bg-destructive text-destructive-foreground hover:bg-destructive/90 hover:shadow-lg hover:shadow-destructive/20",
-          variant === "ghost" && "bg-transparent text-foreground hover:bg-muted",
-          // Sizes
-          size === "default" && "h-11 px-5 text-sm",
-          size === "sm" && "h-9 px-3.5 text-xs",
-          size === "lg" && "h-13 px-7 text-base",
-          size === "icon" && "h-11 w-11",
+          'inline-flex items-center justify-center rounded-xl font-semibold transition-all duration-300 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4F8CFF] active:scale-[0.97]',
+          {
+            'bg-[#4F8CFF] text-white hover:bg-[#3B7BE8] shadow-lg shadow-[#4F8CFF]/20 hover:shadow-[#4F8CFF]/40': variant === 'primary',
+            'bg-transparent text-[#94A3B8] hover:text-white hover:bg-white/5': variant === 'ghost',
+            'border border-[rgba(79,140,255,0.2)] text-white hover:border-[#4F8CFF] hover:bg-[#4F8CFF]/5': variant === 'outline',
+            'glass text-white hover:bg-[rgba(10,15,30,0.8)]': variant === 'glass',
+          },
+          { 'h-8 px-3 text-xs gap-1.5': size === 'sm', 'h-10 px-5 text-sm gap-2': size === 'md', 'h-12 px-8 text-base gap-2.5': size === 'lg' },
           className
         )}
-        ref={ref}
         {...props}
       />
     );
   }
 );
-Button.displayName = "Button";
-
-export { Button };
+Button.displayName = 'Button';
