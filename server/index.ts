@@ -83,51 +83,59 @@ app.post("/api/contact", async (req: Request, res: Response) => {
 <!DOCTYPE html>
 <html>
 <head><meta charset="UTF-8"></head>
-<body style="margin:0;padding:0;background:#f4f6f9;font-family:'Segoe UI',Arial,sans-serif;">
+<body style="margin:0;padding:0;background:#0b1120;font-family:'Inter','Segoe UI',Arial,sans-serif;">
   <table width="100%" cellpadding="0" cellspacing="0" style="padding:40px 20px;">
     <tr>
       <td align="center">
-        <table width="560" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.06);">
+        <table width="560" cellpadding="0" cellspacing="0" style="background:#0f172a;border-radius:16px;overflow:hidden;border:1px solid rgba(79,140,255,0.12);">
           <tr>
-            <td style="background:linear-gradient(135deg,#4F8CFF,#8B5CF6);padding:32px 40px;">
-              <h1 style="margin:0;color:#fff;font-size:20px;font-weight:700;letter-spacing:-0.3px;">New Portfolio Inquiry</h1>
-              <p style="margin:6px 0 0;color:rgba(255,255,255,0.8);font-size:13px;">Someone reached out from your portfolio</p>
+            <td style="padding:36px 40px 0;">
+              <div style="width:40px;height:4px;background:linear-gradient(90deg,#4F8CFF,#8B5CF6);border-radius:2px;margin-bottom:20px;"></div>
+              <h1 style="margin:0 0 4px;color:#f1f5f9;font-size:22px;font-weight:700;letter-spacing:-0.4px;">New Contact</h1>
+              <p style="margin:0 0 24px;color:#64748b;font-size:14px;">${new Date().toLocaleDateString('en-US', { weekday:'long', year:'numeric', month:'long', day:'numeric' })}</p>
             </td>
           </tr>
           <tr>
-            <td style="padding:32px 40px;">
+            <td style="padding:0 40px;">
+              <table width="100%" cellpadding="0" cellspacing="0">
+                <tr><td style="height:1px;background:rgba(79,140,255,0.08);"></td></tr>
+              </table>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:28px 40px;">
               <table width="100%" cellpadding="0" cellspacing="0">
                 <tr>
-                  <td style="padding-bottom:16px;">
-                    <div style="font-size:11px;font-weight:600;color:#94A3B8;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;">Name</div>
-                    <div style="font-size:15px;color:#1a1a2e;font-weight:600;">${name}</div>
+                  <td style="padding-bottom:20px;">
+                    <div style="display:inline-block;padding:4px 12px;border-radius:6px;background:rgba(79,140,255,0.08);color:#4F8CFF;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Name</div>
+                    <div style="font-size:16px;color:#f1f5f9;font-weight:600;">${name}</div>
                   </td>
                 </tr>
                 <tr>
-                  <td style="padding-bottom:16px;">
-                    <div style="font-size:11px;font-weight:600;color:#94A3B8;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;">Email</div>
-                    <a href="mailto:${email}" style="font-size:15px;color:#4F8CFF;text-decoration:none;font-weight:500;">${email}</a>
+                  <td style="padding-bottom:20px;">
+                    <div style="display:inline-block;padding:4px 12px;border-radius:6px;background:rgba(79,140,255,0.08);color:#4F8CFF;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Email</div>
+                    <a href="mailto:${email}" style="display:block;font-size:16px;color:#60a5fa;text-decoration:none;font-weight:500;">${email}</a>
                   </td>
                 </tr>
                 ${company ? `
                 <tr>
-                  <td style="padding-bottom:16px;">
-                    <div style="font-size:11px;font-weight:600;color:#94A3B8;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;">Company</div>
-                    <div style="font-size:15px;color:#1a1a2e;font-weight:500;">${company}</div>
+                  <td style="padding-bottom:20px;">
+                    <div style="display:inline-block;padding:4px 12px;border-radius:6px;background:rgba(79,140,255,0.08);color:#4F8CFF;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Company</div>
+                    <div style="font-size:16px;color:#f1f5f9;font-weight:500;">${company}</div>
                   </td>
                 </tr>` : ''}
                 <tr>
-                  <td style="padding-bottom:8px;">
-                    <div style="font-size:11px;font-weight:600;color:#94A3B8;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;">Message</div>
-                    <div style="font-size:14px;color:#444;line-height:1.7;background:#f8fafc;padding:16px 20px;border-radius:8px;border-left:3px solid #4F8CFF;">${message.replace(/\n/g, '<br>')}</div>
+                  <td>
+                    <div style="display:inline-block;padding:4px 12px;border-radius:6px;background:rgba(79,140,255,0.08);color:#4F8CFF;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:8px;">Message</div>
+                    <div style="font-size:14px;color:#cbd5e1;line-height:1.8;background:rgba(15,23,42,0.6);padding:16px 20px;border-radius:10px;border-left:3px solid #4F8CFF;">${message.replace(/\n/g, '<br>')}</div>
                   </td>
                 </tr>
               </table>
             </td>
           </tr>
           <tr>
-            <td style="padding:20px 40px;border-top:1px solid #edf2f7;">
-              <p style="margin:0;font-size:12px;color:#94A3B8;">Sent from your portfolio contact form</p>
+            <td style="padding:20px 40px;border-top:1px solid rgba(79,140,255,0.08);">
+              <p style="margin:0;font-size:12px;color:#475569;">Sent from <span style="color:#4F8CFF;">Balamurugan C</span> Portfolio</p>
             </td>
           </tr>
         </table>
