@@ -1,19 +1,30 @@
-import type { VercelRequest, VercelResponse } from '@vercel/node';
+import { IncomingMessage, ServerResponse } from 'http';
 import nodemailer from 'nodemailer';
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+export default async function handler(req: IncomingMessage, res: ServerResponse) {
   if (req.method !== 'POST') {
-    return res.status(405).json({ success: false, message: 'Method not allowed' });
+    res.writeHead(405, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ success: false, message: 'Method not allowed' }));
+    return;
   }
 
-  const { name, email, company, message } = req.body;
+  let body = '';
+  await new Promise<void>((resolve) => {
+    req.on('data', (chunk: string) => { body += chunk; });
+    req.on('end', () => resolve());
+  });
+  const { name, email, company, message } = JSON.parse(body);
 
   if (!name || !email || !message) {
-    return res.status(400).json({ success: false, message: 'Payload incomplete. Required: name, email, message.' });
+    res.writeHead(400, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ success: false, message: 'Payload incomplete. Required: name, email, message.' }));
+    return;
   }
 
   if (!email.includes('@')) {
-    return res.status(400).json({ success: false, message: 'Invalid email address.' });
+    res.writeHead(400, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ success: false, message: 'Invalid email address.' }));
+    return;
   }
 
   const smtpUser = process.env.SMTP_USER;
@@ -95,5 +106,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     }
   }
 
-  return res.status(200).json({ success: true, message: 'Message sent successfully!' });
+  res.writeHead(200, { 'Content-Type': 'application/json' });
+  res.end(JSON.stringify({ success: true, message: 'Message sent successfully!' }));
 }
