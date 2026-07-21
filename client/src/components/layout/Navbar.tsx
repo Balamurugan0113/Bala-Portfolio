@@ -47,8 +47,8 @@ export default function Navbar() {
       role="navigation"
       aria-label="Main navigation"
     >
-      <div className="flex items-center gap-1 px-2 py-1.5">
-        <div className="flex items-center gap-2 px-3 mr-2 border-r border-[rgba(79,140,255,0.1)]">
+      <div className="flex items-center gap-1 px-2 py-1.5 overflow-x-auto hide-scrollbar">
+        <div className="flex items-center gap-2 px-3 mr-2 border-r border-[rgba(79,140,255,0.1)] shrink-0">
           <img src={profilePic} alt="Balamurugan C" className="w-7 h-7 rounded-full object-cover border border-[rgba(79,140,255,0.2)]" />
           <span className="text-sm font-semibold text-white hidden sm:inline">BALAMURUGAN C</span>
         </div>

@@ -82,7 +82,7 @@ export default function AboutSection() {
         <div className="grid lg:grid-cols-12 gap-8">
           <div className="lg:col-span-7 space-y-8">
             <motion.div
-              className="glass-card rounded-2xl p-8"
+              className="glass-card rounded-2xl p-6 sm:p-8"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
@@ -113,7 +113,7 @@ export default function AboutSection() {
             </motion.div>
 
             <motion.div
-              className="glass-card rounded-2xl p-8"
+              className="glass-card rounded-2xl p-6 sm:p-8"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
@@ -142,7 +142,7 @@ export default function AboutSection() {
 
           <div className="lg:col-span-5 space-y-6">
             <motion.div
-              className="glass-card rounded-2xl p-8"
+              className="glass-card rounded-2xl p-6 sm:p-8"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
@@ -176,7 +176,7 @@ export default function AboutSection() {
             </motion.div>
 
             <motion.div
-              className="glass-card rounded-2xl p-8"
+              className="glass-card rounded-2xl p-6 sm:p-8"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}

@@ -122,7 +122,7 @@ export default function ContactSection() {
 
           <div className="lg:col-span-7">
             <motion.div
-              className="glass-card rounded-2xl p-8"
+              className="glass-card rounded-2xl p-6 sm:p-8"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}

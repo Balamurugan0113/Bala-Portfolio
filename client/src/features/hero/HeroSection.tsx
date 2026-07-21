@@ -63,7 +63,7 @@ export default function HeroSection() {
           </motion.div>
 
           <motion.h1
-            className="heading-xl gradient-primary mb-4 whitespace-nowrap"
+            className="heading-xl gradient-primary mb-4"
             variants={itemVariants}
           >
             {PERSONAL_INFO.name}
@@ -83,7 +83,7 @@ export default function HeroSection() {
           </motion.p>
 
           <motion.div
-            className="flex flex-wrap items-center gap-3 mb-16 justify-center lg:justify-start"
+            className="flex flex-wrap items-center gap-3 mb-8 sm:mb-16 justify-center lg:justify-start"
             variants={itemVariants}
           >
             <Button size="lg" onClick={scrollToProjects}>

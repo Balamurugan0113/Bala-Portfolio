@@ -193,6 +193,14 @@
   .backface-hidden { backface-visibility: hidden; }
 }
 
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 @supports not (backdrop-filter: blur(1px)) {
   .glass, .glass-strong, .glass-card {
     background: rgba(10, 15, 30, 0.88);
