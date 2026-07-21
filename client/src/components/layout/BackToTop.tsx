@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { ArrowUp } from 'lucide-react';
 
-function smoothScrollToTop(duration = 1200) {
+function smoothScrollToTop(duration = 3000) {
   const start = window.scrollY;
   if (start === 0) return;
   const startTime = performance.now();
@@ -33,7 +33,7 @@ export default function BackToTop() {
 
   return (
     <button
-      onClick={() => smoothScrollToTop(1200)}
+      onClick={() => smoothScrollToTop(3000)}
       className={`fixed bottom-6 right-6 z-40 w-12 h-12 rounded-xl flex items-center justify-center backdrop-blur-xl border transition-all duration-700 ease-out ${
         visible
           ? 'opacity-100 translate-y-0 pointer-events-auto'
