@@ -1,4 +1,4 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useState, useEffect } from 'react';
 import { Route, Switch } from 'wouter';
 import Navbar from '@/components/layout/Navbar';
 
@@ -14,6 +14,8 @@ const HeroSection = lazy(() => import('@/features/hero/HeroSection').then(m => (
 const AboutSection = lazy(() => import('@/features/about/AboutSection').then(m => ({ default: m.default })));
 const SkillsSection = lazy(() => import('@/features/skills/SkillsSection').then(m => ({ default: m.default })));
 const ProjectsSection = lazy(() => import('@/features/projects/ProjectsSection').then(m => ({ default: m.default })));
+const ExperienceSection = lazy(() => import('@/features/experience/ExperienceSection').then(m => ({ default: m.default })));
+const BlogSection = lazy(() => import('@/features/blogs/BlogSection').then(m => ({ default: m.default })));
 const ContactSection = lazy(() => import('@/features/contact/ContactSection').then(m => ({ default: m.default })));
 
 function NotFound() {
@@ -41,17 +43,27 @@ function LoadingFallback() {
 
 function HomePage() {
   const reduced = useReducedMotion();
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    const checkDesktop = () => {
+      setIsDesktop(window.innerWidth >= 768 && window.matchMedia('(pointer: fine)').matches);
+    };
+    checkDesktop();
+    window.addEventListener('resize', checkDesktop);
+    return () => window.removeEventListener('resize', checkDesktop);
+  }, []);
 
   return (
     <div className="relative min-h-screen flex flex-col">
       {!reduced && (
-        <div className="fixed inset-0 z-0">
+        <div className="fixed inset-0 z-0 pointer-events-none">
           <Particles
             particleColors={["rgb(79,140,255)", "rgb(0,217,255)", "rgb(139,92,246)"]}
-            particleCount={400}
+            particleCount={300}
             particleSpread={15}
-            speed={0.05}
-            particleBaseSize={120}
+            speed={0.04}
+            particleBaseSize={100}
             moveParticlesOnHover={true}
             alphaParticles={true}
             sizeRandomness={1.5}
@@ -60,12 +72,16 @@ function HomePage() {
           />
         </div>
       )}
-      <div className="noise-overlay" />
-      {!reduced && <GhostCursor color="rgb(79,140,255)" brightness={1.2} trailLength={40} inertia={0.4} bloomStrength={0.15} />}
+      <div className="noise-overlay pointer-events-none" />
+      {!reduced && isDesktop && (
+        <GhostCursor color="rgb(79,140,255)" brightness={1.2} trailLength={40} inertia={0.4} bloomStrength={0.15} />
+      )}
       <HeroSection />
       <AboutSection />
       <SkillsSection />
       <ProjectsSection />
+      <ExperienceSection />
+      <BlogSection />
       <ContactSection />
     </div>
   );
@@ -74,7 +90,7 @@ function HomePage() {
 export default function App() {
   return (
     <ErrorBoundary>
-      <div className="flex min-h-screen flex-col bg-[#050816] text-white selection:bg-[#4F8CFF]/30 selection:text-white relative">
+      <div className="flex min-h-screen flex-col bg-[#050816] text-white selection:bg-[#4F8CFF]/30 selection:text-white relative overflow-x-hidden">
         <Navbar />
         <main className="flex-grow flex flex-col relative z-10">
           <Suspense fallback={<LoadingFallback />}>

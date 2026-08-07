@@ -69,9 +69,13 @@ const GhostCursor = ({
   const hasValidSizeRef = useRef(false);
 
   const isTouch = useMemo(
-    () => typeof window !== 'undefined' && ('ontouchstart' in window || navigator.maxTouchPoints > 0),
+    () => typeof window !== 'undefined' && ('ontouchstart' in window || navigator.maxTouchPoints > 0 || window.matchMedia('(pointer: coarse)').matches),
     []
   );
+
+  if (isTouch) {
+    return null;
+  }
 
   const pixelBudget = targetPixels ?? (isTouch ? 0.9e6 : 1.3e6);
   const fadeDelay = fadeDelayMs ?? (isTouch ? 500 : 1000);

@@ -1,11 +1,14 @@
 import { motion } from 'framer-motion';
-import { Award } from 'lucide-react';
+import { Award, ShieldCheck, Cpu, Code2, Database } from 'lucide-react';
 import { SKILL_CATEGORIES, CERTIFICATIONS, PROFICIENCIES } from '@/types';
+import Card3DTilt from '@/components/ui/Card3DTilt';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
   visible: (i = 0) => ({ opacity: 1, y: 0, transition: { duration: 0.6, delay: i * 0.06, ease: [0.16, 1, 0.3, 1] as const } }),
 };
+
+const CATEGORY_ICONS = [ShieldCheck, Code2, Cpu, Database];
 
 export default function SkillsSection() {
   return (
@@ -18,95 +21,96 @@ export default function SkillsSection() {
           viewport={{ once: true, margin: '-80px' }}
           variants={fadeUp}
         >
-          <p className="text-xs font-semibold tracking-[0.2em] uppercase text-[#4F8CFF]">Expertise</p>
+          <p className="text-xs font-semibold tracking-[0.2em] uppercase text-[#4F8CFF]">Domain Competencies</p>
           <h2 className="heading-lg gradient-primary mt-2">Skills & Certifications</h2>
-          <p className="text-body max-w-2xl mx-auto mt-4">
-            Core technical expertise and professional credentials.
+          <p className="text-body max-w-2xl mx-auto mt-3 text-sm">
+            Core technical expertise across Artificial Intelligence, Penetration Testing, Cloud Infrastructure, and Application Hardening.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-16">
-          {SKILL_CATEGORIES.map((cat, i) => (
-            <motion.div
-              key={cat.title}
-              className="glass-card rounded-2xl p-6 flex flex-col h-full"
-              custom={i}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-40px' }}
-              variants={fadeUp}
-            >
-              <h3 className="text-sm font-bold text-white mb-4 border-b border-[#4F8CFF]/40 pb-2.5 uppercase tracking-wider text-[#4F8CFF]">
-                {cat.title}
-              </h3>
-              <ul className="space-y-2.5 flex-grow">
-                {cat.skills.map((skill) => (
-                  <li key={skill} className="flex items-center gap-2.5 text-xs text-[#94A3B8] hover:text-white transition-colors">
-                    <span className="w-1.5 h-1.5 bg-[#4F8CFF] rounded-full shrink-0" />
-                    <span>{skill}</span>
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          ))}
+        {/* 3D SKILL CATEGORY CARDS */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+          {SKILL_CATEGORIES.map((cat, i) => {
+            const IconComp = CATEGORY_ICONS[i % CATEGORY_ICONS.length];
+            return (
+              <Card3DTilt
+                key={cat.title}
+                maxTilt={10}
+                className="glass-card p-6 flex flex-col h-full border border-[rgba(79,140,255,0.12)] hover:border-[#4F8CFF]/40"
+              >
+                <div className="flex items-center gap-3 mb-4 border-b border-[rgba(79,140,255,0.12)] pb-3">
+                  <div className="p-2 rounded-xl bg-[#4F8CFF]/15 text-[#4F8CFF] border border-[#4F8CFF]/25">
+                    <IconComp size={18} />
+                  </div>
+                  <h3 className="text-xs font-bold text-white uppercase tracking-wider">
+                    {cat.title}
+                  </h3>
+                </div>
+                <ul className="space-y-3 flex-grow">
+                  {cat.skills.map((skill) => (
+                    <li key={skill} className="flex items-center gap-2 text-xs text-[#94A3B8] hover:text-white transition-colors">
+                      <span className="w-1.5 h-1.5 bg-[#4F8CFF] rounded-full shrink-0" />
+                      <span>{skill}</span>
+                    </li>
+                  ))}
+                </ul>
+              </Card3DTilt>
+            );
+          })}
         </div>
 
+        {/* CERTIFICATIONS & PROFICIENCIES */}
         <div className="grid lg:grid-cols-3 gap-8 items-start">
           <div className="lg:col-span-2 space-y-4">
-            <h3 className="text-lg font-bold text-white">Certifications</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {CERTIFICATIONS.map((cert, i) => (
-                <motion.div
+            <h3 className="text-lg font-bold text-white flex items-center gap-2">
+              <Award className="text-[#F59E0B]" size={20} /> Certifications & Credentials
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {CERTIFICATIONS.map((cert) => (
+                <Card3DTilt
                   key={cert.title}
-                  className="flex items-start gap-3 p-4 rounded-xl border-2 border-[#4F8CFF]/40 bg-[rgba(79,140,255,0.03)] hover:border-[#4F8CFF]/70 hover:bg-[rgba(79,140,255,0.06)] transition-all"
-                  custom={i}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, margin: '-40px' }}
-                  variants={fadeUp}
+                  maxTilt={8}
+                  className="p-5 rounded-2xl border border-[rgba(79,140,255,0.15)] bg-[rgba(10,15,30,0.65)] hover:border-[#4F8CFF]/50 transition-all"
                 >
-                  <div className="p-2 bg-[#4F8CFF]/20 rounded text-[#4F8CFF]">
-                    <Award size={20} />
+                  <div className="flex items-start gap-3">
+                    <div className="p-2.5 bg-[#4F8CFF]/15 border border-[#4F8CFF]/30 rounded-xl text-[#4F8CFF] shrink-0">
+                      <Award size={22} />
+                    </div>
+                    <div>
+                      <h4 className="text-xs sm:text-sm font-bold text-white leading-snug">{cert.title}</h4>
+                      <p className="text-[10px] text-[#94A3B8] mt-0.5 uppercase font-semibold tracking-wider">{cert.issuer}</p>
+                      <p className="text-[11px] text-[#94A3B8] mt-2 leading-relaxed">{cert.description}</p>
+                      <span className="inline-block px-2.5 py-0.5 rounded text-[10px] font-mono font-bold bg-[#4F8CFF]/15 text-[#4F8CFF] border border-[#4F8CFF]/30 mt-3">
+                        Issued: {cert.year}
+                      </span>
+                    </div>
                   </div>
-                  <div>
-                    <h4 className="text-xs sm:text-sm font-bold text-[#4F8CFF] leading-snug">{cert.title}</h4>
-                    <p className="text-[10px] text-[#94A3B8] mt-0.5 uppercase font-semibold">{cert.issuer}</p>
-                    <span className="inline-block px-2.5 py-1 rounded text-[9px] font-semibold bg-[#4F8CFF]/15 text-[#4F8CFF] border border-[#4F8CFF]/30 mt-1.5">{cert.year}</span>
-                  </div>
-                </motion.div>
+                </Card3DTilt>
               ))}
             </div>
           </div>
 
           <div className="space-y-4">
-            <h3 className="text-lg font-bold text-white">Proficiency</h3>
-            <div className="p-5 rounded-xl border border-[rgba(79,140,255,0.06)] bg-[rgba(10,15,30,0.4)] space-y-4">
-              {PROFICIENCIES.slice(0, 4).map((prof, i) => (
-                <motion.div
-                  key={prof.name}
-                  className="space-y-1.5"
-                  custom={i}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: true, margin: '-40px' }}
-                  variants={fadeUp}
-                >
-                  <div className="flex items-center justify-between text-[10px] font-bold">
-                    <span className="text-white bg-[#4F8CFF]/10 px-2 py-1 rounded">{prof.name}</span>
-                    <span className="text-[#4F8CFF] text-xs font-bold">{prof.percentage}%</span>
+            <h3 className="text-lg font-bold text-white">Technical Proficiency</h3>
+            <Card3DTilt maxTilt={6} className="p-6 rounded-2xl border border-[rgba(79,140,255,0.12)] bg-[rgba(10,15,30,0.65)] space-y-5">
+              {PROFICIENCIES.map((prof, i) => (
+                <div key={prof.name} className="space-y-1.5">
+                  <div className="flex items-center justify-between text-[11px] font-semibold">
+                    <span className="text-white">{prof.name}</span>
+                    <span className="text-[#4F8CFF] font-mono font-bold">{prof.percentage}%</span>
                   </div>
-                  <div className="h-2 w-full bg-[rgba(79,140,255,0.06)] rounded-full overflow-hidden">
+                  <div className="h-2 w-full bg-[rgba(79,140,255,0.1)] rounded-full overflow-hidden">
                     <motion.div
-                      className="h-full bg-gradient-to-r from-[#4F8CFF] to-[#00D9FF] rounded-full"
+                      className="h-full bg-gradient-to-r from-[#4F8CFF] via-[#00D9FF] to-[#8B5CF6] rounded-full"
                       initial={{ width: 0 }}
                       whileInView={{ width: `${prof.percentage}%` }}
                       viewport={{ once: true }}
-                      transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] as const, delay: i * 0.15 }}
+                      transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] as const, delay: i * 0.1 }}
                     />
                   </div>
-                </motion.div>
+                </div>
               ))}
-            </div>
+            </Card3DTilt>
           </div>
         </div>
       </div>

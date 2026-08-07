@@ -33,12 +33,12 @@ export default function Scene3D({ className = '' }: { className?: string }) {
   if (!visible) return <div className={`fixed inset-0 -z-10 ${className}`} />;
 
   return (
-    <div className={`fixed inset-0 -z-10 ${className}`} aria-hidden="true">
+    <div className={`fixed inset-0 -z-10 pointer-events-none ${className}`} aria-hidden="true">
       <Canvas
         dpr={dpr}
         camera={{ position: [0, 0, 5], fov: 45 }}
         gl={{ antialias: true, alpha: true }}
-        style={{ background: 'transparent' }}
+        style={{ background: 'transparent', pointerEvents: 'none' }}
       >
         <AdaptiveDpr pixelated />
         <SceneContent />
