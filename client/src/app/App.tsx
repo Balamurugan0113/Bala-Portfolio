@@ -54,11 +54,11 @@ function HomePage() {
   }, []);
 
   return (
-    <div className="relative min-h-screen flex flex-col">
+    <div className="relative min-h-screen flex flex-col bg-[#050508]">
       {!reduced && (
         <div className="fixed inset-0 z-0 pointer-events-none">
           <Particles
-            particleColors={["rgb(79,140,255)", "rgb(0,217,255)", "rgb(139,92,246)"]}
+            particleColors={["rgb(245,158,11)", "rgb(249,115,22)", "rgb(234,179,8)"]}
             particleCount={300}
             particleSpread={15}
             speed={0.04}
@@ -73,7 +73,7 @@ function HomePage() {
       )}
       <div className="noise-overlay pointer-events-none" />
       {!reduced && isDesktop && (
-        <GhostCursor color="rgb(79,140,255)" brightness={1.2} trailLength={40} inertia={0.4} bloomStrength={0.15} />
+        <GhostCursor color="rgb(245,158,11)" brightness={1.2} trailLength={40} inertia={0.4} bloomStrength={0.15} />
       )}
       <HeroSection />
       <AboutSection />
@@ -88,7 +88,7 @@ function HomePage() {
 export default function App() {
   return (
     <ErrorBoundary>
-      <div className="flex min-h-screen flex-col bg-[#050816] text-white selection:bg-[#4F8CFF]/30 selection:text-white relative overflow-x-hidden">
+      <div className="flex min-h-screen flex-col bg-[#050508] text-white selection:bg-[#F59E0B]/30 selection:text-white relative overflow-x-hidden">
         <Navbar />
         <main className="flex-grow flex flex-col relative z-10">
           <Suspense fallback={<LoadingFallback />}>

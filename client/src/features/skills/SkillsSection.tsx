@@ -12,7 +12,7 @@ const CATEGORY_ICONS = [ShieldCheck, Code2, Cpu, Database];
 
 export default function SkillsSection() {
   return (
-    <section id="skills" className="relative section-py px-[clamp(1.25rem,4vw,3rem)]" aria-label="Skills & Certifications">
+    <section id="skills" className="relative bg-[#050508] section-py px-[clamp(1.25rem,4vw,3rem)]" aria-label="Skills & Certifications">
       <div className="max-w-7xl mx-auto">
         <motion.div
           className="text-center mb-16"
@@ -21,9 +21,8 @@ export default function SkillsSection() {
           viewport={{ once: true, margin: '-80px' }}
           variants={fadeUp}
         >
-          <p className="text-xs font-semibold tracking-[0.2em] uppercase text-[#4F8CFF]">Domain Competencies</p>
-          <h2 className="heading-lg gradient-primary mt-2">Skills & Certifications</h2>
-          <p className="text-body max-w-2xl mx-auto mt-3 text-sm">
+          <h2 className="heading-lg bg-clip-text text-transparent bg-gradient-to-b from-[#FFFBEB] via-[#F59E0B] to-[#F97316]">Skills & Certifications</h2>
+          <p className="text-body max-w-2xl mx-auto mt-3 text-sm text-[#94A3B8]">
             Core technical expertise across Artificial Intelligence, Penetration Testing, Cloud Infrastructure, and Application Hardening.
           </p>
         </motion.div>
@@ -38,16 +37,16 @@ export default function SkillsSection() {
                 key={cat.title}
                 maxTilt={10}
                 className={cat.title.includes('PRIMARY')
-                  ? 'glass-card p-6 flex flex-col h-full border-2 border-[#4F8CFF] shadow-xl shadow-[#4F8CFF]/20 relative overflow-hidden'
-                  : 'glass-card p-6 flex flex-col h-full border border-[rgba(79,140,255,0.12)] hover:border-[#4F8CFF]/40'}
+                  ? 'glass-card p-6 flex flex-col h-full border-2 border-[#F59E0B] shadow-xl shadow-[#F59E0B]/20 relative overflow-hidden'
+                  : 'glass-card p-6 flex flex-col h-full border border-[#F59E0B]/20 hover:border-[#F59E0B]/40'}
               >
                 {isPrimary && (
-                  <div className="absolute top-0 right-0 bg-[#4F8CFF] text-white text-[9px] font-mono font-bold px-3 py-1 rounded-bl-xl shadow-md uppercase tracking-widest">
+                  <div className="absolute top-0 right-0 bg-[#F59E0B] text-black text-[9px] font-mono font-extrabold px-3 py-1 rounded-bl-xl shadow-md uppercase tracking-widest">
                     Core Focus
                   </div>
                 )}
-                <div className="flex items-center gap-3 mb-4 border-b border-[rgba(79,140,255,0.12)] pb-3">
-                  <div className="p-2 rounded-xl bg-[#4F8CFF]/15 text-[#4F8CFF] border border-[#4F8CFF]/25 shrink-0">
+                <div className="flex items-center gap-3 mb-4 border-b border-[#F59E0B]/15 pb-3">
+                  <div className="p-2 rounded-xl bg-[#F59E0B]/15 text-[#F59E0B] border border-[#F59E0B]/30 shrink-0">
                     <IconComp size={18} />
                   </div>
                   <h3 className="text-xs font-bold text-white uppercase tracking-wider leading-snug">

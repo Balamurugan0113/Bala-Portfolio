@@ -20,14 +20,14 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      setScrolled(window.scrollY > 40);
 
       let current = 'hero';
       for (const { id } of NAV_ITEMS) {
         const el = document.getElementById(id);
         if (el) {
           const rect = el.getBoundingClientRect();
-          if (rect.top <= 140) current = id;
+          if (rect.top <= 160) current = id;
         }
       }
       setActiveSection(current);
@@ -51,26 +51,28 @@ export default function Navbar() {
   return (
     <nav
       className={cn(
-        'fixed top-4 left-1/2 -translate-x-1/2 z-50 transition-all duration-500 rounded-2xl max-w-[95vw]',
-        scrolled ? 'glass-strong shadow-lg shadow-[rgba(79,140,255,0.08)] border border-[rgba(79,140,255,0.15)]' : 'bg-transparent'
+        'fixed top-3 sm:top-4 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 rounded-full max-w-[94vw] sm:max-w-max',
+        scrolled ? 'glass-strong shadow-2xl shadow-[#F59E0B]/10 border border-[#F59E0B]/30' : 'glass border border-white/10'
       )}
       role="navigation"
       aria-label="Main navigation"
     >
-      <div className="flex items-center gap-1 px-2 py-1.5 overflow-x-auto hide-scrollbar">
-        <div className="flex items-center gap-2 px-3 mr-1 border-r border-[rgba(79,140,255,0.12)] shrink-0">
-          <img src={profilePic} alt="Balamurugan C" className="w-7 h-7 rounded-full object-cover border border-[#4F8CFF]/40 shadow-sm" />
-          <span className="text-xs font-bold text-white hidden sm:inline tracking-wider">BALAMURUGAN C</span>
+      <div className="flex items-center gap-0.5 sm:gap-1 px-1.5 sm:px-2 py-1 overflow-x-auto hide-scrollbar scroll-smooth">
+        {/* Profile Avatar & Name */}
+        <div className="flex items-center gap-1.5 px-2 sm:px-3 mr-0.5 sm:mr-1 border-r border-[#F59E0B]/20 shrink-0">
+          <img src={profilePic} alt="Balamurugan C" className="w-6 h-6 sm:w-7 sm:h-7 rounded-full object-cover border border-[#F59E0B]/50 shadow-md" />
+          <span className="text-[11px] sm:text-xs font-extrabold text-white hidden sm:inline tracking-wider font-mono">BALAMURUGAN C</span>
         </div>
 
+        {/* Nav Items */}
         {NAV_ITEMS.map(({ id, label }) => (
           <button
             key={id}
             onClick={() => handleClick(id)}
             className={cn(
-              'px-2.5 py-1.5 rounded-xl text-xs font-semibold transition-all duration-200 shrink-0',
+              'px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-bold transition-all duration-200 shrink-0 font-mono tracking-wide',
               activeSection === id
-                ? 'text-white bg-[#4F8CFF]/20 border border-[#4F8CFF]/30 shadow-sm'
+                ? 'text-white bg-[#F59E0B]/25 border border-[#F59E0B]/40 shadow-lg shadow-[#F59E0B]/20'
                 : 'text-[#94A3B8] hover:text-white hover:bg-white/5'
             )}
             aria-current={activeSection === id ? 'page' : undefined}
@@ -79,14 +81,15 @@ export default function Navbar() {
           </button>
         ))}
 
-        <div className="pl-1 border-l border-[rgba(79,140,255,0.12)] shrink-0 flex items-center">
+        {/* Mute / Unmute Button */}
+        <div className="pl-1 ml-0.5 sm:ml-1 border-l border-[#F59E0B]/20 shrink-0 flex items-center">
           <button
             onClick={toggleSound}
-            className="p-1.5 rounded-xl text-[#94A3B8] hover:text-white hover:bg-white/10 transition-colors"
+            className="p-1 sm:p-1.5 rounded-full text-[#94A3B8] hover:text-white hover:bg-white/10 transition-colors"
             aria-label={isMuted ? 'Unmute Sound Effects' : 'Mute Sound Effects'}
             title={isMuted ? 'Enable Sound FX' : 'Mute Sound FX'}
           >
-            {isMuted ? <VolumeX size={15} className="text-rose-400" /> : <Volume2 size={15} className="text-[#4F8CFF]" />}
+            {isMuted ? <VolumeX size={14} className="text-rose-400" /> : <Volume2 size={14} className="text-[#F59E0B]" />}
           </button>
         </div>
       </div>

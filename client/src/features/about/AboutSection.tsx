@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { GraduationCap, Target, Shield, Brain, Gamepad2, Trophy, Github, Linkedin, Youtube, Instagram, Award, Sparkles } from 'lucide-react';
+import { GraduationCap, Target, Shield, Brain, Gamepad2, Trophy, Github, Linkedin, Youtube, Instagram, Award } from 'lucide-react';
 import { STATS } from '@/types';
 import Card3DTilt from '@/components/ui/Card3DTilt';
 
@@ -46,8 +46,14 @@ const COMPETITIONS = [
 
 export default function AboutSection() {
   return (
-    <section id="about" className="relative section-py px-[clamp(1.25rem,4vw,3rem)]" aria-label="About me">
-      <div className="max-w-7xl mx-auto">
+    <section id="about" className="relative bg-[#050508] section-py px-[clamp(1.25rem,4vw,3rem)] transition-colors duration-500" aria-label="About me">
+      {/* SMOOTH FADED GRADIENT OVERLAY FROM HERO */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[#050508] via-[#050508]/90 to-transparent z-10" />
+
+      {/* AMBER & GOLD BACKGROUND GLOW ACCENTS */}
+      <div className="pointer-events-none absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[500px] bg-[#F59E0B]/5 blur-[140px] rounded-full z-0" />
+
+      <div className="max-w-7xl mx-auto relative z-10">
         {/* SECTION HEADER */}
         <motion.div
           className="text-center mb-12"
@@ -56,10 +62,9 @@ export default function AboutSection() {
           viewport={{ once: true, margin: '-80px' }}
           variants={fadeUp}
         >
-          <p className="text-xs font-semibold tracking-[0.2em] uppercase text-[#8B5CF6] flex items-center justify-center gap-2">
-            <Sparkles className="w-3.5 h-3.5 text-[#8B5CF6]" /> Profile & Background
-          </p>
-          <h2 className="heading-lg gradient-primary mt-2">About Me</h2>
+          <h2 className="heading-lg bg-clip-text text-transparent bg-gradient-to-b from-[#FFFBEB] via-[#F59E0B] to-[#78350F] filter drop-shadow-md">
+            About Me
+          </h2>
           <p className="text-body max-w-2xl mx-auto mt-3 text-sm text-[#94A3B8]">
             Hi, I'm Balamurugan C. I specialize in Ethical Hacking, developing robust Machine Learning pipelines, performing statistical data analytics, and hardening modern intelligent infrastructure.
           </p>
@@ -71,18 +76,20 @@ export default function AboutSection() {
           {/* STATS MATRIX (12 COLS) */}
           <div className="md:col-span-2 lg:col-span-12 grid grid-cols-2 sm:grid-cols-4 gap-4">
             {STATS.map((stat) => (
-              <Card3DTilt key={stat.label} maxTilt={8} className="glass p-5 text-center border border-[rgba(139,92,246,0.2)] shadow-md">
-                <div className="text-3xl font-extrabold gradient-primary font-mono">{stat.value}</div>
+              <Card3DTilt key={stat.label} maxTilt={8} className="glass p-5 text-center border border-[#F59E0B]/20 shadow-xl shadow-[#F59E0B]/5">
+                <div className="text-3xl font-extrabold bg-clip-text text-transparent bg-gradient-to-b from-[#FFFBEB] via-[#F59E0B] to-[#F97316] font-mono">
+                  {stat.value}
+                </div>
                 <div className="text-xs text-[#94A3B8] font-medium mt-1">{stat.label}</div>
               </Card3DTilt>
             ))}
           </div>
 
           {/* ACADEMIC JOURNEY (6 COLS) */}
-          <Card3DTilt maxTilt={5} className="md:col-span-1 lg:col-span-6 glass-card p-6 sm:p-8 border border-[rgba(139,92,246,0.2)] flex flex-col justify-between">
+          <Card3DTilt maxTilt={5} className="md:col-span-1 lg:col-span-6 glass-card p-6 sm:p-8 border border-[#F59E0B]/20 flex flex-col justify-between shadow-xl">
             <div>
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-xl bg-[#8B5CF6]/15 border border-[#8B5CF6]/30 flex items-center justify-center text-[#8B5CF6]">
+                <div className="w-10 h-10 rounded-xl bg-[#F59E0B]/15 border border-[#F59E0B]/30 flex items-center justify-center text-[#F59E0B]">
                   <GraduationCap size={20} />
                 </div>
                 <div>
@@ -97,9 +104,9 @@ export default function AboutSection() {
 
               <div className="space-y-5">
                 {EDUCATION.map((edu) => (
-                  <div key={edu.title} className="relative pl-5 border-l-2 border-[rgba(139,92,246,0.3)]">
-                    <div className={`absolute -left-[5px] top-1 w-2.5 h-2.5 rounded-full ${edu.active ? 'bg-[#8B5CF6] shadow-lg shadow-[#8B5CF6]' : 'bg-[#94A3B8]/30'}`} />
-                    <span className="text-[10px] font-mono font-bold text-[#8B5CF6] uppercase tracking-wider">{edu.period}</span>
+                  <div key={edu.title} className="relative pl-5 border-l-2 border-[#F59E0B]/30">
+                    <div className={`absolute -left-[5px] top-1 w-2.5 h-2.5 rounded-full ${edu.active ? 'bg-[#F59E0B] shadow-lg shadow-[#F59E0B]' : 'bg-[#94A3B8]/30'}`} />
+                    <span className="text-[10px] font-mono font-bold text-[#F59E0B] uppercase tracking-wider">{edu.period}</span>
                     <h4 className="text-xs font-bold text-white mt-0.5">{edu.title}</h4>
                     <p className="text-[11px] text-[#94A3B8]">{edu.school}</p>
                   </div>
@@ -109,28 +116,28 @@ export default function AboutSection() {
           </Card3DTilt>
 
           {/* ENGINEERING VISION & MISSION (6 COLS) */}
-          <Card3DTilt maxTilt={5} className="md:col-span-1 lg:col-span-6 glass-card p-6 sm:p-8 border border-[rgba(139,92,246,0.2)] flex flex-col justify-between">
+          <Card3DTilt maxTilt={5} className="md:col-span-1 lg:col-span-6 glass-card p-6 sm:p-8 border border-[#F59E0B]/20 flex flex-col justify-between shadow-xl">
             <div>
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-xl bg-[#00D9FF]/15 border border-[#00D9FF]/30 flex items-center justify-center text-[#00D9FF]">
+                <div className="w-10 h-10 rounded-xl bg-[#F97316]/15 border border-[#F97316]/30 flex items-center justify-center text-[#F97316]">
                   <Target size={20} />
                 </div>
                 <h3 className="heading-sm text-white">Engineering Vision</h3>
               </div>
 
               <div className="space-y-4">
-                <div className="p-4 rounded-xl bg-[rgba(139,92,246,0.06)] border border-[rgba(139,92,246,0.15)]">
+                <div className="p-4 rounded-xl bg-[#F59E0B]/5 border border-[#F59E0B]/20">
                   <h4 className="text-xs font-bold text-white flex items-center gap-2 mb-1.5">
-                    <Shield size={14} className="text-[#8B5CF6]" /> Primary Focus: Ethical Hacking & Security
+                    <Shield size={14} className="text-[#F59E0B]" /> Primary Focus: Ethical Hacking & Security
                   </h4>
                   <p className="text-xs text-[#94A3B8] leading-relaxed">
                     Performing penetration testing, web application security auditing, API vulnerability assessments, and proactive network defense.
                   </p>
                 </div>
 
-                <div className="p-4 rounded-xl bg-[rgba(0,217,255,0.06)] border border-[rgba(0,217,255,0.15)]">
+                <div className="p-4 rounded-xl bg-[#F97316]/5 border border-[#F97316]/20">
                   <h4 className="text-xs font-bold text-white flex items-center gap-2 mb-1.5">
-                    <Brain size={14} className="text-[#00D9FF]" /> Python Data Science & ML Pipelines
+                    <Brain size={14} className="text-[#F97316]" /> Python Data Science & ML Pipelines
                   </h4>
                   <p className="text-xs text-[#94A3B8] leading-relaxed">
                     Developing automated Python data preprocessing scripts, feature extraction, and supervised machine learning classification models.
@@ -141,9 +148,9 @@ export default function AboutSection() {
           </Card3DTilt>
 
           {/* BEYOND CODING (6 COLS) */}
-          <Card3DTilt maxTilt={5} className="md:col-span-1 lg:col-span-6 glass-card p-6 border border-[rgba(139,92,246,0.2)]">
+          <Card3DTilt maxTilt={5} className="md:col-span-1 lg:col-span-6 glass-card p-6 border border-[#F59E0B]/20 shadow-xl">
             <div className="flex items-center gap-2.5 mb-4">
-              <Gamepad2 size={18} className="text-[#8B5CF6]" />
+              <Gamepad2 size={18} className="text-[#F59E0B]" />
               <h3 className="text-xs font-bold text-white uppercase tracking-wider">Beyond Coding</h3>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -157,7 +164,7 @@ export default function AboutSection() {
           </Card3DTilt>
 
           {/* COMPETITIONS & SOCIALS (6 COLS) */}
-          <Card3DTilt maxTilt={5} className="md:col-span-1 lg:col-span-6 glass-card p-6 border border-[rgba(139,92,246,0.2)] flex flex-col justify-between">
+          <Card3DTilt maxTilt={5} className="md:col-span-1 lg:col-span-6 glass-card p-6 border border-[#F59E0B]/20 flex flex-col justify-between shadow-xl">
             <div>
               <div className="flex items-center gap-2.5 mb-4">
                 <Trophy size={18} className="text-[#F59E0B]" />
@@ -166,7 +173,7 @@ export default function AboutSection() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
                 {COMPETITIONS.map((comp) => (
                   <div key={comp.title} className="p-3 rounded-xl bg-white/[0.02] border border-white/[0.05]">
-                    <a href={comp.url} target="_blank" rel="noopener noreferrer" className="text-xs font-bold text-[#8B5CF6] hover:underline flex items-center gap-1">
+                    <a href={comp.url} target="_blank" rel="noopener noreferrer" className="text-xs font-bold text-[#F59E0B] hover:underline flex items-center gap-1">
                       {comp.title} <Award size={12} />
                     </a>
                     <p className="text-[10px] text-[#94A3B8] mt-0.5">{comp.desc}</p>
@@ -176,7 +183,7 @@ export default function AboutSection() {
             </div>
 
             {/* Social Grid */}
-            <div className="pt-4 border-t border-[rgba(139,92,246,0.15)]">
+            <div className="pt-4 border-t border-[#F59E0B]/20">
               <h4 className="text-[10px] font-bold text-[#94A3B8] uppercase tracking-wider mb-2.5">Connect Online</h4>
               <div className="grid grid-cols-4 gap-2">
                 {[
@@ -190,7 +197,7 @@ export default function AboutSection() {
                     href={href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex flex-col items-center gap-1.5 p-2 rounded-xl glass hover:scale-105 transition-all duration-200 group"
+                    className="flex flex-col items-center gap-1.5 p-2 rounded-xl glass hover:scale-105 transition-all duration-200 group hover:border-[#F59E0B]/40"
                   >
                     <Icon size={16} style={{ color }} className="group-hover:scale-110 transition-transform" />
                     <span className="text-[9px] font-medium text-[#94A3B8] group-hover:text-white">{label}</span>

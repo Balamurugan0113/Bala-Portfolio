@@ -1,6 +1,6 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowDown, FileText, Sparkles, Shield, Brain, Code, Database, Server, Layers, Cpu, Terminal, Trophy, Gamepad2 } from 'lucide-react';
+import { FileText, Sparkles, Shield, Brain, Code, Database, Server, Layers, Cpu, Terminal, Trophy, Gamepad2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { PERSONAL_INFO } from '@/types';
 import creatorImg from '@/assets/standing_creator.png';
@@ -34,11 +34,6 @@ export default function HeroSection() {
   const textY = useTransform(scrollYProgress, [0, 0.6], [0, -30]);
 
   useEffect(() => { setMounted(true); }, []);
-
-  const scrollToAbout = useCallback(() => {
-    soundFx.playClick();
-    document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
-  }, []);
 
   if (!mounted) return null;
 
@@ -191,15 +186,8 @@ export default function HeroSection() {
         </Button>
       </motion.div>
 
-      {/* SCROLL DOWN INDICATOR */}
-      <motion.button
-        style={{ opacity: heroOpacity }}
-        onClick={scrollToAbout}
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 text-[#94A3B8] hover:text-white transition-colors p-2 z-20"
-        aria-label="Scroll to about section"
-      >
-        <ArrowDown size={22} className="animate-bounce text-[#F59E0B]" />
-      </motion.button>
+      {/* SMOOTH FADED GRADIENT DIVIDER TO ABOUT SECTION */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-36 bg-gradient-to-b from-transparent via-[#050508]/80 to-[#050508] z-20" />
     </section>
   );
 }

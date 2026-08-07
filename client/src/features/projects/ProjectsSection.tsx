@@ -253,14 +253,11 @@ export default function ProjectsSection() {
   };
 
   return (
-    <section id="projects" className="relative section-py px-[clamp(1.25rem,4vw,3rem)] overflow-hidden" aria-label="Projects showcase">
+    <section id="projects" className="relative bg-[#050508] section-py px-[clamp(1.25rem,4vw,3rem)] overflow-hidden" aria-label="Projects showcase">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-10">
-          <p className="text-xs font-semibold tracking-[0.25em] uppercase text-[#4F8CFF] flex items-center justify-center gap-2">
-            <Sparkles className="w-3.5 h-3.5 animate-spin" /> Interactive Rotating Showcase
-          </p>
-          <h2 className="heading-lg gradient-primary mt-2">Featured Projects & Systems</h2>
-          <p className="text-body max-w-2xl mx-auto mt-3 text-sm">
+          <h2 className="heading-lg bg-clip-text text-transparent bg-gradient-to-b from-[#FFFBEB] via-[#F59E0B] to-[#F97316]">Featured Projects & Systems</h2>
+          <p className="text-body max-w-2xl mx-auto mt-3 text-sm text-[#94A3B8]">
             Hover mouse over the rotating deck to pause. Click any project card block to inspect source code and detailed architecture reports.
           </p>
 

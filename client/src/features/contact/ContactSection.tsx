@@ -43,7 +43,7 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="relative section-py px-[clamp(1.25rem,4vw,3rem)]" aria-label="Contact section">
+    <section id="contact" className="relative bg-[#050508] section-py px-[clamp(1.25rem,4vw,3rem)]" aria-label="Contact section">
       <div className="max-w-7xl mx-auto">
         <motion.div
           className="text-center mb-16"
@@ -52,9 +52,8 @@ export default function ContactSection() {
           viewport={{ once: true, margin: '-80px' }}
           variants={fadeUp}
         >
-          <p className="text-xs font-semibold tracking-[0.2em] uppercase text-[#4F8CFF]">Contact</p>
-          <h2 className="heading-lg gradient-primary mt-2">Get in Touch</h2>
-          <p className="text-body max-w-2xl mx-auto mt-4">
+          <h2 className="heading-lg bg-clip-text text-transparent bg-gradient-to-b from-[#FFFBEB] via-[#F59E0B] to-[#F97316]">Get in Touch</h2>
+          <p className="text-body max-w-2xl mx-auto mt-4 text-[#94A3B8]">
             Send a message to discuss project work, model analysis, or cybersecurity audits.
           </p>
         </motion.div>

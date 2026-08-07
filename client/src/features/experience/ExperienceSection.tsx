@@ -1,11 +1,11 @@
 import { motion } from 'framer-motion';
-import { Briefcase, Calendar, Sparkles, CheckCircle2, Award } from 'lucide-react';
+import { Briefcase, Calendar, CheckCircle2, Award } from 'lucide-react';
 import { EXPERIENCES, type Experience } from '@shared/const';
 import Card3DTilt from '@/components/ui/Card3DTilt';
 
 export default function ExperienceSection() {
   return (
-    <section id="experience" className="relative py-12 px-[clamp(1.25rem,4vw,3rem)]" aria-label="Professional Experience">
+    <section id="experience" className="relative bg-[#050508] py-12 px-[clamp(1.25rem,4vw,3rem)]" aria-label="Professional Experience">
       <div className="max-w-3xl mx-auto">
         <motion.div
           className="text-center mb-6"
@@ -14,10 +14,7 @@ export default function ExperienceSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
         >
-          <p className="text-[11px] font-semibold tracking-[0.2em] uppercase text-[#4F8CFF] flex items-center justify-center gap-1.5">
-            <Sparkles className="w-3 h-3" /> Industry Internship
-          </p>
-          <h2 className="heading-md gradient-primary mt-1">Professional Experience</h2>
+          <h2 className="heading-md bg-clip-text text-transparent bg-gradient-to-b from-[#FFFBEB] via-[#F59E0B] to-[#F97316]">Professional Experience</h2>
         </motion.div>
 
         {/* COMPACT ATS INTERNSHIP CARD */}
