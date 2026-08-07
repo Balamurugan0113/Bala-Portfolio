@@ -21,13 +21,37 @@ import signModelTrain from "../projects/sign_translator/model_train.py?raw";
 import signClasses from "../projects/sign_translator/classes.txt?raw";
 import signReadme from "../projects/sign_translator/README.md?raw";
 
+import digitCNN from "../projects/digit_recognition/cnn_model.py?raw";
+import digitInference from "../projects/digit_recognition/inference.py?raw";
+import digitReadme from "../projects/digit_recognition/README.md?raw";
+
 export interface ProjectFile {
   name: string;
   language: string;
   content: string;
 }
 
+const DIGIT_FILES: ProjectFile[] = [
+  {
+    name: "cnn_model.py",
+    language: "python",
+    content: digitCNN
+  },
+  {
+    name: "inference.py",
+    language: "python",
+    content: digitInference
+  },
+  {
+    name: "README.md",
+    language: "markdown",
+    content: digitReadme
+  }
+];
+
 export const PROJECT_FILES: Record<string, ProjectFile[]> = {
+  "digit-recognition": DIGIT_FILES,
+  "handwritten-digit-recognition": DIGIT_FILES,
   "intrusion-detection": [
     {
       name: "nids.py",

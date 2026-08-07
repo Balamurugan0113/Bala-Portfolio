@@ -32,17 +32,25 @@ export default function SkillsSection() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
           {SKILL_CATEGORIES.map((cat, i) => {
             const IconComp = CATEGORY_ICONS[i % CATEGORY_ICONS.length];
+            const isPrimary = i === 0;
             return (
               <Card3DTilt
                 key={cat.title}
                 maxTilt={10}
-                className="glass-card p-6 flex flex-col h-full border border-[rgba(79,140,255,0.12)] hover:border-[#4F8CFF]/40"
+                className={cat.title.includes('PRIMARY')
+                  ? 'glass-card p-6 flex flex-col h-full border-2 border-[#4F8CFF] shadow-xl shadow-[#4F8CFF]/20 relative overflow-hidden'
+                  : 'glass-card p-6 flex flex-col h-full border border-[rgba(79,140,255,0.12)] hover:border-[#4F8CFF]/40'}
               >
+                {isPrimary && (
+                  <div className="absolute top-0 right-0 bg-[#4F8CFF] text-white text-[9px] font-mono font-bold px-3 py-1 rounded-bl-xl shadow-md uppercase tracking-widest">
+                    Core Focus
+                  </div>
+                )}
                 <div className="flex items-center gap-3 mb-4 border-b border-[rgba(79,140,255,0.12)] pb-3">
-                  <div className="p-2 rounded-xl bg-[#4F8CFF]/15 text-[#4F8CFF] border border-[#4F8CFF]/25">
+                  <div className="p-2 rounded-xl bg-[#4F8CFF]/15 text-[#4F8CFF] border border-[#4F8CFF]/25 shrink-0">
                     <IconComp size={18} />
                   </div>
-                  <h3 className="text-xs font-bold text-white uppercase tracking-wider">
+                  <h3 className="text-xs font-bold text-white uppercase tracking-wider leading-snug">
                     {cat.title}
                   </h3>
                 </div>

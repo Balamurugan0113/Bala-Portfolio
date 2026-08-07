@@ -112,20 +112,20 @@ export const STATS: Stat[] = [
 
 export const SKILL_CATEGORIES: SkillCategory[] = [
   {
-    title: 'Penetration Testing',
-    skills: ['Network Pentesting', 'Web App Auditing', 'API Security Assessment', 'Vulnerability Assessment'],
+    title: '★ PRIMARY FOCUS: Ethical Hacking & Pentesting',
+    skills: ['Network Penetration Testing', 'Web Application Security Auditing', 'API Vulnerability Assessment', 'Ethical Exploitation & Privilege Escalation'],
   },
   {
-    title: 'Programming Languages',
-    skills: ['Python (Scripting & Automation)', 'JavaScript / TypeScript', 'Bash / PowerShell', 'SQL'],
+    title: 'Security Analysis & Testing Tools',
+    skills: ['Burp Suite Professional', 'Nmap Network Scanner', 'Wireshark Packet Analyzer', 'Metasploit Framework'],
   },
   {
-    title: 'Security Tools',
-    skills: ['Burp Suite', 'Nmap', 'Wireshark', 'Metasploit Framework'],
+    title: 'Python, Data Science & AI',
+    skills: ['Python (Automation & Security Scripts)', 'Data Preprocessing & EDA (Pandas, NumPy)', 'Machine Learning (Scikit-Learn)', 'Matplotlib & Seaborn Visualizations'],
   },
   {
-    title: 'Cloud & Infrastructure',
-    skills: ['AWS Security', 'Docker', 'Linux Hardening', 'Database Security'],
+    title: 'Cloud, Infrastructure & Web',
+    skills: ['AWS Cloud Security', 'Docker Containerization', 'Linux System Hardening', 'React & FastAPI Web Applications'],
   },
 ];
 
@@ -166,56 +166,8 @@ export const PROFICIENCIES: Proficiency[] = [
 ];
 
 export const PROJECTS: Project[] = [
-  {
-    id: 'intelliq-platform',
-    title: 'INTELLIQ – AI & DS Department Association Web Platform',
-    tagline: 'Full Stack Web Application',
-    description: 'Designed and engineered the official full-stack web application for the AI & Data Science Department Association at Info Institute of Engineering. Developed interactive portals for departmental event management, student project showcases, member registrations, and real-time notifications. Optimized backend RESTful API endpoints and database queries to ensure smooth user experience and high data availability.',
-    impact: 'Official Dept Platform',
-    tags: ['React', 'FastAPI', 'PostgreSQL', 'HTML5/CSS3', 'REST APIs'],
-    details: {
-      problem: 'The AI & Data Science Department Association needed a centralized, modern web platform to manage departmental events, student project showcases, member registrations, and real-time announcements efficiently.',
-      architecture: 'Full-stack web application with React frontend and FastAPI REST API backend. PostgreSQL database schema structured for event tracking, user roles, project submissions, and notification dispatches.',
-      frontend: 'React with TypeScript, responsive UI layout with custom styling, interactive event registration forms, and project showcase galleries.',
-      backend: 'FastAPI REST API with asynchronous route handlers, Pydantic data validation, and CORS middleware.',
-      database: 'PostgreSQL relational database with optimized query indexes for sub-second page loads and high data availability.',
-      auth: 'JWT authentication for admin and student portal access.',
-      security: 'Input validation, parameterized SQL queries, CORS restrictions, and HTTPS data transport.',
-      caching: 'Browser caching for static media assets and optimized API response serialization.',
-      optimization: 'Asynchronous API endpoints and database connection pooling.',
-      deployment: 'Cloud hosting with reverse proxy for production deployment.',
-      monitoring: 'API endpoint logging and error monitoring.',
-      cicd: 'Automated build and linting checks.',
-      scalability: 'Stateless backend architecture allowing horizontal scaling.',
-      future: 'Automated certificate generation for event participants and AI chatbot integration.',
-    },
-    links: { github: 'https://github.com/Balamurugan0113', demo: '#' },
-  },
-  {
-    id: 'campus360-erp',
-    title: 'Campus360 – AI-Powered College ERP Platform',
-    tagline: 'Full Stack & AI Solution (On Progress)',
-    description: 'Designed and built an enterprise-grade college ERP solution featuring Student Portal, Faculty Portal, Bus Tracking, and Attendance modules. Integrated an intelligent AI Chatbot backend with FastAPI to handle real-time student queries, notifications, and automated query resolution. Optimized database schema and API endpoints in PostgreSQL to deliver high-concurrency response times and seamless UI updates in React.',
-    impact: 'On Progress',
-    tags: ['React', 'FastAPI', 'PostgreSQL', 'Python', 'REST APIs', 'AI Chatbot'],
-    details: {
-      problem: 'College campuses face operational bottlenecks across student records, attendance tracking, faculty workflows, transport logistics, and information dispatches. An all-in-one AI-powered ERP platform is needed.',
-      architecture: 'Micro-module full-stack architecture with AI Chatbot integration. React frontend connected via REST APIs to FastAPI backend services and PostgreSQL database.',
-      frontend: 'React dashboard with Student Portal, Faculty Management, Bus GPS tracking view, and Attendance modules.',
-      backend: 'FastAPI async Python backend serving modular APIs and an integrated NLP chatbot processing student queries.',
-      database: 'PostgreSQL with relational schema optimized for high concurrency user interactions.',
-      auth: 'Role-based access control (Student, Faculty, Admin, Transport Operator).',
-      security: 'Encrypted passwords, JWT tokens, and strict role permissions.',
-      caching: 'Redis caching for frequent queries and chatbot response caching.',
-      optimization: 'Quantized NLP pipeline for sub-200ms chatbot responses.',
-      deployment: 'Containerized Docker deployment ready for campus cloud servers.',
-      monitoring: 'System metric logs and real-time user session tracking.',
-      cicd: 'GitHub Actions continuous integration pipeline.',
-      scalability: 'Designed to scale to thousands of active campus users concurrently.',
-      future: 'Live GPS mobile tracking integration and automated biometric sync.',
-    },
-    links: { github: 'https://github.com/Balamurugan0113', demo: '#' },
-  },
+
+
   {
     id: 'digit-recognition',
     title: 'Handwritten Digit Recognition System',

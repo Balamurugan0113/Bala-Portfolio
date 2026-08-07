@@ -2,7 +2,7 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronRight, X, Github, ShieldCheck, Folder, FileCode, Copy, Database, FileText, Pause, Play, ChevronLeft, ExternalLink, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { PROJECTS, METHODOLOGY_STEPS, type Project } from '@/types';
+import { PROJECTS, type Project } from '@/types';
 import { PROJECT_FILES } from '@shared/projectFiles';
 import { cn } from '@/lib/utils';
 import { toast } from 'sonner';
@@ -393,28 +393,6 @@ export default function ProjectsSection() {
                   </div>
                 </Card3DTilt>
               </div>
-            ))}
-          </div>
-        </div>
-
-        {/* METHODOLOGY FLOW */}
-        <div className="mt-28">
-          <div className="text-center mb-12">
-            <p className="text-xs font-semibold tracking-[0.2em] uppercase text-[#4F8CFF]">Engineering Workflow</p>
-            <h3 className="heading-lg gradient-primary mt-2">Methodology Flow</h3>
-            <p className="text-body max-w-2xl mx-auto mt-3 text-sm">
-              Standard operating procedures for adversarial testing, threat analysis, and secure ML model deployment.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {METHODOLOGY_STEPS.map((step) => (
-              <Card3DTilt key={step.step} maxTilt={8} className="glass-card p-6 h-full border border-[rgba(79,140,255,0.08)]">
-                <div className="text-4xl font-extrabold text-[#4F8CFF]/20 font-mono mb-3">{step.step}</div>
-                <h4 className="text-sm font-bold text-white uppercase mb-2 flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#4F8CFF]" /> {step.title}
-                </h4>
-                <p className="text-xs text-[#94A3B8] leading-relaxed">{step.description}</p>
-              </Card3DTilt>
             ))}
           </div>
         </div>

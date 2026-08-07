@@ -1,8 +1,7 @@
 import { motion } from 'framer-motion';
-import { GraduationCap, Target, Shield, Brain, Gamepad2, Trophy, Github, Linkedin, Youtube, Instagram, Award, Sparkles, ShieldCheck } from 'lucide-react';
-import { STATS, PERSONAL_INFO } from '@/types';
+import { GraduationCap, Target, Shield, Brain, Gamepad2, Trophy, Github, Linkedin, Youtube, Instagram, Award, Sparkles } from 'lucide-react';
+import { STATS } from '@/types';
 import Card3DTilt from '@/components/ui/Card3DTilt';
-import profilePic from '@/assets/balamurugan.png';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -57,25 +56,33 @@ export default function AboutSection() {
           viewport={{ once: true, margin: '-80px' }}
           variants={fadeUp}
         >
-          <p className="text-xs font-semibold tracking-[0.2em] uppercase text-[#4F8CFF] flex items-center justify-center gap-2">
-            <Sparkles className="w-3.5 h-3.5 text-[#4F8CFF]" /> Profile & Background
+          <p className="text-xs font-semibold tracking-[0.2em] uppercase text-[#8B5CF6] flex items-center justify-center gap-2">
+            <Sparkles className="w-3.5 h-3.5 text-[#8B5CF6]" /> Profile & Background
           </p>
           <h2 className="heading-lg gradient-primary mt-2">About Me</h2>
           <p className="text-body max-w-2xl mx-auto mt-3 text-sm text-[#94A3B8]">
-            4th-year AI & Data Science scholar with hands-on experience in machine learning pipelines, automated data preprocessing, and web applications.
+            Hi, I'm Balamurugan C. I specialize in Ethical Hacking, developing robust Machine Learning pipelines, performing statistical data analytics, and hardening modern intelligent infrastructure.
           </p>
         </motion.div>
 
-        {/* 2-COLUMN LAYOUT: WORDING ON LEFT, PROFILE PIC & STATS ON RIGHT */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        {/* FULL-WIDTH BENTO GRID LAYOUT */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 items-stretch">
 
-          {/* LEFT SIDE: WORDING, ACADEMIC JOURNEY, VISION, COMPETITIONS (7 COLS ON DESKTOP) */}
-          <div className="lg:col-span-7 space-y-6">
+          {/* STATS MATRIX (12 COLS) */}
+          <div className="md:col-span-2 lg:col-span-12 grid grid-cols-2 sm:grid-cols-4 gap-4">
+            {STATS.map((stat) => (
+              <Card3DTilt key={stat.label} maxTilt={8} className="glass p-5 text-center border border-[rgba(139,92,246,0.2)] shadow-md">
+                <div className="text-3xl font-extrabold gradient-primary font-mono">{stat.value}</div>
+                <div className="text-xs text-[#94A3B8] font-medium mt-1">{stat.label}</div>
+              </Card3DTilt>
+            ))}
+          </div>
 
-            {/* Academic Journey */}
-            <Card3DTilt maxTilt={5} className="glass-card p-6 sm:p-8 border border-[rgba(79,140,255,0.12)]">
+          {/* ACADEMIC JOURNEY (6 COLS) */}
+          <Card3DTilt maxTilt={5} className="md:col-span-1 lg:col-span-6 glass-card p-6 sm:p-8 border border-[rgba(139,92,246,0.2)] flex flex-col justify-between">
+            <div>
               <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-xl bg-[#4F8CFF]/15 border border-[#4F8CFF]/30 flex items-center justify-center text-[#4F8CFF]">
+                <div className="w-10 h-10 rounded-xl bg-[#8B5CF6]/15 border border-[#8B5CF6]/30 flex items-center justify-center text-[#8B5CF6]">
                   <GraduationCap size={20} />
                 </div>
                 <div>
@@ -85,23 +92,25 @@ export default function AboutSection() {
               </div>
 
               <p className="text-xs text-[#94A3B8] leading-relaxed mb-6">
-                Pursuing B.Tech in Artificial Intelligence & Data Science (Final Year). Experienced in building machine learning classification & regression models, exploratory data analytics (EDA), and full-stack REST API applications.
+                Pursuing B.Tech in Artificial Intelligence & Data Science (Final Year). Specialized in Ethical Hacking, building machine learning classification & regression models, exploratory data analytics (EDA), and full-stack REST API web platforms.
               </p>
 
               <div className="space-y-5">
                 {EDUCATION.map((edu) => (
-                  <div key={edu.title} className="relative pl-5 border-l-2 border-[rgba(79,140,255,0.2)]">
-                    <div className={`absolute -left-[5px] top-1 w-2.5 h-2.5 rounded-full ${edu.active ? 'bg-[#4F8CFF] shadow-lg shadow-[#4F8CFF]' : 'bg-[#94A3B8]/30'}`} />
-                    <span className="text-[10px] font-mono font-bold text-[#4F8CFF] uppercase tracking-wider">{edu.period}</span>
+                  <div key={edu.title} className="relative pl-5 border-l-2 border-[rgba(139,92,246,0.3)]">
+                    <div className={`absolute -left-[5px] top-1 w-2.5 h-2.5 rounded-full ${edu.active ? 'bg-[#8B5CF6] shadow-lg shadow-[#8B5CF6]' : 'bg-[#94A3B8]/30'}`} />
+                    <span className="text-[10px] font-mono font-bold text-[#8B5CF6] uppercase tracking-wider">{edu.period}</span>
                     <h4 className="text-xs font-bold text-white mt-0.5">{edu.title}</h4>
                     <p className="text-[11px] text-[#94A3B8]">{edu.school}</p>
                   </div>
                 ))}
               </div>
-            </Card3DTilt>
+            </div>
+          </Card3DTilt>
 
-            {/* Engineering Vision & Mission */}
-            <Card3DTilt maxTilt={5} className="glass-card p-6 sm:p-8 border border-[rgba(79,140,255,0.12)]">
+          {/* ENGINEERING VISION & MISSION (6 COLS) */}
+          <Card3DTilt maxTilt={5} className="md:col-span-1 lg:col-span-6 glass-card p-6 sm:p-8 border border-[rgba(139,92,246,0.2)] flex flex-col justify-between">
+            <div>
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-10 h-10 rounded-xl bg-[#00D9FF]/15 border border-[#00D9FF]/30 flex items-center justify-center text-[#00D9FF]">
                   <Target size={20} />
@@ -110,100 +119,65 @@ export default function AboutSection() {
               </div>
 
               <div className="space-y-4">
-                <div className="p-4 rounded-xl bg-[rgba(79,140,255,0.04)] border border-[rgba(79,140,255,0.08)]">
+                <div className="p-4 rounded-xl bg-[rgba(139,92,246,0.06)] border border-[rgba(139,92,246,0.15)]">
                   <h4 className="text-xs font-bold text-white flex items-center gap-2 mb-1.5">
-                    <Shield size={14} className="text-[#4F8CFF]" /> End-to-End Data Science Pipelines
+                    <Shield size={14} className="text-[#8B5CF6]" /> Primary Focus: Ethical Hacking & Security
                   </h4>
                   <p className="text-xs text-[#94A3B8] leading-relaxed">
-                    Engineering automated Python data preprocessing, feature extraction, and supervised ML classification/regression models.
+                    Performing penetration testing, web application security auditing, API vulnerability assessments, and proactive network defense.
                   </p>
                 </div>
 
-                <div className="p-4 rounded-xl bg-[rgba(0,217,255,0.04)] border border-[rgba(0,217,255,0.08)]">
+                <div className="p-4 rounded-xl bg-[rgba(0,217,255,0.06)] border border-[rgba(0,217,255,0.15)]">
                   <h4 className="text-xs font-bold text-white flex items-center gap-2 mb-1.5">
-                    <Brain size={14} className="text-[#00D9FF]" /> Real-Time Full Stack Applications
+                    <Brain size={14} className="text-[#00D9FF]" /> Python Data Science & ML Pipelines
                   </h4>
                   <p className="text-xs text-[#94A3B8] leading-relaxed">
-                    Building responsive React web portals integrated with FastAPI, PostgreSQL databases, and real-time AI capabilities.
+                    Developing automated Python data preprocessing scripts, feature extraction, and supervised machine learning classification models.
                   </p>
                 </div>
               </div>
-            </Card3DTilt>
-
-            {/* Beyond Coding & Competitions */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <Card3DTilt maxTilt={6} className="glass-card p-6 border border-[rgba(79,140,255,0.12)]">
-                <div className="flex items-center gap-2.5 mb-4">
-                  <Gamepad2 size={18} className="text-[#8B5CF6]" />
-                  <h3 className="text-xs font-bold text-white uppercase tracking-wider">Beyond Coding</h3>
-                </div>
-                <div className="space-y-2.5">
-                  {BEYOND_CODING.slice(0, 2).map((item) => (
-                    <div key={item.title} className="p-2.5 rounded-xl bg-white/[0.02] border border-white/[0.05]">
-                      <span className="text-xs font-bold text-white">{item.icon} {item.title}</span>
-                      <p className="text-[10px] text-[#94A3B8] mt-0.5">{item.desc}</p>
-                    </div>
-                  ))}
-                </div>
-              </Card3DTilt>
-
-              <Card3DTilt maxTilt={6} className="glass-card p-6 border border-[rgba(79,140,255,0.12)]">
-                <div className="flex items-center gap-2.5 mb-4">
-                  <Trophy size={18} className="text-[#F59E0B]" />
-                  <h3 className="text-xs font-bold text-white uppercase tracking-wider">Competitions</h3>
-                </div>
-                <div className="space-y-2.5">
-                  {COMPETITIONS.map((comp) => (
-                    <div key={comp.title} className="p-2.5 rounded-xl bg-white/[0.02] border border-white/[0.05]">
-                      <a href={comp.url} target="_blank" rel="noopener noreferrer" className="text-xs font-bold text-[#4F8CFF] hover:underline flex items-center gap-1">
-                        {comp.title} <Award size={12} />
-                      </a>
-                      <p className="text-[10px] text-[#94A3B8] mt-0.5">{comp.desc}</p>
-                    </div>
-                  ))}
-                </div>
-              </Card3DTilt>
             </div>
+          </Card3DTilt>
 
-          </div>
-
-          {/* RIGHT SIDE: PROFILE PICTURE CARD, QUICK STATS & SOCIALS (5 COLS ON DESKTOP) */}
-          <div className="lg:col-span-5 space-y-6 lg:sticky lg:top-24">
-
-            {/* PROMINENT PROFILE CARD */}
-            <Card3DTilt maxTilt={8} className="glass-card p-3 border-2 border-[rgba(79,140,255,0.2)] shadow-2xl shadow-[#4F8CFF]/10">
-              <div className="relative rounded-2xl overflow-hidden aspect-[4/5] max-h-[420px]">
-                <img
-                  src={profilePic}
-                  alt={PERSONAL_INFO.name}
-                  className="w-full h-full object-cover object-center"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#050816] via-transparent to-transparent opacity-90" />
-                <div className="absolute bottom-4 left-4 right-4 glass-strong p-4 rounded-xl text-center border border-[rgba(79,140,255,0.2)]">
-                  <div className="font-bold text-base text-white flex items-center justify-center gap-1.5">
-                    {PERSONAL_INFO.name} <ShieldCheck size={16} className="text-[#10B981]" />
-                  </div>
-                  <div className="text-xs text-[#4F8CFF] font-mono font-semibold uppercase mt-0.5">
-                    B.Tech AI & Data Science (Final Year)
-                  </div>
-                  <p className="text-[10px] text-[#94A3B8] mt-1">Coimbatore, Tamil Nadu</p>
+          {/* BEYOND CODING (6 COLS) */}
+          <Card3DTilt maxTilt={5} className="md:col-span-1 lg:col-span-6 glass-card p-6 border border-[rgba(139,92,246,0.2)]">
+            <div className="flex items-center gap-2.5 mb-4">
+              <Gamepad2 size={18} className="text-[#8B5CF6]" />
+              <h3 className="text-xs font-bold text-white uppercase tracking-wider">Beyond Coding</h3>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {BEYOND_CODING.map((item) => (
+                <div key={item.title} className="p-3 rounded-xl bg-white/[0.02] border border-white/[0.05]">
+                  <span className="text-xs font-bold text-white">{item.icon} {item.title}</span>
+                  <p className="text-[10px] text-[#94A3B8] mt-0.5">{item.desc}</p>
                 </div>
-              </div>
-            </Card3DTilt>
-
-            {/* QUICK STATS MATRIX */}
-            <div className="grid grid-cols-2 gap-3">
-              {STATS.map((stat) => (
-                <Card3DTilt key={stat.label} maxTilt={8} className="glass p-4 text-center border border-[rgba(79,140,255,0.12)]">
-                  <div className="text-2xl font-extrabold gradient-primary font-mono">{stat.value}</div>
-                  <div className="text-[11px] text-[#94A3B8] font-medium mt-0.5">{stat.label}</div>
-                </Card3DTilt>
               ))}
             </div>
+          </Card3DTilt>
 
-            {/* CONNECT SOCIALS */}
-            <Card3DTilt maxTilt={6} className="glass-card p-5 border border-[rgba(79,140,255,0.12)]">
-              <h4 className="text-[10px] font-bold text-[#94A3B8] uppercase tracking-wider mb-3 text-center">Connect Online</h4>
+          {/* COMPETITIONS & SOCIALS (6 COLS) */}
+          <Card3DTilt maxTilt={5} className="md:col-span-1 lg:col-span-6 glass-card p-6 border border-[rgba(139,92,246,0.2)] flex flex-col justify-between">
+            <div>
+              <div className="flex items-center gap-2.5 mb-4">
+                <Trophy size={18} className="text-[#F59E0B]" />
+                <h3 className="text-xs font-bold text-white uppercase tracking-wider">Competitions & Hackathons</h3>
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+                {COMPETITIONS.map((comp) => (
+                  <div key={comp.title} className="p-3 rounded-xl bg-white/[0.02] border border-white/[0.05]">
+                    <a href={comp.url} target="_blank" rel="noopener noreferrer" className="text-xs font-bold text-[#8B5CF6] hover:underline flex items-center gap-1">
+                      {comp.title} <Award size={12} />
+                    </a>
+                    <p className="text-[10px] text-[#94A3B8] mt-0.5">{comp.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Social Grid */}
+            <div className="pt-4 border-t border-[rgba(139,92,246,0.15)]">
+              <h4 className="text-[10px] font-bold text-[#94A3B8] uppercase tracking-wider mb-2.5">Connect Online</h4>
               <div className="grid grid-cols-4 gap-2">
                 {[
                   { icon: Instagram, href: 'https://www.instagram.com/balaa.xx', label: 'Instagram', color: '#E4405F' },
@@ -216,16 +190,15 @@ export default function AboutSection() {
                     href={href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex flex-col items-center gap-1.5 p-2.5 rounded-xl glass hover:scale-105 transition-all duration-200 group"
+                    className="flex flex-col items-center gap-1.5 p-2 rounded-xl glass hover:scale-105 transition-all duration-200 group"
                   >
                     <Icon size={16} style={{ color }} className="group-hover:scale-110 transition-transform" />
                     <span className="text-[9px] font-medium text-[#94A3B8] group-hover:text-white">{label}</span>
                   </a>
                 ))}
               </div>
-            </Card3DTilt>
-
-          </div>
+            </div>
+          </Card3DTilt>
 
         </div>
       </div>
