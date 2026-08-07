@@ -15,7 +15,6 @@ const AboutSection = lazy(() => import('@/features/about/AboutSection').then(m =
 const SkillsSection = lazy(() => import('@/features/skills/SkillsSection').then(m => ({ default: m.default })));
 const ProjectsSection = lazy(() => import('@/features/projects/ProjectsSection').then(m => ({ default: m.default })));
 const ExperienceSection = lazy(() => import('@/features/experience/ExperienceSection').then(m => ({ default: m.default })));
-const BlogSection = lazy(() => import('@/features/blogs/BlogSection').then(m => ({ default: m.default })));
 const ContactSection = lazy(() => import('@/features/contact/ContactSection').then(m => ({ default: m.default })));
 
 function NotFound() {
@@ -81,7 +80,6 @@ function HomePage() {
       <SkillsSection />
       <ProjectsSection />
       <ExperienceSection />
-      <BlogSection />
       <ContactSection />
     </div>
   );
