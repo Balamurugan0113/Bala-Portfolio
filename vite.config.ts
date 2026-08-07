@@ -19,10 +19,11 @@ export default defineConfig({
       output: {
         manualChunks: {
           three: ['three', '@react-three/fiber', '@react-three/drei'],
+          vendor: ['react', 'react-dom', 'framer-motion', 'wouter', 'lucide-react'],
         },
       },
     },
-    chunkSizeWarningLimit: 600,
+    chunkSizeWarningLimit: 1200,
   },
   server: {
     port: 5173,
