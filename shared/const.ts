@@ -458,62 +458,6 @@ export const EXPERIENCES: Experience[] = [
     ],
     type: 'internship',
   },
-  {
-    id: 'sec-research',
-    role: 'Security Research Intern',
-    organization: 'Cybersecurity Research Lab',
-    period: 'Jun 2024 - Present',
-    description: 'Conducting advanced research on network intrusion detection using machine learning, contributing to open-source security tools, and publishing findings in peer-reviewed conferences.',
-    achievements: [
-      'Developed novel ML-based NIDS algorithm achieving 99.2% detection rate with <0.1% false positives',
-      'Published 2 research papers in IEEE conferences on AI-driven security analytics',
-      'Contributed 500+ commits to open-source security tools including Nmap scripts and Metasploit modules',
-      'Led weekly security workshops training 50+ students on penetration testing methodologies',
-    ],
-    type: 'research',
-  },
-  {
-    id: 'freelance-lead',
-    role: 'Full-Stack Developer & Security Consultant',
-    organization: 'Freelance / Self-Employed',
-    period: 'Jan 2023 - Present',
-    description: 'Delivering enterprise-grade web applications and security assessments for 10+ clients across e-commerce, education, and professional services domains.',
-    achievements: [
-      'Delivered 10+ production client projects with 100% satisfaction rate and zero post-deployment critical issues',
-      'Conducted 50+ security audits identifying and remediating 200+ vulnerabilities across client infrastructure',
-      'Built reusable component library with 50+ components reducing development time by 60% for repeat clients',
-      'Maintained 99.9% SLA uptime across all client deployments with 24/7 incident response',
-    ],
-    type: 'internship',
-  },
-  {
-    id: 'open-source-ai',
-    role: 'AI/ML Open Source Contributor',
-    organization: 'Various Projects',
-    period: '2022 - Present',
-    description: 'Active contributor to open-source AI/ML projects focusing on security applications, model optimization, and developer tooling.',
-    achievements: [
-      'Core contributor to security-focused ML library with 2K+ GitHub stars',
-      'Implemented GPU-optimized inference pipeline reducing latency by 3x for ONNX Runtime',
-      'Created tutorials and documentation used by 10K+ developers for ML security applications',
-      'Won hackathon for AI-powered malware detection achieving 96% accuracy',
-    ],
-    type: 'open-source',
-  },
-  {
-    id: 'education-achievement',
-    role: 'B.Tech Computer Science (AI & Security)',
-    organization: 'Top 10% of Class - Research Focus',
-    period: '2021 - 2025',
-    description: 'Bachelor\'s degree with specialization in Artificial Intelligence and Cyber Security. Research focus on adversarial ML and network security.',
-    achievements: [
-      'Top 10% of class with 8.9/10 CGPA',
-      'Led university cyber security club with 200+ active members',
-      'Organized 3 national-level CTF competitions with 500+ participants',
-      'Completed 5 research projects in ML security, IoT security, and applied cryptography',
-    ],
-    type: 'achievement',
-  },
 ];
 
 export const BLOGS: Blog[] = [
