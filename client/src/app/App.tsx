@@ -2,12 +2,9 @@ import { lazy, Suspense, useState, useEffect } from 'react';
 import { Route, Switch } from 'wouter';
 import Navbar from '@/components/layout/Navbar';
 
-import GhostCursor from '@/components/effects/GhostCursor';
-import Particles from '@/components/effects/Particles';
 import Footer from '@/components/layout/Footer';
 import BackToTop from '@/components/layout/BackToTop';
 import { Toaster } from 'sonner';
-import { useReducedMotion } from '@/hooks/useReducedMotion';
 import ErrorBoundary from '@/components/ErrorBoundary';
 
 const HeroSection = lazy(() => import('@/features/hero/HeroSection').then(m => ({ default: m.default })));
@@ -41,40 +38,8 @@ function LoadingFallback() {
 }
 
 function HomePage() {
-  const reduced = useReducedMotion();
-  const [isDesktop, setIsDesktop] = useState(false);
-
-  useEffect(() => {
-    const checkDesktop = () => {
-      setIsDesktop(window.innerWidth >= 768 && window.matchMedia('(pointer: fine)').matches);
-    };
-    checkDesktop();
-    window.addEventListener('resize', checkDesktop);
-    return () => window.removeEventListener('resize', checkDesktop);
-  }, []);
-
   return (
     <div className="relative min-h-screen flex flex-col bg-[#050508]">
-      {!reduced && (
-        <div className="fixed inset-0 z-0 pointer-events-none">
-          <Particles
-            particleColors={["rgb(245,158,11)", "rgb(249,115,22)", "rgb(234,179,8)"]}
-            particleCount={300}
-            particleSpread={15}
-            speed={0.04}
-            particleBaseSize={100}
-            moveParticlesOnHover={true}
-            alphaParticles={true}
-            sizeRandomness={1.5}
-            cameraDistance={25}
-            pixelRatio={0.5}
-          />
-        </div>
-      )}
-      <div className="noise-overlay pointer-events-none" />
-      {!reduced && isDesktop && (
-        <GhostCursor color="rgb(245,158,11)" brightness={1.2} trailLength={40} inertia={0.4} bloomStrength={0.15} />
-      )}
       <HeroSection />
       <AboutSection />
       <SkillsSection />
