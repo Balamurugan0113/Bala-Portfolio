@@ -1,14 +1,15 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, MapPin, Phone, Send, ShieldCheck } from 'lucide-react';
+import { Mail, MapPin, Phone, Send, ShieldCheck, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { PERSONAL_INFO, SERVICES, FAQS } from '@/types';
 import { cn } from '@/lib/utils';
 import { toast } from 'sonner';
+import { soundFx } from '@/lib/sound';
 
 const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] as const } },
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] as const } },
 };
 
 export default function ContactSection() {
@@ -18,6 +19,7 @@ export default function ContactSection() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    soundFx.playClick();
     if (!formState.name || !formState.email || !formState.message) {
       toast.error('Please fill in all required fields');
       return;
@@ -43,75 +45,77 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contact" className="relative bg-[#050508] section-py px-[clamp(1.25rem,4vw,3rem)]" aria-label="Contact section">
+    <section id="contact" className="relative bg-[#050508] py-14 sm:py-28 px-4 sm:px-6" aria-label="Contact section">
       <div className="max-w-7xl mx-auto">
         <motion.div
-          className="text-center mb-16"
+          className="text-center mb-8 sm:mb-14"
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: '-80px' }}
+          viewport={{ once: true, margin: '-60px' }}
           variants={fadeUp}
         >
-          <h2 className="heading-lg bg-clip-text text-transparent bg-gradient-to-b from-[#FFFBEB] via-[#F59E0B] to-[#F97316]">Get in Touch</h2>
-          <p className="text-body max-w-2xl mx-auto mt-4 text-[#94A3B8]">
-            Send a message to discuss project work, model analysis, or cybersecurity audits.
+          <h2 className="heading-lg bg-clip-text text-transparent bg-gradient-to-b from-[#FFFBEB] via-[#F59E0B] to-[#F97316]">
+            Get in Touch
+          </h2>
+          <p className="text-body max-w-2xl mx-auto mt-2 sm:mt-3 text-xs sm:text-sm text-[#94A3B8]">
+            Send a message to discuss project collaborations, AI pipelines, or software development.
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-12 gap-8">
-          <div className="lg:col-span-5 space-y-6">
+        <div className="grid lg:grid-cols-12 gap-5 sm:gap-8">
+          <div className="lg:col-span-5 space-y-4 sm:space-y-6">
             <motion.div
-              className="glass-card rounded-2xl p-6"
+              className="glass-card rounded-xl sm:rounded-2xl p-4 sm:p-6"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
               variants={fadeUp}
             >
-              <h3 className="text-sm font-bold text-white mb-4">Contact Info</h3>
-              <div className="space-y-3">
-                <div className="flex items-center gap-4 p-3 rounded-xl bg-[rgba(79,140,255,0.03)] border border-[rgba(79,140,255,0.06)]">
-                  <div className="p-2 rounded-lg bg-[#4F8CFF]/10 text-[#4F8CFF]">
-                    <Mail size={16} />
+              <h3 className="text-xs sm:text-sm font-bold text-white mb-3 sm:mb-4">Contact Information</h3>
+              <div className="space-y-2.5 sm:space-y-3">
+                <div className="flex items-center gap-3 p-2.5 sm:p-3 rounded-xl bg-white/5 border border-white/10">
+                  <div className="p-1.5 sm:p-2 rounded-lg bg-[#F59E0B]/10 text-[#F59E0B] shrink-0">
+                    <Mail size={15} />
                   </div>
-                  <div>
-                    <p className="text-[10px] text-[#94A3B8] uppercase font-semibold">Email</p>
-                    <p className="text-sm font-semibold text-white">{PERSONAL_INFO.email}</p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-4 p-3 rounded-xl bg-[rgba(79,140,255,0.03)] border border-[rgba(79,140,255,0.06)]">
-                  <div className="p-2 rounded-lg bg-[#4F8CFF]/10 text-[#4F8CFF]">
-                    <Phone size={16} />
-                  </div>
-                  <div>
-                    <p className="text-[10px] text-[#94A3B8] uppercase font-semibold">Phone</p>
-                    <p className="text-sm font-semibold text-white">+91 {PERSONAL_INFO.mobile}</p>
+                  <div className="min-w-0">
+                    <p className="text-[9px] text-[#94A3B8] uppercase font-semibold">Email</p>
+                    <p className="text-xs sm:text-sm font-semibold text-white truncate">{PERSONAL_INFO.email}</p>
                   </div>
                 </div>
-                <div className="flex items-center gap-4 p-3 rounded-xl bg-[rgba(79,140,255,0.03)] border border-[rgba(79,140,255,0.06)]">
-                  <div className="p-2 rounded-lg bg-[#4F8CFF]/10 text-[#4F8CFF]">
-                    <MapPin size={16} />
+                <div className="flex items-center gap-3 p-2.5 sm:p-3 rounded-xl bg-white/5 border border-white/10">
+                  <div className="p-1.5 sm:p-2 rounded-lg bg-[#F59E0B]/10 text-[#F59E0B] shrink-0">
+                    <Phone size={15} />
                   </div>
                   <div>
-                    <p className="text-[10px] text-[#94A3B8] uppercase font-semibold">Location</p>
-                    <p className="text-sm font-semibold text-white">{PERSONAL_INFO.location}, India</p>
+                    <p className="text-[9px] text-[#94A3B8] uppercase font-semibold">Phone</p>
+                    <p className="text-xs sm:text-sm font-semibold text-white">+91 {PERSONAL_INFO.mobile}</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-3 p-2.5 sm:p-3 rounded-xl bg-white/5 border border-white/10">
+                  <div className="p-1.5 sm:p-2 rounded-lg bg-[#F59E0B]/10 text-[#F59E0B] shrink-0">
+                    <MapPin size={15} />
+                  </div>
+                  <div>
+                    <p className="text-[9px] text-[#94A3B8] uppercase font-semibold">Location</p>
+                    <p className="text-xs sm:text-sm font-semibold text-white">{PERSONAL_INFO.location}, India</p>
                   </div>
                 </div>
               </div>
             </motion.div>
 
             <motion.div
-              className="glass-card rounded-2xl p-6"
+              className="glass-card rounded-xl sm:rounded-2xl p-4 sm:p-6"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
               variants={fadeUp}
               custom={1}
             >
-              <h3 className="text-sm font-bold text-white mb-4">Services Offered</h3>
+              <h3 className="text-xs sm:text-sm font-bold text-white mb-3 sm:mb-4">Services Offered</h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 {SERVICES.map((service) => (
-                  <div key={service} className="flex items-center gap-2 text-xs text-[#94A3B8]">
-                    <ShieldCheck size={14} className="text-[#4F8CFF] shrink-0" />
+                  <div key={service} className="flex items-center gap-2 text-[11px] sm:text-xs text-[#94A3B8]">
+                    <ShieldCheck size={13} className="text-[#F59E0B] shrink-0" />
                     <span>{service}</span>
                   </div>
                 ))}
@@ -121,104 +125,107 @@ export default function ContactSection() {
 
           <div className="lg:col-span-7">
             <motion.div
-              className="glass-card rounded-2xl p-6 sm:p-8"
+              className="glass-card rounded-xl sm:rounded-2xl p-4 sm:p-7"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
               variants={fadeUp}
               custom={2}
             >
-              <h3 className="text-sm font-bold text-white mb-6">Inquiry Form</h3>
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="grid sm:grid-cols-2 gap-4">
-                  <div className="space-y-1.5">
-                    <label htmlFor="name" className="text-xs font-semibold text-[#94A3B8]">Full Name</label>
+              <h3 className="text-xs sm:text-sm font-bold text-white mb-4 sm:mb-5">Inquiry Form</h3>
+              <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
+                <div className="grid sm:grid-cols-2 gap-3 sm:gap-4">
+                  <div className="space-y-1">
+                    <label htmlFor="name" className="text-[11px] sm:text-xs font-semibold text-[#94A3B8]">Full Name</label>
                     <input
                       id="name"
                       type="text"
+                      required
                       value={formState.name}
                       onChange={(e) => setFormState((s) => ({ ...s, name: e.target.value }))}
-                      className="w-full px-4 py-2.5 rounded-xl bg-[#050816] border border-[rgba(79,140,255,0.1)] text-white text-sm placeholder-[#4A5568] focus:outline-none focus:border-[#4F8CFF]/40 transition-colors"
-                      placeholder="John Doe"
+                      className="w-full px-3 py-2 sm:px-4 sm:py-2.5 rounded-xl bg-[#050816] border border-white/10 text-white text-xs sm:text-sm placeholder-[#4A5568] focus:outline-none focus:border-[#F59E0B]/50 transition-colors"
+                      placeholder="Your Name"
                     />
                   </div>
-                  <div className="space-y-1.5">
-                    <label htmlFor="email" className="text-xs font-semibold text-[#94A3B8]">Email Address</label>
+                  <div className="space-y-1">
+                    <label htmlFor="email" className="text-[11px] sm:text-xs font-semibold text-[#94A3B8]">Email Address</label>
                     <input
                       id="email"
                       type="email"
+                      required
                       value={formState.email}
                       onChange={(e) => setFormState((s) => ({ ...s, email: e.target.value }))}
-                      className="w-full px-4 py-2.5 rounded-xl bg-[#050816] border border-[rgba(79,140,255,0.1)] text-white text-sm placeholder-[#4A5568] focus:outline-none focus:border-[#4F8CFF]/40 transition-colors"
-                      placeholder="john@example.com"
+                      className="w-full px-3 py-2 sm:px-4 sm:py-2.5 rounded-xl bg-[#050816] border border-white/10 text-white text-xs sm:text-sm placeholder-[#4A5568] focus:outline-none focus:border-[#F59E0B]/50 transition-colors"
+                      placeholder="your.email@example.com"
                     />
                   </div>
                 </div>
-                <div className="space-y-1.5">
-                  <label htmlFor="company" className="text-xs font-semibold text-[#94A3B8]">Company (Optional)</label>
+
+                <div className="space-y-1">
+                  <label htmlFor="company" className="text-[11px] sm:text-xs font-semibold text-[#94A3B8]">Organization / College (Optional)</label>
                   <input
                     id="company"
                     type="text"
                     value={formState.company}
                     onChange={(e) => setFormState((s) => ({ ...s, company: e.target.value }))}
-                    className="w-full px-4 py-2.5 rounded-xl bg-[#050816] border border-[rgba(79,140,255,0.1)] text-white text-sm placeholder-[#4A5568] focus:outline-none focus:border-[#4F8CFF]/40 transition-colors"
-                    placeholder="Acme Corp"
+                    className="w-full px-3 py-2 sm:px-4 sm:py-2.5 rounded-xl bg-[#050816] border border-white/10 text-white text-xs sm:text-sm placeholder-[#4A5568] focus:outline-none focus:border-[#F59E0B]/50 transition-colors"
+                    placeholder="Company or Institution"
                   />
                 </div>
-                <div className="space-y-1.5">
-                  <label htmlFor="message" className="text-xs font-semibold text-[#94A3B8]">Message Payload</label>
+
+                <div className="space-y-1">
+                  <label htmlFor="message" className="text-[11px] sm:text-xs font-semibold text-[#94A3B8]">Message</label>
                   <textarea
                     id="message"
-                    rows={5}
+                    rows={4}
+                    required
                     value={formState.message}
                     onChange={(e) => setFormState((s) => ({ ...s, message: e.target.value }))}
-                    className="w-full px-4 py-2.5 rounded-xl bg-[#050816] border border-[rgba(79,140,255,0.1)] text-white text-sm placeholder-[#4A5568] focus:outline-none focus:border-[#4F8CFF]/40 transition-colors resize-none"
-                    placeholder="Describe the project scope or details here..."
+                    className="w-full px-3 py-2 sm:px-4 sm:py-2.5 rounded-xl bg-[#050816] border border-white/10 text-white text-xs sm:text-sm placeholder-[#4A5568] focus:outline-none focus:border-[#F59E0B]/50 transition-colors resize-none"
+                    placeholder="Tell me about your project, query, or discussion..."
                   />
                 </div>
-                <Button type="submit" disabled={sending} className="w-full">
-                  {sending ? (
-                    <span className="flex items-center gap-2">
-                      <span className="w-4 h-4 rounded-full border-2 border-white/30 border-t-white animate-spin" />
-                      Transmitting Data...
-                    </span>
-                  ) : (
-                    <span className="flex items-center gap-2">
-                      <Send size={14} /> Send Message
-                    </span>
-                  )}
+
+                <Button
+                  type="submit"
+                  disabled={sending}
+                  className="w-full bg-[#F59E0B] hover:bg-[#F59E0B]/90 text-[#050508] font-bold rounded-xl py-5 flex items-center justify-center gap-2 transition-transform active:scale-95 cursor-pointer shadow-[0_0_15px_rgba(245,158,11,0.3)]"
+                >
+                  <Send size={15} />
+                  <span>{sending ? 'Sending...' : 'Send Message'}</span>
                 </Button>
               </form>
             </motion.div>
           </div>
         </div>
 
+        {/* FAQs */}
         <motion.div
-          className="max-w-3xl mx-auto mt-24"
+          className="mt-10 sm:mt-16 max-w-3xl mx-auto"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={fadeUp}
         >
-          <h3 className="heading-sm text-center mb-8">Frequently Asked Questions</h3>
+          <h3 className="heading-sm text-center mb-4 sm:mb-6">Frequently Asked Questions</h3>
           <div className="space-y-2">
             {FAQS.map((faq, idx) => (
               <div key={idx} className="glass-card rounded-xl overflow-hidden">
                 <button
-                  onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
-                  className="w-full flex items-center justify-between px-5 py-4 text-sm font-medium text-white hover:bg-white/5 transition-colors text-left"
+                  onClick={() => { soundFx.playClick(); setOpenFaq(openFaq === idx ? null : idx); }}
+                  className="w-full flex items-center justify-between px-3.5 py-3 sm:px-5 sm:py-4 text-xs sm:text-sm font-medium text-white hover:bg-white/5 transition-colors text-left cursor-pointer"
                   aria-expanded={openFaq === idx}
                 >
-                  {faq.question}
-                  <svg
-                    width="12" height="12" viewBox="0 0 12 12" fill="none"
-                    className={`transition-transform duration-300 text-[#94A3B8] ${openFaq === idx ? 'rotate-180' : ''}`}
-                  >
-                    <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
+                  <span className="pr-2">{faq.question}</span>
+                  <ChevronDown
+                    size={15}
+                    className={`transition-transform duration-300 text-[#F59E0B] shrink-0 ${openFaq === idx ? 'rotate-180' : ''}`}
+                  />
                 </button>
-                <div className={cn('transition-all duration-300', openFaq === idx ? 'max-h-80' : 'max-h-0')}>
-                  <div className="px-5 pb-4 text-xs text-[#94A3B8] leading-relaxed">{faq.answer}</div>
+                <div className={cn('transition-all duration-300 overflow-hidden', openFaq === idx ? 'max-h-60' : 'max-h-0')}>
+                  <div className="px-3.5 pb-3 sm:px-5 sm:pb-4 text-[11px] sm:text-xs text-[#94A3B8] leading-relaxed border-t border-white/5 pt-2">
+                    {faq.answer}
+                  </div>
                 </div>
               </div>
             ))}

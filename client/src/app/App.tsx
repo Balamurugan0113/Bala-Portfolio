@@ -1,11 +1,13 @@
-import { lazy, Suspense, useState, useEffect } from 'react';
+import { lazy, Suspense, useState } from 'react';
 import { Route, Switch } from 'wouter';
 import Navbar from '@/components/layout/Navbar';
-
+import ThemeToggle from '@/components/ui/ThemeToggle';
 import Footer from '@/components/layout/Footer';
 import BackToTop from '@/components/layout/BackToTop';
 import { Toaster } from 'sonner';
 import ErrorBoundary from '@/components/ErrorBoundary';
+import LoadingScreen from '@/components/ui/LoadingScreen';
+import { ThemeProvider, useTheme } from '@/context/ThemeContext';
 
 const HeroSection = lazy(() => import('@/features/hero/HeroSection').then(m => ({ default: m.default })));
 const AboutSection = lazy(() => import('@/features/about/AboutSection').then(m => ({ default: m.default })));
@@ -32,14 +34,14 @@ function NotFound() {
 function LoadingFallback() {
   return (
     <div className="min-h-screen flex items-center justify-center">
-      <div className="w-6 h-6 rounded-full border-2 border-[#4F8CFF] border-t-transparent animate-spin" />
+      <div className="w-6 h-6 rounded-full border-2 border-[#F59E0B] border-t-transparent animate-spin" />
     </div>
   );
 }
 
 function HomePage() {
   return (
-    <div className="relative min-h-screen flex flex-col bg-[#050508]">
+    <div className="relative min-h-screen flex flex-col">
       <HeroSection />
       <AboutSection />
       <SkillsSection />
@@ -50,23 +52,42 @@ function HomePage() {
   );
 }
 
+function AppContent() {
+  const [isAppLoaded, setIsAppLoaded] = useState(false);
+  const { theme } = useTheme();
+
+  return (
+    <div className="flex min-h-screen flex-col selection:bg-[#F59E0B]/30 selection:text-white relative overflow-x-hidden transition-colors duration-300">
+      {!isAppLoaded && <LoadingScreen onComplete={() => setIsAppLoaded(true)} />}
+      
+      {/* Top Left Radial Navigation */}
+      <Navbar />
+      
+      {/* Top Right Animated Light/Dark Theme Toggle */}
+      <ThemeToggle />
+
+      <main className="flex-grow flex flex-col relative z-10">
+        <Suspense fallback={<LoadingFallback />}>
+          <Switch>
+            <Route path="/" component={HomePage} />
+            <Route component={NotFound} />
+          </Switch>
+        </Suspense>
+      </main>
+      
+      <Footer />
+      <BackToTop />
+      <Toaster theme={theme === 'dark' ? 'dark' : 'light'} position="bottom-right" richColors />
+    </div>
+  );
+}
+
 export default function App() {
   return (
     <ErrorBoundary>
-      <div className="flex min-h-screen flex-col bg-[#050508] text-white selection:bg-[#F59E0B]/30 selection:text-white relative overflow-x-hidden">
-        <Navbar />
-        <main className="flex-grow flex flex-col relative z-10">
-          <Suspense fallback={<LoadingFallback />}>
-            <Switch>
-              <Route path="/" component={HomePage} />
-              <Route component={NotFound} />
-            </Switch>
-          </Suspense>
-        </main>
-        <Footer />
-        <BackToTop />
-        <Toaster theme="dark" position="bottom-right" richColors />
-      </div>
+      <ThemeProvider>
+        <AppContent />
+      </ThemeProvider>
     </ErrorBoundary>
   );
 }

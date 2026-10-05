@@ -1,47 +1,64 @@
 import { useEffect, useState } from 'react';
-import { ArrowUp } from 'lucide-react';
-
-function smoothScrollToTop(duration = 3000) {
-  const start = window.scrollY;
-  if (start === 0) return;
-  const startTime = performance.now();
-
-  function easeOutCubic(t: number) {
-    return 1 - Math.pow(1 - t, 3);
-  }
-
-  function step(currentTime: number) {
-    const elapsed = currentTime - startTime;
-    const progress = Math.min(elapsed / duration, 1);
-    window.scrollTo(0, start * (1 - easeOutCubic(progress)));
-    if (progress < 1) requestAnimationFrame(step);
-  }
-
-  requestAnimationFrame(step);
-}
+import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronUp } from 'lucide-react';
+import { soundFx } from '@/lib/sound';
 
 export default function BackToTop() {
-  const [visible, setVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setVisible(window.scrollY > window.innerHeight * 0.5);
+      // Promptly show as soon as user scrolls down 180px
+      setIsVisible(window.scrollY > 180);
     };
+
     window.addEventListener('scroll', handleScroll, { passive: true });
+    // Check initial position
+    handleScroll();
+
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const scrollToTop = () => {
+    soundFx.playClick();
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
+
   return (
-    <button
-      onClick={() => smoothScrollToTop(3000)}
-      className={`fixed bottom-6 right-6 z-40 w-12 h-12 rounded-xl flex items-center justify-center backdrop-blur-xl border transition-all duration-700 ease-out ${
-        visible
-          ? 'opacity-100 translate-y-0 pointer-events-auto'
-          : 'opacity-0 translate-y-4 pointer-events-none'
-      } bg-[rgba(79,140,255,0.08)] border-[rgba(79,140,255,0.15)] hover:bg-[rgba(79,140,255,0.15)] hover:border-[rgba(79,140,255,0.3)] hover:shadow-[0_0_24px_rgba(79,140,255,0.15)]`}
-      aria-label="Scroll to top"
-    >
-      <ArrowUp size={18} className="text-[#4F8CFF]" />
-    </button>
+    <AnimatePresence>
+      {isVisible && (
+        <motion.button
+          initial={{ opacity: 0, scale: 0.7, y: 15 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.7, y: 15 }}
+          transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+          whileHover={{ scale: 1.12, y: -2 }}
+          whileTap={{ scale: 0.92 }}
+          onClick={scrollToTop}
+          aria-label="Back to top"
+          className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 group flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-2xl cursor-pointer
+            bg-[#050508]/85 dark:bg-[#050508]/90 light:bg-white/90 backdrop-blur-xl
+            border border-[#F59E0B]/30 hover:border-[#F59E0B]
+            shadow-[0_8px_24px_rgba(0,0,0,0.5),0_0_15px_rgba(245,158,11,0.2)]
+            hover:shadow-[0_12px_30px_rgba(0,0,0,0.6),0_0_25px_rgba(245,158,11,0.45)]
+            transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#F59E0B]"
+        >
+          {/* Subtle Cyber Glow Ring on Hover */}
+          <div className="absolute inset-0 rounded-2xl bg-[#F59E0B]/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+
+          {/* Upward Chevron Icon */}
+          <ChevronUp
+            className="w-5 h-5 sm:w-6 sm:h-6 text-[#F59E0B] group-hover:-translate-y-0.5 transition-transform duration-200"
+            strokeWidth={2.5}
+          />
+
+          {/* Screen Reader Label */}
+          <span className="sr-only">Scroll to top of homepage</span>
+        </motion.button>
+      )}
+    </AnimatePresence>
   );
 }

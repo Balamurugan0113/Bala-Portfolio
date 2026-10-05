@@ -1,33 +1,32 @@
 import { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
-import profilePic from '@/assets/Profile_pic.png';
 import { soundFx } from '@/lib/sound';
-import { Volume2, VolumeX } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Home, User, Cpu, FolderKanban, Briefcase, Mail } from 'lucide-react';
+import BALogo from '@/components/ui/BALogo';
 
 const NAV_ITEMS = [
-  { id: 'hero', label: 'Home' },
-  { id: 'about', label: 'About' },
-  { id: 'skills', label: 'Skills' },
-  { id: 'projects', label: 'Projects' },
-  { id: 'experience', label: 'Experience' },
-  { id: 'contact', label: 'Contact' },
+  { id: 'hero', label: 'Home', icon: Home },
+  { id: 'about', label: 'About', icon: User },
+  { id: 'skills', label: 'Skills', icon: Cpu },
+  { id: 'projects', label: 'Projects', icon: FolderKanban },
+  { id: 'experience', label: 'Experience', icon: Briefcase },
+  { id: 'contact', label: 'Contact', icon: Mail },
 ];
 
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
-  const [isMuted, setIsMuted] = useState(soundFx.isMuted());
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [hoveredItem, setHoveredItem] = useState<string | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 40);
-
       let current = 'hero';
       for (const { id } of NAV_ITEMS) {
         const el = document.getElementById(id);
         if (el) {
           const rect = el.getBoundingClientRect();
-          if (rect.top <= 160) current = id;
+          if (rect.top <= 220) current = id;
         }
       }
       setActiveSection(current);
@@ -39,60 +38,145 @@ export default function Navbar() {
 
   const handleClick = (id: string) => {
     soundFx.playClick();
+    setIsExpanded(false);
+    setHoveredItem(null);
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const toggleSound = () => {
-    const nextMuted = soundFx.toggleMute();
-    setIsMuted(nextMuted);
-  };
+  // Radial radius tuned for comfortable spacing between circular icon nodes
+  const radiusDesktop = 145;
+  const radiusMobile = 105;
 
   return (
-    <nav
+    <div 
       className={cn(
-        'fixed top-3 sm:top-4 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 rounded-full max-w-[94vw] sm:max-w-max',
-        scrolled ? 'glass-strong shadow-2xl shadow-[#F59E0B]/10 border border-[#F59E0B]/30' : 'glass border border-white/10'
+        "fixed top-0 left-0 z-[100] transition-all duration-300",
+        isExpanded ? "w-[280px] h-[280px] sm:w-[320px] sm:h-[320px]" : "w-20 h-20 sm:w-28 sm:h-28"
       )}
-      role="navigation"
-      aria-label="Main navigation"
+      onMouseEnter={() => setIsExpanded(true)}
+      onMouseLeave={() => {
+        setIsExpanded(false);
+        setHoveredItem(null);
+      }}
     >
-      <div className="flex items-center gap-0.5 sm:gap-1 px-1.5 sm:px-2 py-1 overflow-x-auto hide-scrollbar scroll-smooth">
-        {/* Profile Avatar & Name */}
-        <div className="flex items-center gap-1.5 px-2 sm:px-3 mr-0.5 sm:mr-1 border-r border-[#F59E0B]/20 shrink-0">
-          <img src={profilePic} alt="Balamurugan C" className="w-6 h-6 sm:w-7 sm:h-7 rounded-full object-cover border border-[#F59E0B]/50 shadow-md" />
-          <span className="text-[11px] sm:text-xs font-extrabold text-white hidden sm:inline tracking-wider font-mono">BALAMURUGAN C</span>
-        </div>
+      <div className="relative w-full h-full p-4 sm:p-6">
+        {/* Core Interactive Logo Button */}
+        <motion.div
+          onClick={() => {
+            soundFx.playClick();
+            setIsExpanded((prev) => !prev);
+          }}
+          className={cn(
+            "relative z-20 w-11 h-11 sm:w-13 sm:h-13 glass flex items-center justify-center rounded-full border shadow-xl cursor-pointer backdrop-blur-xl transition-colors duration-300",
+            isExpanded 
+              ? "border-[#F59E0B]/60 shadow-[0_0_20px_rgba(245,158,11,0.25)] bg-[#050508]/85" 
+              : "border-white/10 hover:border-[#F59E0B]/40 hover:shadow-[0_0_15px_rgba(245,158,11,0.15)]"
+          )}
+          animate={{ rotate: isExpanded ? 90 : 0 }}
+          transition={{ type: "spring", stiffness: 320, damping: 22 }}
+          aria-label="Navigation Menu"
+        >
+          <BALogo size={22} className={isExpanded ? "scale-90" : "scale-100 transition-transform"} />
+        </motion.div>
 
-        {/* Nav Items */}
-        {NAV_ITEMS.map(({ id, label }) => (
-          <button
-            key={id}
-            onClick={() => handleClick(id)}
-            className={cn(
-              'px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-bold transition-all duration-200 shrink-0 font-mono tracking-wide',
-              activeSection === id
-                ? 'text-white bg-[#F59E0B]/25 border border-[#F59E0B]/40 shadow-lg shadow-[#F59E0B]/20'
-                : 'text-[#94A3B8] hover:text-white hover:bg-white/5'
-            )}
-            aria-current={activeSection === id ? 'page' : undefined}
-          >
-            {label}
-          </button>
-        ))}
+        {/* Radial Animated Icon Navigation Nodes */}
+        <AnimatePresence>
+          {isExpanded && NAV_ITEMS.map((item, i) => {
+            const totalItems = NAV_ITEMS.length;
+            // Angle mapping from right (0 deg) to bottom (90 deg)
+            const angleDeg = (i / (totalItems - 1)) * 90;
+            const angleRad = (angleDeg * Math.PI) / 180;
+            
+            const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
+            const r = isMobile ? radiusMobile : radiusDesktop;
+            
+            const x = r * Math.cos(angleRad);
+            const y = r * Math.sin(angleRad);
+            
+            const isActive = activeSection === item.id;
+            const isHovered = hoveredItem === item.id;
+            const Icon = item.icon;
 
-        {/* Mute / Unmute Button */}
-        <div className="pl-1 ml-0.5 sm:ml-1 border-l border-[#F59E0B]/20 shrink-0 flex items-center">
-          <button
-            onClick={toggleSound}
-            className="p-1 sm:p-1.5 rounded-full text-[#94A3B8] hover:text-white hover:bg-white/10 transition-colors"
-            aria-label={isMuted ? 'Unmute Sound Effects' : 'Mute Sound Effects'}
-            title={isMuted ? 'Enable Sound FX' : 'Mute Sound FX'}
-          >
-            {isMuted ? <VolumeX size={14} className="text-rose-400" /> : <Volume2 size={14} className="text-[#F59E0B]" />}
-          </button>
-        </div>
+            return (
+              <motion.div
+                key={item.id}
+                initial={{ opacity: 0, scale: 0, x: 0, y: 0 }}
+                animate={{ opacity: 1, scale: 1, x, y }}
+                exit={{ opacity: 0, scale: 0, x: 0, y: 0 }}
+                transition={{ 
+                  type: "spring", 
+                  stiffness: 280, 
+                  damping: 22, 
+                  delay: i * 0.04 
+                }}
+                className="absolute top-0 left-0 z-10 w-11 h-11 sm:w-13 sm:h-13 flex items-center justify-center pointer-events-none"
+              >
+                {/* Connecting Laser Ray */}
+                <motion.div 
+                  className="absolute top-1/2 left-1/2 h-px bg-gradient-to-r from-[#F59E0B]/40 to-transparent origin-left -z-10 hidden sm:block pointer-events-none"
+                  style={{ width: `${r}px`, rotate: `${angleDeg}deg`, x: '-50%', y: '-50%' }}
+                  initial={{ scaleX: 0 }}
+                  animate={{ scaleX: 1 }}
+                  exit={{ scaleX: 0 }}
+                  transition={{ delay: 0.05 }}
+                />
+                
+                {/* Animated Circular Icon Button */}
+                <div className="relative pointer-events-auto">
+                  <motion.button
+                    whileHover={{ 
+                      scale: 1.18, 
+                      rotate: [0, -6, 6, 0],
+                      transition: { duration: 0.3 }
+                    }}
+                    whileTap={{ scale: 0.9 }}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleClick(item.id);
+                    }}
+                    onMouseEnter={() => setHoveredItem(item.id)}
+                    onMouseLeave={() => setHoveredItem(null)}
+                    aria-label={item.label}
+                    className={cn(
+                      "relative w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center rounded-full glass border shadow-lg backdrop-blur-md cursor-pointer transition-colors duration-200",
+                      isActive 
+                        ? "border-[#F59E0B] shadow-[0_0_15px_rgba(245,158,11,0.4)] bg-[#F59E0B]/20 text-[#F59E0B]" 
+                        : "border-white/12 text-[#94A3B8] hover:text-white hover:border-[#F59E0B]/50 hover:bg-[#F59E0B]/10"
+                    )}
+                  >
+                    <Icon size={16} className={cn("transition-transform duration-200", isActive && "scale-110")} />
+                    
+                    {isActive && (
+                      <motion.div 
+                        layoutId="activeIconRing"
+                        className="absolute inset-0 rounded-full border border-[#F59E0B] shadow-[0_0_12px_rgba(245,158,11,0.5)] -z-10"
+                      />
+                    )}
+                  </motion.button>
+
+                  {/* Floating Tooltip positioned on the outer-right side to prevent overlap */}
+                  <AnimatePresence>
+                    {isHovered && (
+                      <motion.div
+                        initial={{ opacity: 0, scale: 0.8, x: -6 }}
+                        animate={{ opacity: 1, scale: 1, x: 0 }}
+                        exit={{ opacity: 0, scale: 0.8, x: -6 }}
+                        transition={{ duration: 0.15 }}
+                        className="absolute left-full top-1/2 -translate-y-1/2 ml-2.5 pointer-events-none z-50"
+                      >
+                        <span className="px-2.5 py-1 rounded-md bg-[#050508]/95 text-[#F59E0B] border border-[#F59E0B]/40 text-[9px] sm:text-[10px] font-mono font-bold tracking-wider uppercase whitespace-nowrap shadow-[0_4px_15px_rgba(0,0,0,0.8)]">
+                          {item.label}
+                        </span>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              </motion.div>
+            );
+          })}
+        </AnimatePresence>
       </div>
-    </nav>
+    </div>
   );
 }

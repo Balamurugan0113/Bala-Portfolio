@@ -3,26 +3,44 @@
 class SoundEngine {
   private ctx: AudioContext | null = null;
   private muted: boolean = false;
+  private userInteracted: boolean = false;
 
   constructor() {
-    // Lazy init audio context on first user interaction
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem('portfolio_sound_muted');
       if (saved !== null) {
         this.muted = JSON.parse(saved);
       }
+
+      // Safely unlock AudioContext on first actual user interaction
+      const unlockAudio = () => {
+        this.userInteracted = true;
+        this.initCtx();
+        window.removeEventListener('pointerdown', unlockAudio);
+        window.removeEventListener('keydown', unlockAudio);
+        window.removeEventListener('touchstart', unlockAudio);
+      };
+
+      window.addEventListener('pointerdown', unlockAudio, { passive: true });
+      window.addEventListener('keydown', unlockAudio, { passive: true });
+      window.addEventListener('touchstart', unlockAudio, { passive: true });
     }
   }
 
   private initCtx() {
-    if (!this.ctx && typeof window !== 'undefined') {
+    if (!this.userInteracted || typeof window === 'undefined') return;
+    if (!this.ctx) {
       const AudioCtx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
       if (AudioCtx) {
-        this.ctx = new AudioCtx();
+        try {
+          this.ctx = new AudioCtx();
+        } catch {
+          // Silent catch for autoplay constraints
+        }
       }
     }
     if (this.ctx && this.ctx.state === 'suspended') {
-      this.ctx.resume();
+      this.ctx.resume().catch(() => {});
     }
   }
 
@@ -38,13 +56,10 @@ class SoundEngine {
     return this.muted;
   }
 
-  // Play subtle hover tick
+  // Play subtle hover tick (only when AudioContext is running after user interaction)
   public playHover() {
-    if (this.muted) return;
+    if (this.muted || !this.userInteracted || !this.ctx || this.ctx.state !== 'running') return;
     try {
-      this.initCtx();
-      if (!this.ctx) return;
-
       const osc = this.ctx.createOscillator();
       const gain = this.ctx.createGain();
 
@@ -61,7 +76,7 @@ class SoundEngine {
       osc.start();
       osc.stop(this.ctx.currentTime + 0.035);
     } catch {
-      // Audio autoplay policy catch
+      // Audio policy catch
     }
   }
 
@@ -69,6 +84,7 @@ class SoundEngine {
   public playClick() {
     if (this.muted) return;
     try {
+      this.userInteracted = true;
       this.initCtx();
       if (!this.ctx) return;
 
@@ -96,6 +112,7 @@ class SoundEngine {
   public playModalOpen() {
     if (this.muted) return;
     try {
+      this.userInteracted = true;
       this.initCtx();
       if (!this.ctx) return;
 

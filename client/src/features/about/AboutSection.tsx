@@ -1,212 +1,161 @@
 import { motion } from 'framer-motion';
-import { GraduationCap, Target, Shield, Brain, Gamepad2, Trophy, Github, Linkedin, Youtube, Instagram, Award } from 'lucide-react';
-import { STATS } from '@/types';
+import { GraduationCap, Target, Shield, Brain, Terminal, Code, Database, Crosshair } from 'lucide-react';
 import Card3DTilt from '@/components/ui/Card3DTilt';
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 24 },
-  visible: (i = 0) => ({ opacity: 1, y: 0, transition: { duration: 0.6, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] as const } }),
-};
-
-const EDUCATION = [
-  {
-    period: '2023 - PRESENT',
-    title: 'B.Tech in AI & Data Science (Final year)',
-    school: 'Info Institute of Engineering',
-    location: 'Kovilpalayam, Coimbatore',
-    active: true,
-  },
-  {
-    period: '2021 - 2023',
-    title: 'Secondary Schooling (11th - 12th)',
-    school: 'Shri Nehru Vidyalaya Higher Sec School',
-    location: 'R.S. PURAM, Coimbatore',
-    active: false,
-  },
-  {
-    period: '2011 - 2021',
-    title: 'Primary Schooling',
-    school: 'Amrita Vidyalayam',
-    location: 'Nallampalayam, Coimbatore',
-    active: false,
-  },
-];
-
-const BEYOND_CODING = [
-  { icon: '🤾', title: 'Handball Player', desc: 'Active competitive player since school' },
-  { icon: '🎮', title: 'PC Gaming', desc: 'Valorant, GTA 5, Strategy games' },
-  { icon: '💼', title: 'Security & Web Freelance', desc: 'Client project delivery & audits' },
-  { icon: '🎓', title: 'Final Year Capstones', desc: 'Guiding college research projects' },
-];
-
-const COMPETITIONS = [
-  { title: 'Smart India Hackathon 2025', desc: 'National level AI hackathon competitor', url: 'https://www.sih.gov.in/' },
-  { title: 'Trisquadathon 2024', desc: 'CSE Association technical event winner', url: 'https://trisquadathon.infomeister.co.in/' },
+const TECHNICAL_INTERESTS = [
+  'Artificial Intelligence',
+  'Machine Learning',
+  'Data Science',
+  'Python Development',
+  'Cybersecurity',
+  'Ethical Hacking',
+  'Web Development',
+  'API Development',
+  'Computer Vision',
+  'NLP',
+  'Cloud & Infrastructure'
 ];
 
 export default function AboutSection() {
   return (
-    <section id="about" className="relative bg-[#050508] section-py px-[clamp(1.25rem,4vw,3rem)] transition-colors duration-500" aria-label="About me">
-      {/* SMOOTH FADED GRADIENT OVERLAY FROM HERO */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[#050508] via-[#050508]/90 to-transparent z-10" />
+    <section id="about" className="relative bg-[#050508] py-14 sm:py-28 px-4 sm:px-6" aria-label="About me">
+      {/* BACKGROUND EFFECTS */}
+      <div className="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 w-[80vw] h-[400px] bg-gradient-to-b from-[#F59E0B]/5 to-transparent blur-[80px] sm:blur-[100px] rounded-full z-0" />
 
-      {/* AMBER & GOLD BACKGROUND GLOW ACCENTS */}
-      <div className="pointer-events-none absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[500px] bg-[#F59E0B]/5 blur-[140px] rounded-full z-0" />
-
-      <div className="max-w-7xl mx-auto relative z-10">
-        {/* SECTION HEADER */}
+      <div className="max-w-5xl mx-auto relative z-10 flex flex-col items-center">
+        
+        {/* SECTION HEADER / INTRO */}
         <motion.div
-          className="text-center mb-12"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-80px' }}
-          variants={fadeUp}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.7 }}
+          className="w-full flex flex-col items-center text-center mb-8 sm:mb-14"
         >
-          <h2 className="heading-lg bg-clip-text text-transparent bg-gradient-to-b from-[#FFFBEB] via-[#F59E0B] to-[#78350F] filter drop-shadow-md">
+          <h2 className="heading-lg font-black uppercase font-['Syne'] tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-[#FFFBEB] to-[#F59E0B]">
             About Me
           </h2>
-          <p className="text-body max-w-2xl mx-auto mt-3 text-sm text-[#94A3B8]">
-            Hi, I'm Balamurugan C. I specialize in Ethical Hacking, developing robust Machine Learning pipelines, performing statistical data analytics, and hardening modern intelligent infrastructure.
+          <p className="mt-4 sm:mt-6 text-xs sm:text-base text-[#94A3B8] max-w-3xl leading-relaxed font-medium">
+            I am Balamurugan C, a final-year B.Tech student specializing in Artificial Intelligence and Data Science.
+            I build intelligent systems combining machine learning, data science, software engineering, and cybersecurity.
+          </p>
+          <p className="mt-2.5 sm:mt-4 text-xs sm:text-base text-[#94A3B8] max-w-3xl leading-relaxed font-medium">
+            I enjoy taking an idea from technical concept to production — designing architectures, training models, and building secure systems.
           </p>
         </motion.div>
 
-        {/* FULL-WIDTH BENTO GRID LAYOUT */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-6 items-stretch">
-
-          {/* STATS MATRIX (12 COLS) */}
-          <div className="md:col-span-2 lg:col-span-12 grid grid-cols-2 sm:grid-cols-4 gap-4">
-            {STATS.map((stat) => (
-              <Card3DTilt key={stat.label} maxTilt={8} className="glass p-5 text-center border border-[#F59E0B]/20 shadow-xl shadow-[#F59E0B]/5">
-                <div className="text-3xl font-extrabold bg-clip-text text-transparent bg-gradient-to-b from-[#FFFBEB] via-[#F59E0B] to-[#F97316] font-mono">
-                  {stat.value}
-                </div>
-                <div className="text-xs text-[#94A3B8] font-medium mt-1">{stat.label}</div>
-              </Card3DTilt>
-            ))}
-          </div>
-
-          {/* ACADEMIC JOURNEY (6 COLS) */}
-          <Card3DTilt maxTilt={5} className="md:col-span-1 lg:col-span-6 glass-card p-6 sm:p-8 border border-[#F59E0B]/20 flex flex-col justify-between shadow-xl">
-            <div>
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-xl bg-[#F59E0B]/15 border border-[#F59E0B]/30 flex items-center justify-center text-[#F59E0B]">
-                  <GraduationCap size={20} />
-                </div>
-                <div>
-                  <h3 className="heading-sm text-white">Academic Journey</h3>
-                  <p className="text-[11px] text-[#94A3B8]">AI & Data Science Specialization</p>
-                </div>
-              </div>
-
-              <p className="text-xs text-[#94A3B8] leading-relaxed mb-6">
-                Pursuing B.Tech in Artificial Intelligence & Data Science (Final Year). Specialized in Ethical Hacking, building machine learning classification & regression models, exploratory data analytics (EDA), and full-stack REST API web platforms.
-              </p>
-
-              <div className="space-y-5">
-                {EDUCATION.map((edu) => (
-                  <div key={edu.title} className="relative pl-5 border-l-2 border-[#F59E0B]/30">
-                    <div className={`absolute -left-[5px] top-1 w-2.5 h-2.5 rounded-full ${edu.active ? 'bg-[#F59E0B] shadow-lg shadow-[#F59E0B]' : 'bg-[#94A3B8]/30'}`} />
-                    <span className="text-[10px] font-mono font-bold text-[#F59E0B] uppercase tracking-wider">{edu.period}</span>
-                    <h4 className="text-xs font-bold text-white mt-0.5">{edu.title}</h4>
-                    <p className="text-[11px] text-[#94A3B8]">{edu.school}</p>
+        <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 items-stretch">
+          
+          {/* ENGINEERING FOCUS */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-40px' }}
+            transition={{ duration: 0.7 }}
+            className="flex flex-col"
+          >
+            <Card3DTilt maxTilt={3} className="h-full glass-card p-5 sm:p-7 border border-[#F59E0B]/20 rounded-2xl sm:rounded-3xl shadow-[0_0_30px_rgba(245,158,11,0.05)] relative overflow-hidden flex flex-col">
+              <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(245,158,11,0.03)_50%,transparent_75%)] bg-[length:20px_20px]" />
+              <div className="relative z-10">
+                <div className="flex items-center gap-3 mb-4 sm:mb-5">
+                  <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-[#F59E0B]/10 border border-[#F59E0B]/30 flex items-center justify-center text-[#F59E0B]">
+                    <Target size={20} />
                   </div>
-                ))}
-              </div>
-            </div>
-          </Card3DTilt>
-
-          {/* ENGINEERING VISION & MISSION (6 COLS) */}
-          <Card3DTilt maxTilt={5} className="md:col-span-1 lg:col-span-6 glass-card p-6 sm:p-8 border border-[#F59E0B]/20 flex flex-col justify-between shadow-xl">
-            <div>
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-xl bg-[#F97316]/15 border border-[#F97316]/30 flex items-center justify-center text-[#F97316]">
-                  <Target size={20} />
+                  <h3 className="text-base sm:text-lg font-bold text-white uppercase tracking-wider font-mono">Engineering Focus</h3>
                 </div>
-                <h3 className="heading-sm text-white">Engineering Vision</h3>
-              </div>
-
-              <div className="space-y-4">
-                <div className="p-4 rounded-xl bg-[#F59E0B]/5 border border-[#F59E0B]/20">
-                  <h4 className="text-xs font-bold text-white flex items-center gap-2 mb-1.5">
-                    <Shield size={14} className="text-[#F59E0B]" /> Primary Focus: Ethical Hacking & Security
-                  </h4>
-                  <p className="text-xs text-[#94A3B8] leading-relaxed">
-                    Performing penetration testing, web application security auditing, API vulnerability assessments, and proactive network defense.
-                  </p>
-                </div>
-
-                <div className="p-4 rounded-xl bg-[#F97316]/5 border border-[#F97316]/20">
-                  <h4 className="text-xs font-bold text-white flex items-center gap-2 mb-1.5">
-                    <Brain size={14} className="text-[#F97316]" /> Python Data Science & ML Pipelines
-                  </h4>
-                  <p className="text-xs text-[#94A3B8] leading-relaxed">
-                    Developing automated Python data preprocessing scripts, feature extraction, and supervised machine learning classification models.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </Card3DTilt>
-
-          {/* BEYOND CODING (6 COLS) */}
-          <Card3DTilt maxTilt={5} className="md:col-span-1 lg:col-span-6 glass-card p-6 border border-[#F59E0B]/20 shadow-xl">
-            <div className="flex items-center gap-2.5 mb-4">
-              <Gamepad2 size={18} className="text-[#F59E0B]" />
-              <h3 className="text-xs font-bold text-white uppercase tracking-wider">Beyond Coding</h3>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {BEYOND_CODING.map((item) => (
-                <div key={item.title} className="p-3 rounded-xl bg-white/[0.02] border border-white/[0.05]">
-                  <span className="text-xs font-bold text-white">{item.icon} {item.title}</span>
-                  <p className="text-[10px] text-[#94A3B8] mt-0.5">{item.desc}</p>
-                </div>
-              ))}
-            </div>
-          </Card3DTilt>
-
-          {/* COMPETITIONS & SOCIALS (6 COLS) */}
-          <Card3DTilt maxTilt={5} className="md:col-span-1 lg:col-span-6 glass-card p-6 border border-[#F59E0B]/20 flex flex-col justify-between shadow-xl">
-            <div>
-              <div className="flex items-center gap-2.5 mb-4">
-                <Trophy size={18} className="text-[#F59E0B]" />
-                <h3 className="text-xs font-bold text-white uppercase tracking-wider">Competitions & Hackathons</h3>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
-                {COMPETITIONS.map((comp) => (
-                  <div key={comp.title} className="p-3 rounded-xl bg-white/[0.02] border border-white/[0.05]">
-                    <a href={comp.url} target="_blank" rel="noopener noreferrer" className="text-xs font-bold text-[#F59E0B] hover:underline flex items-center gap-1">
-                      {comp.title} <Award size={12} />
-                    </a>
-                    <p className="text-[10px] text-[#94A3B8] mt-0.5">{comp.desc}</p>
+                
+                <div className="grid grid-cols-2 gap-2.5 sm:gap-3.5 mt-3 sm:mt-4">
+                  <div className="flex items-center gap-2.5 p-2.5 sm:p-3 rounded-xl bg-white/5 border border-white/10">
+                    <Brain className="text-[#F97316] shrink-0" size={16} />
+                    <span className="text-xs sm:text-sm font-semibold text-white">AI / ML</span>
                   </div>
-                ))}
+                  <div className="flex items-center gap-2.5 p-2.5 sm:p-3 rounded-xl bg-white/5 border border-white/10">
+                    <Database className="text-[#06B6D4] shrink-0" size={16} />
+                    <span className="text-xs sm:text-sm font-semibold text-white">Data Science</span>
+                  </div>
+                  <div className="flex items-center gap-2.5 p-2.5 sm:p-3 rounded-xl bg-white/5 border border-white/10">
+                    <Shield className="text-[#F59E0B] shrink-0" size={16} />
+                    <span className="text-xs sm:text-sm font-semibold text-white">Cybersecurity</span>
+                  </div>
+                  <div className="flex items-center gap-2.5 p-2.5 sm:p-3 rounded-xl bg-white/5 border border-white/10">
+                    <Code className="text-[#3B82F6] shrink-0" size={16} />
+                    <span className="text-xs sm:text-sm font-semibold text-white">Software Eng</span>
+                  </div>
+                </div>
               </div>
-            </div>
+            </Card3DTilt>
+          </motion.div>
 
-            {/* Social Grid */}
-            <div className="pt-4 border-t border-[#F59E0B]/20">
-              <h4 className="text-[10px] font-bold text-[#94A3B8] uppercase tracking-wider mb-2.5">Connect Online</h4>
-              <div className="grid grid-cols-4 gap-2">
-                {[
-                  { icon: Instagram, href: 'https://www.instagram.com/balaa.xx', label: 'Instagram', color: '#E4405F' },
-                  { icon: Youtube, href: 'https://www.youtube.com/@Balsplayzz2005', label: 'YouTube', color: '#FF0000' },
-                  { icon: Linkedin, href: 'https://www.linkedin.com/in/balamurugan-c-5507b82a3', label: 'LinkedIn', color: '#0A66C2' },
-                  { icon: Github, href: 'https://github.com/Balamurugan0113', label: 'GitHub', color: '#FFFFFF' },
-                ].map(({ icon: Icon, href, label, color }) => (
-                  <a
-                    key={label}
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex flex-col items-center gap-1.5 p-2 rounded-xl glass hover:scale-105 transition-all duration-200 group hover:border-[#F59E0B]/40"
+          {/* CURRENTLY & GOALS */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-40px' }}
+            transition={{ duration: 0.7 }}
+            className="flex flex-col gap-4 sm:gap-6"
+          >
+            {/* CURRENTLY */}
+            <Card3DTilt maxTilt={3} className="glass-card p-4 sm:p-6 border border-white/10 rounded-2xl sm:rounded-3xl shadow-xl relative">
+              <div className="absolute top-0 left-0 w-1 h-full bg-[#10B981] rounded-l-2xl sm:rounded-l-3xl" />
+              <div className="flex flex-col">
+                <span className="text-[9px] sm:text-[10px] font-bold text-[#10B981] uppercase tracking-widest mb-1.5 flex items-center gap-1.5">
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#10B981] animate-pulse" /> Currently
+                </span>
+                <h3 className="text-sm sm:text-base font-bold text-white flex items-center gap-2 sm:gap-3">
+                  <GraduationCap size={18} className="text-[#94A3B8] shrink-0" />
+                  Final-year B.Tech AI & Data Science
+                </h3>
+              </div>
+            </Card3DTilt>
+
+            {/* GOAL */}
+            <Card3DTilt maxTilt={3} className="glass-card p-4 sm:p-6 border border-[#F59E0B]/20 rounded-2xl sm:rounded-3xl shadow-xl bg-gradient-to-br from-[#F59E0B]/5 to-transparent">
+              <div className="flex flex-col">
+                <span className="text-[9px] sm:text-[10px] font-bold text-[#F59E0B] uppercase tracking-widest mb-1.5 flex items-center gap-1.5">
+                  <Crosshair size={13} /> Goal
+                </span>
+                <h3 className="text-xs sm:text-base font-bold text-white/90 leading-relaxed italic">
+                  "Building practical, intelligent, and secure systems where AI, data, and secure software engineering come together."
+                </h3>
+              </div>
+            </Card3DTilt>
+          </motion.div>
+
+          {/* TECHNICAL INTERESTS (FULL WIDTH) */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-40px' }}
+            transition={{ duration: 0.7 }}
+            className="md:col-span-2"
+          >
+            <div className="glass-card p-4 sm:p-7 border border-white/10 rounded-2xl sm:rounded-3xl shadow-xl flex flex-col items-center">
+              <div className="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6">
+                <Terminal size={18} className="text-[#F59E0B]" />
+                <h3 className="text-sm sm:text-base font-bold text-white uppercase tracking-widest font-mono">Technical Interests</h3>
+              </div>
+              
+              <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
+                {TECHNICAL_INTERESTS.map((interest, idx) => (
+                  <motion.div
+                    key={interest}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.3, delay: idx * 0.03 }}
+                    className="px-2.5 py-1 sm:px-3.5 sm:py-1.5 rounded-lg sm:rounded-full glass border border-white/10 text-[10px] sm:text-xs font-semibold text-[#94A3B8] hover:text-white hover:border-[#F59E0B]/50 hover:bg-[#F59E0B]/10 transition-all cursor-default"
                   >
-                    <Icon size={16} style={{ color }} className="group-hover:scale-110 transition-transform" />
-                    <span className="text-[9px] font-medium text-[#94A3B8] group-hover:text-white">{label}</span>
-                  </a>
+                    {interest}
+                  </motion.div>
                 ))}
               </div>
+              
+              <p className="mt-4 sm:mt-6 text-[10px] sm:text-xs text-[#94A3B8] text-center max-w-2xl">
+                Continuously advancing engineering capabilities through applied ML, security labs, and full-stack software development.
+              </p>
             </div>
-          </Card3DTilt>
-
+          </motion.div>
+          
         </div>
       </div>
     </section>

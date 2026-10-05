@@ -397,6 +397,19 @@ export const PROJECTS: Project[] = [
 
 export const EXPERIENCES: Experience[] = [
   {
+    id: 'elevance-internship',
+    role: 'Data Science / AI / ML / Python Intern',
+    organization: 'Elevance Skills Technology Private Limited',
+    period: '2024 - Present',
+    description: 'Working on real-world AI and Data Science projects, focusing on machine learning models and Python-based data pipelines.',
+    achievements: [
+      'Engineered and optimized data pipelines using Python for robust machine learning applications.',
+      'Developed and deployed predictive ML models for diverse data-driven use cases.',
+      'Collaborated on AI infrastructure improvements and model fine-tuning.',
+    ],
+    type: 'internship',
+  },
+  {
     id: 'ats-internship',
     role: 'Python with Data Science Intern',
     organization: 'Accent Techno Soft (ATS)',
