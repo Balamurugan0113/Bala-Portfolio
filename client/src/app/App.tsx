@@ -1,8 +1,10 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useState } from 'react';
 import { Route, Switch } from 'wouter';
 import { MotionConfig } from 'framer-motion';
 import Navbar from '@/components/layout/Navbar';
 import BackgroundFX from '@/app/BackgroundFX';
+import LoadingScreen from '@/components/LoadingScreen';
+import { BootContext } from '@/app/BootContext';
 
 import Footer from '@/components/layout/Footer';
 import BackToTop from '@/components/layout/BackToTop';
@@ -62,10 +64,14 @@ function HomePage() {
 }
 
 export default function App() {
+  const [booted, setBooted] = useState(false);
+
   return (
     <ErrorBoundary>
+      <BootContext.Provider value={booted}>
       <MotionConfig reducedMotion="user">
         <div className="flex min-h-screen flex-col bg-[#050508] text-white selection:bg-[#F59E0B]/30 selection:text-white relative overflow-x-clip">
+          {!booted && <LoadingScreen onComplete={() => setBooted(true)} />}
           <BackgroundFX />
           <div className="noise-overlay" aria-hidden="true" />
           <Navbar />
@@ -82,6 +88,7 @@ export default function App() {
           <Toaster theme="dark" position="bottom-right" richColors />
         </div>
       </MotionConfig>
+      </BootContext.Provider>
     </ErrorBoundary>
   );
 }

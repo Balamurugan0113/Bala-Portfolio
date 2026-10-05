@@ -84,8 +84,12 @@ const { default: App } = await vite.ssrLoadModule('/src/app/App.tsx');
 const root = createRoot(document.getElementById('root'));
 root.render(React.createElement(App));
 
-// let lazy chunks + effects + raf flush
-await new Promise((r) => setTimeout(r, 2500));
+// ---- early sample: loading screen must be present shortly after boot -----
+await new Promise((r) => setTimeout(r, 400));
+const earlyHtml = document.body.innerHTML;
+
+// let lazy chunks + effects + raf + loader exit flush
+await new Promise((r) => setTimeout(r, 3300));
 
 // ---- assertions ---------------------------------------------------------
 const html = document.body.innerHTML;
@@ -97,11 +101,17 @@ const check = (name, cond, extra = '') => {
 };
 
 check('No global ErrorBoundary crash', !html.includes('Unexpected Error'));
-check('Hero: name', html.includes('Balamurugan'));
-check('Hero: badge B.Tech', html.includes('B.Tech AI'));
-check('Hero: typewriter role', html.includes('AI &amp; Data Science Engineer') || html.includes('AI & Data Science Engineer'));
+check('Loader: present early (boot sequence)', earlyHtml.includes('BALA PORTFOLIO') && earlyHtml.includes('SYS.BOOT'));
+check('Loader: gone after boot', !html.includes('BALA PORTFOLIO') && !html.includes('SYS.BOOT'));
+check('Hero: name lockup', html.includes('BALAMURUGAN') && /Balamurugan C/i.test(html));
+check('Hero: label', /B\.TECH/i.test(html) && /DATA SCIENCE ENGINEER/i.test(html));
+check('Hero: spec strip', /SECURITY/.test(html) && /ENGINEERING/.test(html));
+check('Hero: typewriter role', /Ethical Hacker|AI &amp; Data Science/i.test(html));
 check('Hero: resume CTA', html.includes('Resume'));
-check('Navbar: brand + items', html.includes('BALAMURUGAN') && html.includes('Projects'));
+const navEl = document.querySelector('nav[aria-label="Main navigation"]');
+const navText = navEl ? navEl.textContent : '';
+check('Navbar: BALA brand + items', navText.includes('BALA') && navText.includes('Projects') && navText.includes('Resume'));
+check('Navbar: Home link dropped', !navText.includes('Home'));
 check('About: heading', html.includes('The Engineer Behind The Terminal'));
 check('About: stats', html.includes('Security Lab Audits') && html.includes('AI Models Developed'));
 check('About: education', html.includes('Info Institute of Engineering'));

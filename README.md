@@ -25,9 +25,15 @@ Hacker, and Full-Stack Architect.
   **code inspector** (syntax highlighting, file tree, copy — zero highlighting dependencies).
 - **Glowing experience timeline** — scroll-drawn spine, glowing nodes, 3D cards.
 - **Animated stat counters**, glassmorphism throughout, layered atmospheric background,
-  hide-on-scroll floating navbar with animated active indicator, polished mobile menu.
-- **Professional branding** — geometric amber "B" monogram favicon (SVG + 16/32/48/180/192/512
-  PNGs), web manifest, and a generated 1200×630 social share image.
+  floating glass-pill navbar (BA monogram brand, spring-animated active pill that glides
+  between links, scroll-aware opacity/blur — never hides), and a polished full-glass
+  mobile menu with sequential item animation and scroll lock.
+- **Logo-first boot screen** — a ~1.5 s cinematic loading sequence (BA mark, orbital
+  progress ring, module readout) driven by real font readiness with no artificial delays,
+  simple fade under reduced motion, gating the hero's entrance animations via BootContext.
+- **Professional branding** — geometric amber "BA" monogram (SVG + 16/32/48/180/192/512
+  PNGs) shared by the loading screen, navbar, favicon and social share image (1200×630),
+  plus web manifest and dark `theme-color` for dark browser tabs.
 - **Accessible** — semantic HTML, focus-visible states, focus-trapped modal with `Esc` support,
   keyboard-operable cards, aria labels, and full reduced-motion support (CSS + framer-motion
   `MotionConfig`).
@@ -42,13 +48,15 @@ Fiber + Drei · Lucide · wouter · Sonner · Express (contact API) · Nodemaile
 ```
 client/
   src/
-    app/                  # App shell, global background FX
+    app/                  # App shell, global background FX, BootContext
     components/
-      layout/             # Navbar, Footer, BackToTop
+      branding/           # BALogo (shared BA monogram)
+      layout/             # Navbar, NavLink, MobileMenu, Footer, BackToTop
       three/              # HeroScene, AICore, ParticleField (R3F)
       ui/                 # TechIcon, Card3DTilt, SectionHeading, AnimatedCounter, Button
+      LoadingScreen.tsx   # logo-first boot sequence
     features/
-      hero/               # HeroSection, Typewriter
+      hero/               # HeroSection (two-zone layout), HeroTypography, Typewriter
       about/  skills/     # Section components (lazy loaded)
       projects/           # ProjectsSection, ProjectModal, ProjectVisual,
                           # ArchitectureFlow, CodeInspector, highlight.ts

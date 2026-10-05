@@ -272,6 +272,91 @@
     color: rgb(148, 163, 184);
   }
 
+  /* ---------- Hero typography system (two-zone, collision-proof) ---------- */
+  /*
+   * Metrics-driven sizing: "BALAMURUGAN" in Syne 800 measures 13.44em wide
+   * (with tracking), so the name is sized against its content column via
+   * container-query units — 7.1cqw ≈ 96% of the column — which makes a
+   * single-line, dominant lockup that physically cannot overflow at any
+   * viewport. The vw clamp below it is the conservative fallback for the
+   * few browsers without container-query support.
+   */
+  .hero-container {
+    container-type: inline-size;
+  }
+  .hero-label {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: clamp(0.6rem, 1.5vw, 0.76rem);
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: rgb(253, 230, 138);
+    white-space: nowrap;
+  }
+  .hero-label .hero-label-dim { color: rgb(100, 116, 139); }
+  .hero-name-lockup {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 100%;
+    margin-top: clamp(0.9rem, 2.2vw, 1.5rem);
+  }
+  .hero-name {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(1.28rem, 6.4vw, 3.5rem);
+    line-height: 1;
+    letter-spacing: -0.015em;
+    text-transform: uppercase;
+    max-width: 100%;
+  }
+  .hero-name-c {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(0.95rem, 3.1vw, 3.4rem);
+    line-height: 1;
+    letter-spacing: 0;
+  }
+  @supports (container-type: inline-size) {
+    .hero-name { font-size: clamp(1.28rem, 7.1cqw, 6.5rem); }
+    .hero-name-c { font-size: clamp(0.95rem, 3.9cqw, 4.3rem); }
+  }
+  .hero-name-sub {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: clamp(0.6rem, 2vw, 1.4rem);
+    width: 100%;
+    margin-top: clamp(0.3rem, 1vw, 0.7rem);
+  }
+  .hero-name-rule {
+    flex: 1 1 0;
+    height: 1px;
+    min-width: 1.75rem;
+    background: linear-gradient(90deg, transparent, rgba(245, 158, 11, 0.55));
+  }
+  .hero-strip {
+    font-family: var(--font-mono);
+    font-size: clamp(0.58rem, 1.2vw, 0.7rem);
+    font-weight: 500;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgb(148, 163, 184);
+    white-space: nowrap;
+  }
+  .hero-strip .hero-strip-sep { color: rgba(245, 158, 11, 0.55); padding: 0 0.35em; }
+  /* Short viewports: pills are the first thing to go — CTAs matter more. */
+  @media (max-height: 700px) {
+    .hero-pills { display: none; }
+  }
+  .hero-desc {
+    max-width: 42rem;
+    font-size: clamp(0.85rem, 1.5vw, 1.05rem);
+    line-height: 1.8;
+    color: rgb(148, 163, 184);
+  }
+
   .section-py {
     padding-top: clamp(4.5rem, 8vw, 7.5rem);
     padding-bottom: clamp(4.5rem, 8vw, 7.5rem);
@@ -476,6 +561,33 @@
     15% { opacity: 1; }
     85% { opacity: 1; }
     100% { top: calc(100% - 6px); opacity: 0; }
+  }
+
+  /* ---------- Loading screen (boot sequence) ---------- */
+  .boot-ring-spin {
+    animation: boot-rotate 26s linear infinite;
+    transform-origin: center;
+  }
+  .boot-ring-spin-rev {
+    animation: boot-rotate 40s linear infinite reverse;
+    transform-origin: center;
+  }
+  @keyframes boot-rotate {
+    to { transform: rotate(360deg); }
+  }
+  .boot-particle {
+    animation: boot-float 5.5s ease-in-out infinite;
+  }
+  @keyframes boot-float {
+    0%, 100% { transform: translateY(0); opacity: 0.35; }
+    50% { transform: translateY(-14px); opacity: 0.9; }
+  }
+  .boot-pulse {
+    animation: boot-pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes boot-pulse {
+    0%, 100% { opacity: 0.45; }
+    50% { opacity: 1; }
   }
 }
 

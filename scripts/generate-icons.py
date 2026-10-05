@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Generate favicon PNG variants + apple-touch-icon + og-image for Bala Portfolio.
 
-Deterministic raster rendering of the 'B' monogram (matches client/public/favicon.svg).
+Deterministic raster rendering of the 'BA' monogram (matches client/public/favicon.svg).
 Draws at high resolution and downsamples with LANCZOS for crisp small sizes.
 """
 from PIL import Image, ImageDraw, ImageFilter
@@ -98,34 +98,41 @@ def build_monogram(size_px):
     glyph_glow = Image.new("RGBA", (s, s), (0, 0, 0, 0))
     ggd = ImageDraw.Draw(glyph_glow)
 
-    def draw_glyph(d, offset=0):
-        """Draw B glyph shapes onto drawer d (design coords * k)."""
-        # stem
+    def draw_glyph(d, offset=0, with_counter=True):
+        """Draw BA glyph shapes onto drawer d (design coords * k)."""
+        # B — stem
         d.rounded_rectangle(
-            [int(164 * k) + offset, int(118 * k) + offset, int(234 * k) + offset, int(394 * k) + offset],
-            radius=int(35 * k), fill=255,
+            [int(92 * k) + offset, int(130 * k) + offset, int(142 * k) + offset, int(382 * k) + offset],
+            radius=int(25 * k), fill=255,
         )
-        # upper bowl
+        # B — upper bowl (stadium)
         d.rounded_rectangle(
-            [int(196 * k) + offset, int(118 * k) + offset, int(367 * k) + offset, int(256 * k) + offset],
-            radius=int(69 * k), fill=255,
+            [int(120 * k) + offset, int(130 * k) + offset, int(272 * k) + offset, int(251 * k) + offset],
+            radius=int(60 * k), fill=255,
         )
-        # lower bowl
+        # B — lower bowl (stadium)
         d.rounded_rectangle(
-            [int(196 * k) + offset, int(256 * k) + offset, int(391 * k) + offset, int(394 * k) + offset],
-            radius=int(69 * k), fill=255,
+            [int(120 * k) + offset, int(251 * k) + offset, int(292 * k) + offset, int(382 * k) + offset],
+            radius=int(65 * k), fill=255,
         )
-        # circuit pins
+        # B — circuit pins
         d.rounded_rectangle(
-            [int(132 * k) + offset, int(134 * k) + offset, int(190 * k) + offset, int(160 * k) + offset],
-            radius=int(13 * k), fill=255,
+            [int(66 * k) + offset, int(146 * k) + offset, int(112 * k) + offset, int(166 * k) + offset],
+            radius=int(10 * k), fill=255,
         )
         d.rounded_rectangle(
-            [int(132 * k) + offset, int(352 * k) + offset, int(190 * k) + offset, int(378 * k) + offset],
-            radius=int(13 * k), fill=255,
+            [int(66 * k) + offset, int(346 * k) + offset, int(112 * k) + offset, int(366 * k) + offset],
+            radius=int(10 * k), fill=255,
         )
+        # A — outer polygon with bottom notch between the legs
+        a_pts = [(374, 130), (302, 384), (342, 384), (356, 332), (392, 332), (406, 384), (446, 384)]
+        d.polygon([(int(x * k) + offset, int(y * k) + offset) for x, y in a_pts], fill=255)
+        if with_counter:
+            # A — counter (triangular hole above the crossbar)
+            c_pts = [(374, 210), (362, 308), (386, 308)]
+            d.polygon([(int(x * k) + offset, int(y * k) + offset) for x, y in c_pts], fill=0)
 
-    draw_glyph(ggd)
+    draw_glyph(ggd, with_counter=False)
     glyph_glow = glyph_glow.filter(ImageFilter.GaussianBlur(int(18 * k)))
     amber_glow = Image.new("RGBA", (s, s), (245, 158, 11, 90))
     img = Image.alpha_composite(img, Image.composite(amber_glow, Image.new("RGBA", (s, s), (0, 0, 0, 0)), glyph_glow))
@@ -151,9 +158,9 @@ def build_monogram(size_px):
     # cyan AI node with ring
     node = Image.new("RGBA", (s, s), (0, 0, 0, 0))
     nd = ImageDraw.Draw(node)
-    cx, cy, r = int(366 * k), int(325 * k), int(10 * k)
+    cx, cy, r = int(312 * k), int(208 * k), int(9 * k)
     nd.ellipse([cx - r, cy - r, cx + r, cy + r], fill=CYAN + (255,))
-    ring_r = int(19 * k)
+    ring_r = int(17 * k)
     nd.ellipse(
         [cx - ring_r, cy - ring_r, cx + ring_r, cy + ring_r],
         outline=CYAN + (115,), width=max(int(4 * k), 1),
