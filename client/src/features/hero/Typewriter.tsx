@@ -7,10 +7,18 @@ interface TypewriterProps {
   pauseTime?: number;
 }
 
-export function Typewriter({ texts, typingSpeed = 80, deletingSpeed = 40, pauseTime = 2000 }: TypewriterProps) {
+export function Typewriter({ texts, typingSpeed = 70, deletingSpeed = 35, pauseTime = 2200 }: TypewriterProps) {
   const [text, setText] = useState('');
   const [wordIdx, setWordIdx] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    // Reduced motion: show the first role statically, no cycling
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setText(texts[0] ?? '');
+      return;
+    }
+  }, [texts]);
 
   useEffect(() => {
     const current = texts[wordIdx];
@@ -31,9 +39,10 @@ export function Typewriter({ texts, typingSpeed = 80, deletingSpeed = 40, pauseT
   }, [text, wordIdx, isDeleting, texts, typingSpeed, deletingSpeed, pauseTime]);
 
   return (
-    <span aria-live="polite">
+    <span aria-live="polite" className="font-mono2">
+      <span className="text-[#F59E0B]/70 mr-1">&gt;</span>
       {text}
-      <span className="inline-block w-0.5 h-6 ml-1 bg-[#4F8CFF] align-middle animate-pulse" />
+      <span className="inline-block w-2 h-4 sm:h-5 ml-1 bg-[#F59E0B] align-middle animate-pulse" />
     </span>
   );
 }

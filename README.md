@@ -1,100 +1,101 @@
-<p align="center">
-  <img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=600&size=28&duration=3000&pause=1000&color=4F8CFF&center=true&vCenter=true&width=435&lines=Balamurugan+C;AI+%26+Security+Engineer" alt="Typing SVG" />
-</p>
+# Bala Portfolio — AI & Data Science Engineer
 
-<p align="center">
-  <a href="https://bala-portfolio-sigma.vercel.app/"><img src="https://img.shields.io/badge/Live_Demo-4F8CFF?style=for-the-badge&logo=vercel&logoColor=white" /></a>
-  <a href="https://www.linkedin.com/in/balamurugan-c-5507b82a3"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" /></a>
-  <a href="https://github.com/Balamurugan0113"><img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" /></a>
-  <a href="mailto:tharanishbalaa@gmail.com"><img src="https://img.shields.io/badge/Email-EA4335?style=for-the-badge&logo=gmail&logoColor=white" /></a>
-</p>
+Premium, cinematic 3D portfolio for **Balamurugan C** — AI & Data Science Engineer, Ethical
+Hacker, and Full-Stack Architect.
+
+**Live:** https://bala-portfolio-sigma.vercel.app/
 
 ---
 
-## ✨ Overview
+## ✨ Highlights
 
-> **AI & Security Engineer** portfolio showcasing penetration testing expertise, machine learning systems, and secure architecture design. Built with a modern full-stack stack and an immersive 3D interface.
+- **Cinematic 3D hero** — a React Three Fiber "AI core" (distorted energy sphere, orbital rings,
+  orbiting polyhedra, amber particle field) rendered behind the portrait with pointer parallax,
+  HUD reticle, scanning beam, and floating technology chips.
+- **Adaptive 3D budget** — device-tier detection (low / mid / high) drives particle count, DPR
+  and antialiasing. Rendering pauses when the hero leaves the viewport, when the tab is hidden,
+  or when `prefers-reduced-motion` is set. WebGL failures degrade gracefully (the hero never dies).
+- **3D icon system** — `TechIcon` chips with brand-tinted glass materials, specular highlights,
+  inner shadows and subtle hover tilt. 40+ hand-drawn / lucide glyphs with fuzzy skill matching.
+- **Interactive skills showcase** — six 3D-tilt category cards, floating tech icon band, animated
+  proficiency meters, and certification cards.
+- **Project case-study interface** — auto-rotating deck with per-project SVG "product interface"
+  artwork, animated border beams, and a 5-tab modal (Overview / Architecture / Security /
+  Performance / Code) with an architecture flow diagram and a premium IDE-style
+  **code inspector** (syntax highlighting, file tree, copy — zero highlighting dependencies).
+- **Glowing experience timeline** — scroll-drawn spine, glowing nodes, 3D cards.
+- **Animated stat counters**, glassmorphism throughout, layered atmospheric background,
+  hide-on-scroll floating navbar with animated active indicator, polished mobile menu.
+- **Professional branding** — geometric amber "B" monogram favicon (SVG + 16/32/48/180/192/512
+  PNGs), web manifest, and a generated 1200×630 social share image.
+- **Accessible** — semantic HTML, focus-visible states, focus-trapped modal with `Esc` support,
+  keyboard-operable cards, aria labels, and full reduced-motion support (CSS + framer-motion
+  `MotionConfig`).
 
----
+## 🧱 Stack
 
-## 🚀 Features
+React 19 · TypeScript · Vite 6 · Tailwind CSS 4 · Framer Motion 12 · Three.js + React Three
+Fiber + Drei · Lucide · wouter · Sonner · Express (contact API) · Nodemailer
 
-| Feature | Description |
-|---------|-------------|
-| 🌌 **3D Hero Scene** | Interactive particle field animated with Three.js + OGL |
-| 📁 **Live Code Inspector** | Browse project source files directly in-browser |
-| 📊 **Skills Dashboard** | Proficiency bars, certifications, and categorized expertise |
-| 📬 **Contact Engine** | SMTP-powered form with professional HTML email alerts |
-| 🧭 **Smart Nav** | Scroll-aware active section tracking with smooth transitions |
-| 🎨 **Glassmorphic UI** | Frosted glass cards with dynamic glow effects |
+## 📁 Structure
 
----
+```
+client/
+  src/
+    app/                  # App shell, global background FX
+    components/
+      layout/             # Navbar, Footer, BackToTop
+      three/              # HeroScene, AICore, ParticleField (R3F)
+      ui/                 # TechIcon, Card3DTilt, SectionHeading, AnimatedCounter, Button
+    features/
+      hero/               # HeroSection, Typewriter
+      about/  skills/     # Section components (lazy loaded)
+      projects/           # ProjectsSection, ProjectModal, ProjectVisual,
+                          # ArchitectureFlow, CodeInspector, highlight.ts
+      experience/ contact/
+  public/                 # favicon set, manifest, resume.pdf, og-image
+scripts/
+  generate-icons.py       # regenerates the favicon/OG PNG set (Pillow)
+  render-test.mjs         # headless full-app render test (jsdom + vite)
+  modal-test.mjs          # project modal interaction test
+shared/
+  const.ts                # all portfolio data (projects, skills, experience…)
+  projectFiles.ts         # source files shown in the code inspector
+api/contact.ts            # Vercel serverless contact endpoint
+server/index.ts           # local Express dev server for /api/contact
+```
 
-## 🛠️ Tech Stack
-
-<p align="center">
-  <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" />
-  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" />
-  <img src="https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white" />
-  <img src="https://img.shields.io/badge/Framer_Motion-0055FF?style=for-the-badge&logo=framer&logoColor=white" />
-  <img src="https://img.shields.io/badge/Three.js-000000?style=for-the-badge&logo=three.js&logoColor=white" />
-  <img src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white" />
-  <img src="https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=express&logoColor=white" />
-  <img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white" />
-</p>
-
-| Layer | Technology |
-|-------|-----------|
-| **Frontend** | React 19, TypeScript, Tailwind CSS, Framer Motion, Three.js (R3F + OGL), Vite |
-| **Backend** | Express.js, Nodemailer, TypeScript |
-| **Deployment** | Vercel (SPA + serverless API function) |
-
----
-
-## 🏃 Getting Started
+## 🚀 Getting started
 
 ```bash
-git clone https://github.com/Balamurugan0113/Bala-Portfolio.git
-cd Bala-Portfolio
 npm install
-cp .env.example .env      # add your SMTP credentials
-npm run dev                # frontend :5173 + backend :5000
+npm run dev          # vite (5173) + contact API (5000) with proxy
 ```
 
-### 📦 Production Build
+Environment (optional, for live contact emails) — see `.env.example`:
+
+```
+SMTP_USER=your_email@gmail.com
+SMTP_PASS=your_16_char_app_password
+```
+
+Without SMTP credentials, contact submissions are logged to the server console.
+
+## ✅ Verification
 
 ```bash
-npm run build
+npm run typecheck    # tsc --noEmit
+npm run build        # production build
+npm test             # headless render + modal interaction tests (jsdom)
+npm run icons        # regenerate favicon / OG images (requires Pillow)
 ```
 
----
+The test suite boots the real app (via Vite's module runner) inside jsdom and asserts every
+section, the modal lifecycle, tab switching, the code inspector, Esc/focus handling, and
+mobile / reduced-motion modes.
 
-## 📁 Project Structure
+## 📝 Notes
 
-```
-├── client/src/
-│   ├── components/        # UI primitives & layout (Navbar, Footer, BackToTop, Scene3D)
-│   ├── features/          # Section components (hero, about, skills, projects, contact)
-│   ├── hooks/             # Custom React hooks
-│   └── types/             # Portfolio data & constants
-├── projects/              # Standalone project source code
-├── server/                # Express API (contact endpoint)
-├── api/                   # Vercel serverless contact function
-└── shared/                # Shared types & project file definitions
-```
-
----
-
-## 🔒 Security
-
-- `.env` is gitignored — credentials never leave your machine
-- SMTP credentials loaded from environment, not hardcoded
-- Form validation on both client and server
-
----
-
-<p align="center">
-  Built with ❤️ by <strong>Balamurugan C</strong>
-  <br />
-  <sub>B.Tech AI & Data Science — Info Institute of Engineering</sub>
-</p>
+- Three.js is intentionally **not** in `manualChunks` — it stays inside the lazily-loaded hero
+  chunk so first paint never fetches ~1 MB of WebGL code.
+- `BlogSection.tsx` exists but is not currently routed.

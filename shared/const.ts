@@ -112,20 +112,28 @@ export const STATS: Stat[] = [
 
 export const SKILL_CATEGORIES: SkillCategory[] = [
   {
-    title: '★ PRIMARY FOCUS: Ethical Hacking & Pentesting',
-    skills: ['Network Penetration Testing', 'Web Application Security Auditing', 'API Vulnerability Assessment', 'Ethical Exploitation & Privilege Escalation'],
+    title: 'AI & Machine Learning',
+    skills: ['Machine Learning (Scikit-Learn)', 'CNN & LSTM Deep Learning (TensorFlow / Keras)', 'Real-Time Inference Pipelines (ONNX)', 'Model Evaluation & Hyperparameter Tuning'],
   },
   {
-    title: 'Security Analysis & Testing Tools',
-    skills: ['Burp Suite Professional', 'Nmap Network Scanner', 'Wireshark Packet Analyzer', 'Metasploit Framework'],
+    title: 'Python / Data Science',
+    skills: ['Python (Automation & Security Scripts)', 'Data Preprocessing & EDA (Pandas, NumPy)', 'Matplotlib & Seaborn Visualizations', 'Feature Engineering & Statistical Analytics'],
   },
   {
-    title: 'Python, Data Science & AI',
-    skills: ['Python (Automation & Security Scripts)', 'Data Preprocessing & EDA (Pandas, NumPy)', 'Machine Learning (Scikit-Learn)', 'Matplotlib & Seaborn Visualizations'],
+    title: 'Cybersecurity',
+    skills: ['Network Penetration Testing', 'Web Application Security Auditing', 'API Vulnerability Assessment', 'Ethical Exploitation & Privilege Escalation', 'NIDS Engineering & Packet Analysis'],
   },
   {
-    title: 'Cloud, Infrastructure & Web',
-    skills: ['AWS Cloud Security', 'Docker Containerization', 'Linux System Hardening', 'React & FastAPI Web Applications'],
+    title: 'Web Development',
+    skills: ['React & FastAPI Web Applications', 'REST API Design & WebSockets', 'Responsive UI Engineering', 'Real-Time Data Dashboards'],
+  },
+  {
+    title: 'Cloud & Infrastructure',
+    skills: ['AWS Cloud Security', 'Docker Containerization', 'Linux System Hardening', 'CI/CD Pipelines (GitHub Actions)'],
+  },
+  {
+    title: 'Tools & Technologies',
+    skills: ['Burp Suite Professional', 'Nmap Network Scanner', 'Wireshark Packet Analyzer', 'Metasploit Framework', 'OpenCV / MediaPipe'],
   },
 ];
 
@@ -409,6 +417,31 @@ export const EXPERIENCES: Experience[] = [
       'Collaborated on real-world AI project prototypes, applying best practices in model evaluation, hyperparameter tuning, and workflow optimization.',
     ],
     type: 'internship',
+  },
+  {
+    id: 'sih-2025',
+    role: 'National Hackathon Finalist — Smart India Hackathon 2025',
+    organization: 'Government of India · SIH',
+    period: '2025',
+    description: 'Competed at national level in the Smart India Hackathon, building AI-driven solutions under strict 36-hour constraints against teams across India.',
+    achievements: [
+      'Reached the national finalist stage of India\'s largest hackathon with an AI & Data Science driven solution.',
+      'Rapid-prototyped a complete ML pipeline — data ingestion, model training, and evaluation — within the hackathon timeframe.',
+      'Presented and defended the technical architecture before expert industry judges.',
+    ],
+    type: 'achievement',
+  },
+  {
+    id: 'trisquadathon-2024',
+    role: 'Technical Event Winner — Trisquadathon 2024',
+    organization: 'CSE Association',
+    period: '2024',
+    description: 'Won the CSE Association tri-sport technical competition, solving multi-domain engineering challenges across programming, logic, and systems rounds.',
+    achievements: [
+      'Placed first among all competing teams in the CSE Association technical event.',
+      'Solved multi-stage challenges spanning algorithms, debugging, and system design under timed conditions.',
+    ],
+    type: 'achievement',
   },
 ];
 

@@ -9,25 +9,35 @@ const SOCIALS = [
 
 export default function Footer() {
   return (
-    <footer className="relative z-20 border-t border-[rgba(79,140,255,0.06)] py-6" role="contentinfo">
-      <div className="max-w-7xl mx-auto px-[clamp(1.25rem,4vw,3rem)] flex flex-col items-center gap-4">
-        <div className="flex items-center gap-4">
+    <footer className="relative z-20 border-t border-[#F59E0B]/10 py-8" role="contentinfo">
+      {/* top glow seam */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#F59E0B]/50 to-transparent" />
+      <div className="max-w-7xl mx-auto px-[clamp(1.25rem,4vw,3rem)] flex flex-col items-center gap-5">
+        {/* monogram */}
+        <div className="flex items-center gap-2.5" aria-hidden="true">
+          <img src="/favicon.svg" alt="" className="w-8 h-8 rounded-lg" />
+          <span className="font-mono2 text-[11px] font-extrabold text-white tracking-[0.18em]">
+            BALAMURUGAN<span className="text-[#F59E0B]">.C</span>
+          </span>
+        </div>
+
+        <div className="flex items-center gap-3">
           {SOCIALS.map(({ icon: Icon, href, label }) => (
             <a
               key={label}
               href={href}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-9 h-9 flex items-center justify-center rounded-lg bg-[rgba(79,140,255,0.08)] text-[#94A3B8] hover:text-white hover:bg-[#4F8CFF]/20 transition-all duration-200 cursor-pointer"
+              className="w-9 h-9 flex items-center justify-center rounded-xl bg-white/[0.04] border border-white/[0.07] text-[#94A3B8] hover:text-[#FBBF24] hover:border-[#F59E0B]/45 hover:bg-[#F59E0B]/10 hover:-translate-y-0.5 transition-all duration-200"
               aria-label={label}
-              style={{ pointerEvents: 'auto', position: 'relative', zIndex: 1 }}
             >
-              <Icon size={16} />
+              <Icon size={15} />
             </a>
           ))}
         </div>
-        <p className="text-xs text-[#94A3B8] text-center leading-relaxed">
-          &copy;2026 BALAMURUGAN C PORTFOLIO B.TECH AI &amp; DS
+
+        <p className="text-[11px] text-[#94A3B8]/70 text-center leading-relaxed font-mono2 tracking-wide">
+          &copy;2026 BALAMURUGAN C — PORTFOLIO · B.TECH AI &amp; DS
         </p>
       </div>
     </footer>

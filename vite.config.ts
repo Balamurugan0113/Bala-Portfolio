@@ -17,8 +17,10 @@ export default defineConfig({
     emptyOutDir: true,
     rollupOptions: {
       output: {
+        // NOTE: three/@react-three/drei are intentionally NOT in manualChunks —
+        // they must stay inside the lazily-loaded hero chunk so the initial
+        // route never fetches ~1MB of WebGL code up front.
         manualChunks: {
-          three: ['three', '@react-three/fiber', '@react-three/drei'],
           vendor: ['react', 'react-dom', 'framer-motion', 'wouter', 'lucide-react'],
         },
       },
@@ -26,6 +28,9 @@ export default defineConfig({
     chunkSizeWarningLimit: 1200,
   },
   server: {
+    host: true,
+    // Allow sandbox/preview proxies (e.g. *.e2b.app) to reach the dev server
+    allowedHosts: true,
     port: 5173,
     proxy: {
       '/api': {
