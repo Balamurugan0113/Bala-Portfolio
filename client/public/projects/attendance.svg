@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="100%" height="100%">
+  <defs>
+    <linearGradient id="abg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050a12"/>
+      <stop offset="50%" stop-color="#0a1828"/>
+      <stop offset="100%" stop-color="#03060a"/>
+    </linearGradient>
+    <radialGradient id="aglow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#3B82F6" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#3B82F6" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#abg)"/>
+  <circle cx="400" cy="225" r="220" fill="url(#aglow)"/>
+  <!-- Target Box -->
+  <g stroke="#3B82F6" stroke-width="3" fill="none">
+    <path d="M 280 140 L 280 110 L 310 110"/>
+    <path d="M 490 110 L 520 110 L 520 140"/>
+    <path d="M 520 300 L 520 330 L 490 330"/>
+    <path d="M 310 330 L 280 330 L 280 300"/>
+  </g>
+  <!-- Biometric Mesh points -->
+  <circle cx="400" cy="180" r="45" fill="none" stroke="#60A5FA" stroke-width="2"/>
+  <circle cx="380" cy="175" r="5" fill="#60A5FA"/>
+  <circle cx="420" cy="175" r="5" fill="#60A5FA"/>
+  <line x1="400" y1="180" x2="400" y2="210" stroke="#60A5FA" stroke-width="2"/>
+  <path d="M 385 230 Q 400 245 415 230" stroke="#60A5FA" stroke-width="2" fill="none"/>
+  <!-- Scan line -->
+  <line x1="290" y1="210" x2="510" y2="210" stroke="#93C5FD" stroke-width="2.5" stroke-dasharray="6 4"/>
+  <rect x="250" y="360" width="300" height="40" rx="20" fill="rgba(59,130,246,0.15)" stroke="#3B82F6" stroke-width="1.5"/>
+  <text x="400" y="385" font-family="'JetBrains Mono', monospace" font-size="13" font-weight="bold" fill="#93C5FD" text-anchor="middle" letter-spacing="2">OPENCV • DLIB RESNET • FASTAPI</text>
+  <text x="400" y="65" font-family="'Syne', sans-serif" font-size="24" font-weight="900" fill="#FFFFFF" text-anchor="middle" letter-spacing="4">FACE RECOGNITION ATTENDANCE</text>
+</svg>

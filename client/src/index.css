@@ -58,7 +58,7 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    overflow-x: hidden;
+    overflow-x: clip;
     -webkit-tap-highlight-color: transparent;
   }
 
@@ -70,7 +70,7 @@
       rgb(5, 5, 8);
     color: #FFFFFF;
     font-family: var(--font-sans);
-    overflow-x: hidden;
+    overflow-x: clip;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     line-height: 1.6;
@@ -236,35 +236,213 @@
   .backface-hidden { backface-visibility: hidden; }
 }
 
-/* Light Mode Global Element & Class Adaptations */
+/* ==========================================================================
+   LIGHT MODE DESIGN SYSTEM & COLOR ADAPTATIONS
+   Guarantees optimal contrast, rich typography, and seamless surface transitions
+   ========================================================================== */
 .light body {
   background-color: #F8FAFC !important;
   color: #0F172A !important;
 }
 
-.light [class*="bg-[#050508]"],
-.light [class*="bg-[#050816]"] {
+/* Headings & Title Gradients: Rich High-Contrast Amber/Bronze */
+.light h1.font-\[\'Syne\'\],
+.light [class*="font-['Syne']"][class*="text-transparent"] {
+  background-image: linear-gradient(135deg, rgba(15, 23, 42, 0.12) 0%, rgba(217, 119, 6, 0.22) 50%, rgba(180, 83, 9, 0.15) 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+}
+
+.light h2.heading-lg,
+.light h2.heading-md,
+.light h2.heading-xl,
+.light h3.heading-sm,
+.light [class*="from-[#FFFBEB]"] {
+  background-image: linear-gradient(180deg, #78350F 0%, #D97706 50%, #B45309 100%) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  color: transparent !important;
+}
+
+/* Sections & Page Layout Fades */
+.light section {
   background-color: transparent !important;
 }
 
-.light [class*="text-white"] {
+.light [class*="bg-[#050508]"] {
+  background-color: transparent !important;
+}
+
+.light .bg-gradient-to-t[class*="from-[#050508]"],
+.light [class*="from-[#050508]"] {
+  --tw-gradient-from: #F8FAFC var(--tw-gradient-from-position) !important;
+}
+
+.light .bg-gradient-to-b[class*="to-[#050508]"],
+.light [class*="to-[#050508]"] {
+  --tw-gradient-to: #F8FAFC var(--tw-gradient-to-position) !important;
+}
+
+/* Primary Glass & Custom Cards */
+.light .glass {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border-color: rgba(245, 158, 11, 0.25) !important;
   color: #0F172A !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04) !important;
 }
 
-.light [class*="text-[#94A3B8]"] {
-  color: #475569 !important;
+.light .glass-strong {
+  background: rgba(255, 255, 255, 0.96) !important;
+  border-color: rgba(245, 158, 11, 0.3) !important;
+  color: #0F172A !important;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06) !important;
 }
 
-.light [class*="bg-white/5"] {
-  background-color: rgba(0, 0, 0, 0.04) !important;
+.light .glass-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(248, 250, 252, 0.88)) !important;
+  border-color: rgba(245, 158, 11, 0.22) !important;
+  color: #0F172A !important;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.05) !important;
 }
 
-.light [class*="border-white/10"] {
+.light .glass-card:hover {
+  background: linear-gradient(135deg, #FFFFFF, rgba(254, 243, 199, 0.45)) !important;
+  border-color: rgba(245, 158, 11, 0.5) !important;
+  box-shadow: 0 12px 36px rgba(245, 158, 11, 0.16) !important;
+}
+
+/* Deep Navy Cards Transformed into Crisp White Surfaces */
+.light [class*="bg-[#070C1E]"],
+.light [class*="bg-[#080B18]"],
+.light [class*="bg-[#080D22]"],
+.light [class*="bg-[#090C16]"] {
+  background-color: rgba(255, 255, 255, 0.97) !important;
+  border-color: rgba(245, 158, 11, 0.3) !important;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.06), 0 0 15px rgba(245, 158, 11, 0.06) !important;
+}
+
+.light [class*="bg-[#060A1A]"] {
+  background-color: rgba(241, 245, 249, 0.95) !important;
+  border-color: rgba(245, 158, 11, 0.2) !important;
+}
+
+/* Project Visual Preview Containers & Dim Overlays */
+.light [class*="bg-[#040714]"] {
+  background-color: #F1F5F9 !important;
   border-color: rgba(0, 0, 0, 0.08) !important;
 }
 
-.light [class*="border-white/20"] {
+.light [class*="bg-[#02040a]"] {
+  background-color: #E2E8F0 !important;
+}
+
+/* Typography & Contrast */
+.light [class*="text-white"],
+.light h1, .light h2, .light h3, .light h4, .light h5 {
+  color: #0F172A !important;
+}
+
+.light [class*="text-[#94A3B8]"],
+.light .text-body,
+.light [class*="text-slate-300"],
+.light [class*="text-slate-400"] {
+  color: #475569 !important;
+}
+
+.light [class*="text-white/80"],
+.light [class*="text-white/90"] {
+  color: #1E293B !important;
+}
+
+/* High-Contrast Amber Text */
+.light [class*="text-[#F59E0B]"] {
+  color: #D97706 !important;
+}
+
+/* Primary Amber Buttons (Preserve Dark Crisp Label) */
+.light button[class*="bg-[#F59E0B]"],
+.light [class*="bg-[#F59E0B]"] [class*="text-[#050508]"],
+.light button[class*="bg-[#F59E0B]"] span {
+  color: #050508 !important;
+}
+
+/* Green Impact Badges */
+.light [class*="text-[#10B981]"] {
+  color: #059669 !important;
+}
+
+.light [class*="bg-[#10B981]/10"],
+.light [class*="bg-[#10B981]/15"] {
+  background-color: rgba(16, 185, 129, 0.12) !important;
+  border-color: rgba(16, 185, 129, 0.3) !important;
+}
+
+/* Borders & Subtle Transparent Layers */
+.light [class*="bg-white/5"],
+.light [class*="bg-white/[0.03]"] {
+  background-color: rgba(0, 0, 0, 0.04) !important;
+}
+
+.light [class*="bg-white/10"] {
+  background-color: rgba(0, 0, 0, 0.06) !important;
+}
+
+.light [class*="border-white/5"],
+.light [class*="border-white/10"],
+.light [class*="border-white/12"],
+.light [class*="border-white/15"] {
+  border-color: rgba(0, 0, 0, 0.09) !important;
+}
+
+.light [class*="border-white/20"],
+.light [class*="border-white/25"] {
   border-color: rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Form Inputs in Contact Section */
+.light input,
+.light textarea {
+  background-color: #FFFFFF !important;
+  color: #0F172A !important;
+  border-color: #CBD5E1 !important;
+}
+
+.light input::placeholder,
+.light textarea::placeholder {
+  color: #94A3B8 !important;
+}
+
+.light input:focus,
+.light textarea:focus {
+  border-color: #D97706 !important;
+  box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.15) !important;
+  outline: none !important;
+}
+
+/* Code Inspector Modal in Light Mode */
+.light [class*="bg-[#0A0F24]"],
+.light [class*="bg-[#0A0F24]/60"] {
+  background-color: #F8FAFC !important;
+  border-color: #E2E8F0 !important;
+}
+
+.light [class*="bg-[#050816]"] {
+  background-color: #FFFFFF !important;
+}
+
+.light [class*="bg-[#070C1E]/60"] {
+  background-color: #F1F5F9 !important;
+}
+
+.light [class*="bg-[#030612]"] {
+  background-color: #F8FAFC !important;
+  color: #1E293B !important;
+}
+
+/* Footer in Light Mode */
+.light footer {
+  background: linear-gradient(to top, #F1F5F9, rgba(248, 250, 252, 0.95), transparent) !important;
+  border-color: rgba(245, 158, 11, 0.25) !important;
 }
 
 .light .shadow-2xl {

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="100%" height="100%">
+  <defs>
+    <linearGradient id="sbg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0b0716"/>
+      <stop offset="50%" stop-color="#160e2c"/>
+      <stop offset="100%" stop-color="#05030b"/>
+    </linearGradient>
+    <radialGradient id="sglow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#A855F7" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#A855F7" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#sbg)"/>
+  <circle cx="400" cy="225" r="220" fill="url(#sglow)"/>
+  <!-- Sentiment Waveform and Chat Bubbles -->
+  <rect x="250" y="140" width="160" height="60" rx="18" fill="#1b1238" stroke="#A855F7" stroke-width="2"/>
+  <text x="330" y="175" font-family="'JetBrains Mono', monospace" font-size="14" fill="#C084FC" text-anchor="middle">Positive +0.94</text>
+  <rect x="390" y="230" width="160" height="60" rx="18" fill="#1b1238" stroke="#EC4899" stroke-width="2"/>
+  <text x="470" y="265" font-family="'JetBrains Mono', monospace" font-size="14" fill="#F472B6" text-anchor="middle">Neutral 0.05</text>
+  <rect x="250" y="360" width="300" height="40" rx="20" fill="rgba(168,85,247,0.15)" stroke="#A855F7" stroke-width="1.5"/>
+  <text x="400" y="385" font-family="'JetBrains Mono', monospace" font-size="13" font-weight="bold" fill="#E9D5FF" text-anchor="middle" letter-spacing="2">DISTILBERT • WEBSOCKETS • FASTAPI</text>
+  <text x="400" y="65" font-family="'Syne', sans-serif" font-size="24" font-weight="900" fill="#FFFFFF" text-anchor="middle" letter-spacing="4">CAMPUS FEED SENTIMENT ANALYZER</text>
+</svg>

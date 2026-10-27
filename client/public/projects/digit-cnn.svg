@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="100%" height="100%">
+  <defs>
+    <linearGradient id="dbg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0802"/>
+      <stop offset="50%" stop-color="#1c1404"/>
+      <stop offset="100%" stop-color="#060501"/>
+    </linearGradient>
+    <radialGradient id="dglow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#F59E0B" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#F59E0B" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#dbg)"/>
+  <circle cx="400" cy="225" r="220" fill="url(#dglow)"/>
+  <!-- Digit 7 Drawing -->
+  <text x="400" y="270" font-family="'Syne', sans-serif" font-size="160" font-weight="900" fill="rgba(245,158,11,0.2)" stroke="#F59E0B" stroke-width="4" text-anchor="middle">7</text>
+  <!-- Convolution Kernels -->
+  <rect x="230" y="150" width="50" height="50" fill="none" stroke="#FBBF24" stroke-width="2" stroke-dasharray="4 3"/>
+  <rect x="520" y="210" width="50" height="50" fill="none" stroke="#F97316" stroke-width="2" stroke-dasharray="4 3"/>
+  <rect x="250" y="360" width="300" height="40" rx="20" fill="rgba(245,158,11,0.12)" stroke="#F59E0B" stroke-width="1.5"/>
+  <text x="400" y="385" font-family="'JetBrains Mono', monospace" font-size="13" font-weight="bold" fill="#FDE68A" text-anchor="middle" letter-spacing="2">TENSORFLOW • KERAS CNN • OPENCV</text>
+  <text x="400" y="65" font-family="'Syne', sans-serif" font-size="24" font-weight="900" fill="#FFFFFF" text-anchor="middle" letter-spacing="4">HANDWRITTEN DIGIT RECOGNITION</text>
+</svg>

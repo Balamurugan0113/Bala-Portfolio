@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="100%" height="100%">
+  <defs>
+    <linearGradient id="qbg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#020b08"/>
+      <stop offset="50%" stop-color="#061c14"/>
+      <stop offset="100%" stop-color="#010705"/>
+    </linearGradient>
+    <radialGradient id="qglow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#10B981" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#10B981" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#qbg)"/>
+  <circle cx="400" cy="225" r="220" fill="url(#qglow)"/>
+  <!-- Telemetry Gauges -->
+  <circle cx="400" cy="210" r="85" fill="none" stroke="rgba(16,185,129,0.2)" stroke-width="10"/>
+  <path d="M 330 250 A 85 85 0 1 1 470 250" fill="none" stroke="#10B981" stroke-width="10" stroke-linecap="round"/>
+  <text x="400" y="210" font-family="'Syne', sans-serif" font-size="38" font-weight="900" fill="#FFFFFF" text-anchor="middle">42</text>
+  <text x="400" y="235" font-family="'JetBrains Mono', monospace" font-size="13" font-weight="bold" fill="#6EE7B7" text-anchor="middle">AQI • GOOD</text>
+  <rect x="250" y="360" width="300" height="40" rx="20" fill="rgba(16,185,129,0.15)" stroke="#10B981" stroke-width="1.5"/>
+  <text x="400" y="385" font-family="'JetBrains Mono', monospace" font-size="13" font-weight="bold" fill="#A7F3D0" text-anchor="middle" letter-spacing="2">ESP32 • RANDOM FOREST • MQTT</text>
+  <text x="400" y="65" font-family="'Syne', sans-serif" font-size="24" font-weight="900" fill="#FFFFFF" text-anchor="middle" letter-spacing="4">IOT REAL-TIME AQI PREDICTOR</text>
+</svg>

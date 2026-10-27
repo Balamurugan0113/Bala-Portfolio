@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="100%" height="100%">
+  <defs>
+    <linearGradient id="vbg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#020814"/>
+      <stop offset="50%" stop-color="#051a2e"/>
+      <stop offset="100%" stop-color="#01050a"/>
+    </linearGradient>
+    <linearGradient id="cyan" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#06B6D4"/>
+      <stop offset="50%" stop-color="#3B82F6"/>
+      <stop offset="100%" stop-color="#8B5CF6"/>
+    </linearGradient>
+    <radialGradient id="vglow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#06B6D4" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#06B6D4" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#vbg)"/>
+  <circle cx="400" cy="225" r="200" fill="url(#vglow)"/>
+  <!-- Vinyl / Audio Disc -->
+  <circle cx="400" cy="220" r="110" fill="#081020" stroke="#06B6D4" stroke-width="3"/>
+  <circle cx="400" cy="220" r="85" fill="none" stroke="rgba(6,182,212,0.3)" stroke-width="1.5" stroke-dasharray="8 6"/>
+  <circle cx="400" cy="220" r="60" fill="none" stroke="rgba(59,130,246,0.3)" stroke-width="1.5"/>
+  <circle cx="400" cy="220" r="30" fill="url(#cyan)"/>
+  <circle cx="400" cy="220" r="8" fill="#020814"/>
+  <!-- Waveforms -->
+  <g fill="url(#cyan)" opacity="0.85">
+    <rect x="140" y="200" width="8" height="50" rx="4"/>
+    <rect x="160" y="170" width="8" height="110" rx="4"/>
+    <rect x="180" y="140" width="8" height="170" rx="4"/>
+    <rect x="200" y="180" width="8" height="90" rx="4"/>
+    <rect x="220" y="160" width="8" height="130" rx="4"/>
+    <rect x="240" y="195" width="8" height="60" rx="4"/>
+
+    <rect x="550" y="195" width="8" height="60" rx="4"/>
+    <rect x="570" y="160" width="8" height="130" rx="4"/>
+    <rect x="590" y="180" width="8" height="90" rx="4"/>
+    <rect x="610" y="140" width="8" height="170" rx="4"/>
+    <rect x="630" y="170" width="8" height="110" rx="4"/>
+    <rect x="650" y="200" width="8" height="50" rx="4"/>
+  </g>
+  <rect x="260" y="360" width="280" height="40" rx="20" fill="rgba(6,182,212,0.12)" stroke="#06B6D4" stroke-width="1.5"/>
+  <text x="400" y="385" font-family="'JetBrains Mono', monospace" font-size="14" font-weight="bold" fill="#67E8F9" text-anchor="middle" letter-spacing="2">REACT • SUPABASE • AUDIO ENGINE</text>
+  <text x="400" y="75" font-family="'Syne', sans-serif" font-size="26" font-weight="900" fill="#FFFFFF" text-anchor="middle" letter-spacing="4">VIBELY MUSIC STREAMING</text>
+</svg>

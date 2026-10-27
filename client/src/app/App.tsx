@@ -57,7 +57,7 @@ function AppContent() {
   const { theme } = useTheme();
 
   return (
-    <div className="flex min-h-screen flex-col selection:bg-[#F59E0B]/30 selection:text-white relative overflow-x-hidden transition-colors duration-300">
+    <div className="flex min-h-screen flex-col selection:bg-[#F59E0B]/30 selection:text-white relative overflow-x-clip transition-colors duration-300">
       {!isAppLoaded && <LoadingScreen onComplete={() => setIsAppLoaded(true)} />}
       
       {/* Top Left Radial Navigation */}

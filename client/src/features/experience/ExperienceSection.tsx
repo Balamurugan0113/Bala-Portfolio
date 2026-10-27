@@ -5,7 +5,7 @@ import Card3DTilt from '@/components/ui/Card3DTilt';
 
 export default function ExperienceSection() {
   return (
-    <section id="experience" className="relative bg-[#050508] py-10 sm:py-16 px-4 sm:px-6" aria-label="Professional Experience">
+    <section id="experience" className="relative z-20 bg-[#050508] py-10 sm:py-16 px-4 sm:px-6" aria-label="Professional Experience">
       <div className="max-w-3xl mx-auto">
         <motion.div
           className="text-center mb-6 sm:mb-8"

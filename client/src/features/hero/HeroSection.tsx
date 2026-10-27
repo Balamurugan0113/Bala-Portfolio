@@ -95,16 +95,16 @@ export default function HeroSection() {
           className="relative z-[4] flex flex-col items-center text-center mt-1 sm:mt-2 px-4"
         >
           {/* SUBTITLE */}
-          <h2 className="text-[10px] sm:text-xs font-bold tracking-[0.2em] sm:tracking-[0.25em] text-white/80 font-mono mb-2 sm:mb-3 uppercase flex flex-wrap justify-center gap-x-2 sm:gap-x-3 gap-y-1">
+          <h2 className="text-[9px] sm:text-xs font-bold tracking-[0.2em] sm:tracking-[0.25em] text-white/80 font-mono mb-1.5 sm:mb-3 uppercase flex flex-wrap justify-center gap-x-1.5 sm:gap-x-3 gap-y-1">
             <span>AI</span> <span className="text-[#F59E0B]">•</span>
-            <span>Data</span> <span className="text-[#F59E0B]">•</span>
-            <span>Security</span> <span className="text-[#F59E0B]">•</span>
-            <span>Engineering</span>
+            <span>Vibe Coding</span> <span className="text-[#F59E0B]">•</span>
+            <span>Data Science</span> <span className="text-[#F59E0B]">•</span>
+            <span>Security</span>
           </h2>
 
-          <p className="text-xs sm:text-base text-[#94A3B8] max-w-sm sm:max-w-lg leading-relaxed font-medium">
-            Specializing in Ethical Hacking, Machine Learning,
-            <span className="block">and robust data-driven applications.</span>
+          <p className="text-[11px] sm:text-base text-[#94A3B8] max-w-sm sm:max-w-lg leading-relaxed font-medium">
+            Specializing in Vibe Coding, Agentic AI, Machine Learning,
+            <span className="block">and robust data-driven engineering.</span>
           </p>
         </motion.div>
 

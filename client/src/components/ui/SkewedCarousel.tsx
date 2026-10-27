@@ -31,9 +31,9 @@ export function SkewedCarousel({
   items,
   renderCard,
   onItemClick,
-  skewAngle = -3,
-  tiltIntensity = 8,
-  baseVelocity = -0.3,
+  skewAngle = -1.5,
+  tiltIntensity = 6,
+  baseVelocity = -0.28,
   pauseOnHover = true,
   className,
 }: SkewedCarouselProps) {
@@ -77,14 +77,14 @@ export function SkewedCarousel({
     <div
       ref={containerRef}
       className={cn(
-        "relative w-full overflow-hidden py-4 sm:py-8 select-none",
+        "relative w-full overflow-hidden py-2 sm:py-4 select-none",
         className
       )}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Top Bar: Count badge & Manual Controls */}
-      <div className="flex items-center justify-between max-w-7xl mx-auto px-4 sm:px-8 mb-3 sm:mb-4 relative z-30 pointer-events-auto">
+      <div className="flex items-center justify-between max-w-7xl mx-auto px-4 sm:px-8 mb-2 sm:mb-3 relative z-30 pointer-events-auto">
         <div className="flex items-center gap-2">
           <span className="text-[9px] sm:text-[10px] font-mono font-bold tracking-widest text-[#F59E0B] uppercase bg-[#F59E0B]/10 px-2.5 py-0.5 rounded-full border border-[#F59E0B]/20">
             {items.length} Featured Systems
@@ -113,13 +113,13 @@ export function SkewedCarousel({
 
       {/* Skewed Perspective Plane */}
       <div
-        className="w-full flex items-center justify-start overflow-visible py-2 sm:py-3"
+        className="w-full flex items-center justify-start overflow-visible py-1 sm:py-2"
         style={{
           transform: `rotate(${skewAngle}deg)`,
         }}
       >
         <motion.div
-          className="flex items-center gap-3 sm:gap-6 w-max will-change-transform px-3 sm:px-4"
+          className="flex items-center gap-4 sm:gap-7 w-max will-change-transform px-3 sm:px-4"
           style={{ x }}
         >
           {loopItems.map((item, idx) => {
@@ -213,52 +213,70 @@ function SkewedCardItem({
       {children ? (
         children
       ) : (
-        /* Compact, Crisp & Responsive Project Card */
-        <div className="w-[220px] xs:w-[250px] sm:w-[290px] md:w-[320px] h-[285px] sm:h-[340px] glass-strong border border-white/12 rounded-xl sm:rounded-2xl p-3.5 sm:p-5 flex flex-col justify-between overflow-hidden relative group bg-[#090C16] hover:border-[#F59E0B]/50 transition-all duration-300">
+        /* High-Impact Enlarged Flow Project Card */
+        <div className="w-[290px] xs:w-[330px] sm:w-[380px] md:w-[440px] h-[380px] sm:h-[430px] md:h-[460px] glass-strong border border-white/12 hover:border-[#F59E0B]/50 rounded-2xl sm:rounded-3xl p-4 sm:p-5 flex flex-col justify-between overflow-hidden relative group bg-[#080B18] transition-all duration-300 shadow-xl">
           
           {/* Index Watermark */}
-          <div className="absolute top-0 right-0 p-3 sm:p-4 opacity-5 pointer-events-none select-none">
-            <span className="font-['Syne'] font-black text-3xl sm:text-5xl tracking-tighter text-white">
-              0{index + 1}
+          <div className="absolute top-2 right-3 opacity-5 pointer-events-none select-none">
+            <span className="font-['Syne'] font-black text-4xl sm:text-6xl tracking-tighter text-white">
+              {String(index + 1).padStart(2, '0')}
             </span>
           </div>
 
-          <div className="relative z-10">
-            {/* Impact Metric & Tagline */}
-            <div className="flex items-center gap-1.5 mb-2">
-              {item.impact && (
-                <span className="text-[8px] sm:text-[9px] font-semibold text-[#10B981] bg-[#10B981]/15 px-1.5 sm:px-2 py-0.5 rounded-full border border-[#10B981]/30 font-mono shrink-0">
-                  {item.impact}
-                </span>
+          <div className="relative z-10 flex flex-col flex-1">
+            {/* Visual Image Preview Banner */}
+            <div className="relative w-full h-32 sm:h-44 rounded-xl overflow-hidden bg-[#040714] border border-white/10 mb-3 flex items-center justify-center p-2.5 group-hover:border-[#F59E0B]/40 transition-all duration-300">
+              <div className="absolute inset-0 bg-radial from-[#F59E0B]/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+              {item.image ? (
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="w-full h-full object-contain filter drop-shadow-[0_6px_16px_rgba(0,0,0,0.7)] group-hover:scale-105 transition-transform duration-500"
+                />
+              ) : (
+                <div className="text-[11px] text-[#94A3B8] font-mono font-semibold uppercase tracking-wider">
+                  System Architecture
+                </div>
               )}
+
+              {/* Tagline Badge Overlay */}
               {item.tagline && (
-                <span className="text-[8px] sm:text-[9px] font-bold text-[#F59E0B] tracking-wider uppercase font-mono truncate">
+                <div className="absolute top-2 left-2 px-2 py-0.5 rounded-md bg-[#050508]/85 backdrop-blur-md border border-white/10 text-[8px] sm:text-[9px] font-mono font-bold text-[#F59E0B] uppercase tracking-wider">
                   {item.tagline}
+                </div>
+              )}
+            </div>
+
+            {/* Impact Metric */}
+            <div className="flex items-center gap-2 mb-1.5">
+              {item.impact && (
+                <span className="text-[8px] sm:text-[9px] font-semibold text-[#10B981] bg-[#10B981]/15 px-2 py-0.5 rounded-full border border-[#10B981]/30 font-mono shrink-0">
+                  {item.impact}
                 </span>
               )}
             </div>
 
             {/* Title */}
-            <h3 className="text-sm sm:text-base md:text-lg font-bold text-white mb-1.5 sm:mb-2 group-hover:text-[#F59E0B] transition-colors leading-snug line-clamp-2">
+            <h3 className="text-sm sm:text-lg md:text-xl font-bold font-['Syne'] text-white mb-1.5 group-hover:text-[#F59E0B] transition-colors leading-snug line-clamp-1">
               {item.title}
             </h3>
 
-            {/* Short & Crisp Description */}
+            {/* Crisp Description */}
             {item.description && (
-              <p className="text-[10px] sm:text-xs text-[#94A3B8] leading-relaxed line-clamp-3 font-normal">
+              <p className="text-[11px] sm:text-xs text-[#94A3B8] leading-relaxed line-clamp-2 font-normal">
                 {item.description}
               </p>
             )}
           </div>
 
-          <div className="relative z-10 mt-auto pt-2.5 sm:pt-3 border-t border-white/10">
+          <div className="relative z-10 mt-auto pt-3 border-t border-white/10">
             {/* Top 3 Tags */}
             {item.tags && (
-              <div className="flex flex-wrap gap-1 mb-2 sm:mb-3">
-                {item.tags.slice(0, 3).map((t) => (
+              <div className="flex flex-wrap gap-1.5 mb-2.5">
+                {item.tags.slice(0, 3).map((t: string) => (
                   <span
                     key={t}
-                    className="text-[7px] sm:text-[9px] px-1.5 py-0.5 rounded-md glass border border-white/10 text-white/90 font-mono"
+                    className="text-[8px] sm:text-[9px] px-2 py-0.5 rounded-md glass border border-white/10 text-white/90 font-mono"
                   >
                     {t}
                   </span>
@@ -266,11 +284,12 @@ function SkewedCardItem({
               </div>
             )}
             
-            {/* Crisp CTA Link */}
-            <div className="text-[9px] sm:text-[11px] font-bold text-[#F59E0B] flex items-center justify-between group-hover:translate-x-1 transition-transform">
+            {/* CTA Link */}
+            <div className="text-[10px] sm:text-xs font-bold text-[#F59E0B] flex items-center justify-between group-hover:translate-x-1 transition-transform">
               <span className="uppercase tracking-wider flex items-center gap-1 font-mono">
-                Inspect <ArrowRight size={11} />
+                Inspect System <ArrowRight size={12} />
               </span>
+              <span className="text-[9px] text-[#94A3B8] font-mono hidden sm:inline">Specs &amp; Code</span>
             </div>
           </div>
         </div>
