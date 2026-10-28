@@ -3,7 +3,7 @@ import nidsRules from "../projects/intrusion_detection/rules.json?raw";
 import nidsReadme from "../projects/intrusion_detection/README.md?raw";
 
 import attendanceApp from "../projects/attendance_system/app.py?raw";
-import attendanceFaceUtils from "../projects/attendance_system/face_utils.py?raw";
+import attendanceTimetableService from "../projects/attendance_system/timetable_service.py?raw";
 import attendanceSchema from "../projects/attendance_system/schema.sql?raw";
 import attendanceReadme from "../projects/attendance_system/README.md?raw";
 
@@ -84,7 +84,7 @@ export const PROJECT_FILES: Record<string, ProjectFile[]> = {
   ],
   "attendance-system": [
     { name: "app.py", language: "python", content: attendanceApp },
-    { name: "face_utils.py", language: "python", content: attendanceFaceUtils },
+    { name: "timetable_service.py", language: "python", content: attendanceTimetableService },
     { name: "schema.sql", language: "sql", content: attendanceSchema },
     { name: "README.md", language: "markdown", content: attendanceReadme }
   ],

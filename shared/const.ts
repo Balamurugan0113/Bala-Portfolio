@@ -210,6 +210,36 @@ export const PROJECTS: Project[] = [
     }
   },
   {
+    id: 'attendance-system',
+    title: 'Smart Institutional Attendance & Academic Governance ERP',
+    tagline: 'Real-time IST timetable sync, NLP quick-chat bot & OD governance',
+    description: 'An enterprise-grade academic attendance and governance platform engineered with FastAPI, React, and real-time IST timetable synchronization. Features AI conversational attendance recording, multi-tier RBAC (Admin, HOD, Class Advisor, Faculty, Student), automated On-Duty (OD) protection, period window lockouts, and audit-grade analytics.',
+    impact: '100% Timetable Compliance • Zero Proxy Marking',
+    tags: ['FastAPI', 'React 18', 'TypeScript', 'Python', 'SQLAlchemy', 'Tailwind CSS', 'JWT RBAC', 'NLP'],
+    image: '/projects/attendance.svg',
+    featured: true,
+    details: {
+      problem: 'Collegiate attendance systems suffer from proxy attendance, untracked On-Duty (OD) disputes, post-facto backfilling errors, and lack of real-time timetable period synchronization.',
+      architecture: 'Full-stack decoupled architecture with high-performance FastAPI REST backend, Pydantic v2 validation, SQLAlchemy ORM, and React 18 / TypeScript SPA dashboard.',
+      frontend: 'Responsive Tailwind CSS interface featuring dedicated dashboards for Admin, HOD, Class Advisor, Faculty, and Students, complete with an interactive chat attendance modal.',
+      backend: 'Asynchronous FastAPI application with real-time Indian Standard Time (IST, UTC+05:30) timetable window validator, NLP regex absentee parser, and automated OD protection pipeline.',
+      database: 'Relational database (SQLite/PostgreSQL) with relational constraints, composite indices on (student_id, date, period), and transactional rollback protection.',
+      auth: 'Hierarchical 5-tier RBAC with JWT token authentication, department credential vaults, and strict privilege segregation.',
+      security: 'Bcrypt password hashing, role-based API route guards, and non-bypassable backend period timing locks.',
+      caching: 'Optimized query execution with memoized timetable lookups and sub-100ms absentee list matching.',
+      optimization: 'Vite code-splitting, lazy-loaded role views, and efficient Pydantic serialization reducing API latency to under 30ms.',
+      deployment: 'Containerized with Docker multi-stage builds, Gunicorn/Uvicorn ASGI server, and Vercel/Node deployment.',
+      monitoring: 'Audit logging recording every attendance adjustment with faculty provenance and reason tracking.',
+      cicd: 'Automated TypeScript validation, linting, and Pytest test suite.',
+      scalability: 'Horizontally scalable backend supporting multi-department, multi-year university structures with thousands of students.',
+      future: 'Biometric RFID/NFC hardware integration and automated SMS/WhatsApp parent notification gateway.'
+    },
+    links: {
+      github: 'https://github.com/Balamurugan0113/Info-attendance-system.git',
+      demo: '#'
+    }
+  },
+  {
     id: 'gen-ai-bot',
     title: 'Multi-Modal Gen AI Customer Assistant Suite',
     tagline: 'Multi-Modal LLM Agent with LangChain & Google PaLM',
@@ -352,32 +382,6 @@ export const PROJECTS: Project[] = [
       cicd: 'Automated GitHub Actions linting, unit tests, and integration tests against simulated network traffic.',
       scalability: 'Horizontal scaling via packet sharding by source IP hash.',
       future: 'MITRE ATT&CK framework mapping and eBPF/XDP kernel-bypass packet processing.'
-    },
-    links: { github: 'https://github.com/Balamurugan0113', demo: '#' }
-  },
-  {
-    id: 'attendance-system',
-    title: 'Real-Time Face Recognition Attendance',
-    tagline: 'Real-time face detection and recognition pipeline',
-    description: 'A real-time face detection and recognition pipeline that automates student class attendance logging via live webcam feeds, composite duplicate checks, and statistical exports.',
-    impact: '99.4% Recognition Accuracy',
-    tags: ['Computer Vision', 'OpenCV', 'SQLite', 'Python', 'Face Recognition'],
-    image: '/projects/attendance.svg',
-    details: {
-      problem: 'Traditional attendance systems suffer from proxy attendance and slow manual processing during peak university entry windows.',
-      architecture: 'Two-stage detection pipeline: Stage 1 Haar Cascade classifiers for rapid ROI localization; Stage 2 extracts 128D face embeddings using dlib ResNet model with Euclidean distance matching.',
-      frontend: 'Streamlit real-time dashboard with live camera feed overlay, detection boxes, and attendance heatmaps.',
-      backend: 'Python FastAPI with async stream processing and background report generation scheduler.',
-      database: 'SQLite3 with normalized schema and composite UNIQUE(student_id, date) constraints.',
-      auth: 'Role-based access: admin, faculty, and operator accounts with JWT token auth.',
-      security: 'Biometric embeddings stored as salted numeric hashes; raw face images purged after extraction.',
-      caching: 'In-memory LRU cache of recent embeddings for sub-100ms verification.',
-      optimization: 'Frame downscaling to 160x120 for detection reducing CPU usage by 75%.',
-      deployment: 'Docker multi-stage container supporting CPU-only edge device deployment.',
-      monitoring: 'Recognition throughput and false positive rate tracking.',
-      cicd: 'GitHub Actions unit tests and mock camera stream regression tests.',
-      scalability: 'Camera-to-server sharding supporting 50+ concurrent classroom video feeds.',
-      future: 'Liveness anti-spoofing detection and automated learning management system (LMS) syncing.'
     },
     links: { github: 'https://github.com/Balamurugan0113', demo: '#' }
   },

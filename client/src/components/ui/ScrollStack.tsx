@@ -22,7 +22,7 @@ export interface ScrollStackProps {
   className?: string;
   itemDistance?: number;
   itemStackDistance?: number;
-  stackPosition?: number | string;
+  stackPosition?: number;
   itemScale?: number;
   baseScale?: number;
   dimAmount?: number;
@@ -32,7 +32,7 @@ export const ScrollStackItem = ({ children, itemClassName = '', style }: ScrollS
   return (
     <div
       className={cn(
-        "scroll-stack-card relative box-border w-full origin-top rounded-2xl sm:rounded-3xl p-5 sm:p-7 md:p-8 glass-card border border-[#F59E0B]/30 hover:border-[#F59E0B]/60 shadow-[0_20px_60px_rgba(0,0,0,0.85)] backdrop-blur-2xl transition-shadow",
+        "scroll-stack-card relative box-border w-full origin-top rounded-2xl sm:rounded-3xl p-5 sm:p-7 md:p-8 glass-card border border-[#F59E0B]/30 hover:border-[#F59E0B]/60 shadow-[0_20px_60px_rgba(0,0,0,0.85)] backdrop-blur-2xl transition-[border-color,box-shadow]",
         itemClassName
       )}
       style={style}
@@ -50,182 +50,123 @@ export const ScrollStackItem = ({ children, itemClassName = '', style }: ScrollS
 export const ScrollStack = ({
   children,
   className = '',
-  itemDistance = 40, // Viewport height % gap between cards in the scroll flow
-  itemStackDistance = 24, // Pixel vertical step between stacked cards
-  stackPosition = 85, // Fixed pixel distance from viewport top where cards lock
-  itemScale = 0.025, // Scale reduction per stacked item
-  baseScale = 0.88, // Minimum scale boundary
+  itemDistance = 28, // Viewport height % gap between cards in the scroll flow
+  itemStackDistance = 18, // Pixel vertical step between stacked cards
+  stackPosition = 84, // Fixed pixel distance from viewport top where cards lock (below navbar)
+  itemScale = 0.02, // Scale reduction per stacked item
+  baseScale = 0.90, // Minimum scale boundary
   dimAmount = 0.35, // Maximum darkness overlay
 }: ScrollStackProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const endRef = useRef<HTMLDivElement>(null);
-  const spacersRef = useRef<(HTMLDivElement | null)[]>([]);
-  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
-  const isUpdatingRef = useRef(false);
+  const wrappersRef = useRef<(HTMLDivElement | null)[]>([]);
+  const innersRef = useRef<(HTMLDivElement | null)[]>([]);
 
   const items = Children.toArray(children);
   const total = items.length;
 
-  // Frame-by-frame hardware-accelerated transform loop
+  // Frame-by-frame hardware-accelerated transform loop for scale and dimming
   const updateCardTransforms = useCallback(() => {
-    if (isUpdatingRef.current) return;
-    isUpdatingRef.current = true;
+    const wrappers = wrappersRef.current;
+    const inners = innersRef.current;
+    const n = wrappers.length;
+    if (n === 0) return;
 
-    const cards = cardsRef.current;
-    const spacers = spacersRef.current;
-    const n = cards.length;
-    if (n === 0) {
-      isUpdatingRef.current = false;
-      return;
-    }
-
-    const scrollTop = window.scrollY;
-    const containerHeight = window.innerHeight;
-    const stackPos = typeof stackPosition === 'number' ? stackPosition : 85;
-
-    // Calculate document offsets of spacers (pure, un-transformed positions)
-    const cardTops: number[] = [];
     for (let i = 0; i < n; i++) {
-      const spacer = spacers[i];
-      if (spacer) {
-        cardTops[i] = spacer.getBoundingClientRect().top + scrollTop;
-      } else {
-        cardTops[i] = 0;
-      }
-    }
+      const inner = inners[i];
+      if (!inner) continue;
 
-    // Pinning and unpinning boundaries
-    const lastIdx = n - 1;
-    const lastCardTop = cardTops[lastIdx] || 0;
-    const lastCardHeight = spacers[lastIdx]?.offsetHeight || 480;
-    const lastPinStart = lastCardTop - stackPos - itemStackDistance * lastIdx;
-
-    // Hold the completed stack for ~30vh so the user can inspect the final stacked deck
-    const holdDistance = Math.min(320, containerHeight * 0.35);
-    const pinEnd = lastPinStart + holdDistance;
-
-    // Runway distance required for the stack to scroll off the screen before the next section appears
-    const exitDistance = stackPos + itemStackDistance * lastIdx + lastCardHeight + 80;
-    const nextSectionDocTop = pinEnd + exitDistance + 40;
-    const runwayHeight = Math.max(120, nextSectionDocTop - (lastCardTop + lastCardHeight));
-
-    // Dynamically size the exit runway so ExperienceSection never collides with the pinned cards
-    const endEl = endRef.current;
-    if (endEl && endEl.style.height !== `${runwayHeight}px`) {
-      endEl.style.height = `${runwayHeight}px`;
-    }
-
-    cards.forEach((card, i) => {
-      if (!card) return;
-
-      const cardTop = cardTops[i];
-      if (!cardTop) return;
-
-      // pinStart: exact scroll position where this card reaches its stacked position
-      const pinStart = cardTop - stackPos - itemStackDistance * i;
-
-      let translateY = 0;
-      if (scrollTop >= pinStart && scrollTop <= pinEnd) {
-        // Pinned in place at its designated stack slot
-        translateY = scrollTop - cardTop + stackPos + itemStackDistance * i;
-      } else if (scrollTop > pinEnd) {
-        // Stack completed; unpins and scrolls away smoothly off the top of the viewport
-        translateY = pinEnd - cardTop + stackPos + itemStackDistance * i;
-      }
-
-      // Overlap math: as Card i+1 approaches and covers Card i, scale down and dim Card i
-      let scale = 1;
-      let dim = 0;
-
+      // Calculate how many subsequent cards have stacked over card i
+      let coverage = 0;
       if (i < n - 1) {
-        let cardsCovering = 0;
         for (let j = i + 1; j < n; j++) {
-          const nextTop = cardTops[j];
-          if (!nextTop) continue;
+          const nextWrapper = wrappers[j];
+          if (!nextWrapper) continue;
 
-          const nextPinStart = nextTop - stackPos - itemStackDistance * j;
-          // Card j overlaps Card i across a 220px scroll window before nextPinStart
-          const overlapTrigger = nextPinStart - 200;
+          const nextTop = nextWrapper.getBoundingClientRect().top;
+          const targetTop = stackPosition + Math.min(j * itemStackDistance, 180);
 
-          if (scrollTop >= nextPinStart) {
-            cardsCovering += 1;
-          } else if (scrollTop > overlapTrigger) {
-            cardsCovering += (scrollTop - overlapTrigger) / 200;
+          // Card j overlaps card i as it enters within 250px of its sticky target
+          if (nextTop <= targetTop) {
+            coverage += 1;
+          } else if (nextTop < targetTop + 250) {
+            coverage += (targetTop + 250 - nextTop) / 250;
           }
         }
-
-        scale = Math.max(baseScale, 1 - cardsCovering * itemScale);
-        dim = Math.min(dimAmount, cardsCovering * 0.1);
       }
 
-      // Apply 3D transform directly to card DOM node
-      card.style.transform = `translate3d(0px, ${translateY}px, 0px) scale(${scale})`;
-      card.style.transformOrigin = 'top center';
-      card.style.zIndex = `${i + 10}`;
+      const scale = Math.max(baseScale, 1 - coverage * itemScale);
+      const dim = Math.min(dimAmount, coverage * (dimAmount / 3));
 
-      // Update dim overlay
-      const dimOverlay = card.querySelector('.scroll-stack-dim') as HTMLElement | null;
+      inner.style.transform = `scale(${scale})`;
+      const dimOverlay = inner.querySelector('.scroll-stack-dim') as HTMLElement | null;
       if (dimOverlay) {
         dimOverlay.style.opacity = `${dim}`;
       }
-    });
-
-    isUpdatingRef.current = false;
+    }
   }, [baseScale, dimAmount, itemScale, itemStackDistance, stackPosition]);
 
   useEffect(() => {
-    // Initial update
-    const timer = setTimeout(() => {
-      updateCardTransforms();
-    }, 50);
+    let ticking = false;
 
     const handleScroll = () => {
-      requestAnimationFrame(updateCardTransforms);
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(() => {
+          updateCardTransforms();
+          ticking = false;
+        });
+      }
     };
 
     const handleResize = () => {
-      requestAnimationFrame(updateCardTransforms);
+      handleScroll();
     };
+
+    // Run initial transform
+    handleScroll();
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     window.addEventListener('resize', handleResize, { passive: true });
 
     return () => {
-      clearTimeout(timer);
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleResize);
     };
   }, [updateCardTransforms]);
 
   return (
-    <div ref={containerRef} className={cn("relative w-full flex flex-col items-center", className)}>
+    <div 
+      ref={containerRef} 
+      className={cn("scroll-stack-container relative w-full flex flex-col items-center pb-12 sm:pb-20", className)}
+    >
       {items.map((child, index) => {
         const isLast = index === total - 1;
+        // Native CSS sticky positioning ensures buttery-smooth 120 FPS pinning on GPU compositor
+        const stickyTop = stackPosition + Math.min(index * itemStackDistance, 180);
+
         return (
           <div
             key={isValidElement(child) ? (child.key ?? index) : index}
-            ref={(el) => { spacersRef.current[index] = el; }}
-            className="w-full relative"
+            ref={(el) => { wrappersRef.current[index] = el; }}
+            className="scroll-stack-card-wrapper sticky w-full"
             style={{
-              // Natural distance between cards before they start stacking
+              top: `${stickyTop}px`,
+              zIndex: 10 + index,
               marginBottom: isLast ? '0px' : `${itemDistance}vh`,
             }}
           >
             <div
-              ref={(el) => { cardsRef.current[index] = el; }}
-              className="w-full will-change-transform"
+              ref={(el) => { innersRef.current[index] = el; }}
+              className="scroll-stack-card-inner w-full will-change-transform"
+              style={{
+                transformOrigin: 'top center',
+              }}
             >
               {child}
             </div>
           </div>
         );
       })}
-      {/* End boundary marker and exit runway */}
-      <div 
-        ref={endRef} 
-        className="scroll-stack-end w-full pointer-events-none transition-[height] duration-200" 
-        style={{ minHeight: '45vh' }}
-      />
     </div>
   );
 };

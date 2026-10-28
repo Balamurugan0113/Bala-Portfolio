@@ -323,16 +323,17 @@ export default function ProjectsSection() {
         {desktopView === 'stack' ? (
           <div className="relative w-full max-w-6xl mx-auto px-4 sm:px-6">
             <ScrollStack
-              itemStackDistance={24}
-              itemScale={0.03}
-              baseScale={0.88}
+              itemDistance={28}
+              itemStackDistance={18}
+              itemScale={0.02}
+              baseScale={0.90}
               dimAmount={0.35}
               className="w-full"
             >
               {PROJECTS.map((project, idx) => (
                 <ScrollStackItem
                   key={project.id}
-                  itemClassName="bg-[#070C1E]/95 border border-[#F59E0B]/25 hover:border-[#F59E0B]/50 rounded-3xl p-7 lg:p-9 shadow-[0_20px_60px_rgba(0,0,0,0.85)] backdrop-blur-2xl transition-all"
+                  itemClassName="bg-[#070C1E]/95 border border-[#F59E0B]/25 hover:border-[#F59E0B]/50 rounded-3xl p-7 lg:p-9 shadow-[0_20px_60px_rgba(0,0,0,0.85)] backdrop-blur-2xl transition-[border-color,box-shadow]"
                 >
                   <div className="flex flex-col gap-6">
                     {/* TOP CARD BAR */}
